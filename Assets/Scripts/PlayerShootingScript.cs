@@ -15,16 +15,13 @@ public class PlayerShootingScript : MonoBehaviour
 
     void Update(){
         if(Input.GetButtonDown("Fire1")){
-            Debug.DrawLine(
-                transform.position,
-                Camera.main.ScreenToWorldPoint(new Vector3(
-                    Input.mousePosition.x,
-                    Input.mousePosition.y,
-                    0
-                )),
-                Color.red,
-                2f
-            );
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            float xPos = transform.position.x - mousePos.x;
+            float yPos = transform.position.y - mousePos.y;
+
+            float angle = -Mathf.Atan2(yPos, xPos) * Mathf.Rad2Deg;
+            Debug.Log($"x {xPos} | y {yPos} | angle {angle}");
         }        
 
 

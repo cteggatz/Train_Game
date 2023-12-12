@@ -35,7 +35,7 @@ public class CameraFollowMouse : MonoBehaviour
             player.position.y - lookThreshHold , 
             player.position.y + lookThreshHold
         );
-        Debug.Log(targetPosition.x);
+        //Debug.Log(targetPosition.x);
         targetPosition.z = 0;
 
         this.transform.position = targetPosition;
