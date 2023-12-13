@@ -20,7 +20,7 @@ public class CameraFollowMouse : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPosition = (player.position + mousePos) / 2f;
