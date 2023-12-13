@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float DefaultSpeed, SprintSpeed, CurrentSpeed, SpeedLoss, SprintGain;
     [SerializeField] private float jumphight;
