@@ -14,7 +14,7 @@ TagManager:
   - UI
   - Inside_Train
   - Outside_Train
-  - 
+  - Player
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PlayerRenderingLayer
+    uniqueID: 913276795
     locked: 0
