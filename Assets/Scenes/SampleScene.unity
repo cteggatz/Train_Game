@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 361018873}
   - component: {fileID: 361018877}
   - component: {fileID: 361018878}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 361018872}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.15, y: 5.29, z: 0}
+  m_LocalPosition: {x: 16.42, y: -0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1503,10 +1503,10 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: f83e0563191d5d74884662596e42a5da, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

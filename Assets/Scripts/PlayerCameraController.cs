@@ -26,7 +26,7 @@ public class PlayerCameraController : MonoBehaviour
     void Update(){
         if(Input.GetKeyDown("e") == true && canMoveOutside){
             //switching layer
-            //this.gameObject.layer = ((this.gameObject.layer == 7) ? 6 : 7);
+            this.gameObject.layer = ((this.gameObject.layer == 6) ? 7 : 6);
             //flipping the bit of the camera culling mask.
             //IDK WTF this code does but its what I was told to do lol.
             cam.cullingMask ^= 1 << LayerMask.NameToLayer("Outside_Train");
