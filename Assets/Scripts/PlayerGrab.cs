@@ -18,7 +18,7 @@ public class PlayerGrab : MonoBehaviour
         RaycastHit2D hitinfo = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance);
         if (hitinfo.collider != null)
         {
-            if (Input.GetKey("e") && grabbedObject == null)
+            if (Input.GetKey("f") && grabbedObject == null && hitinfo.collider.gameObject.tag == "Grabbable")
             {
                 grabbedObject = hitinfo.collider.gameObject;
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -26,7 +26,7 @@ public class PlayerGrab : MonoBehaviour
                 grabbedObject.transform.SetParent(transform);
             }
         }
-        if (Input.GetKey("e") == false && grabbedObject != null)
+        if (Input.GetKey("f") == false && grabbedObject != null)
         {
             grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbedObject.transform.SetParent(null);
