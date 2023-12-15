@@ -17,22 +17,9 @@ public class PlayerCameraController : MonoBehaviour
 
 
     private bool canMoveOutside;
-
-    void Start()
-    {
-       // _camera = transform.GetComponent<CinemachineBrain>();
-    }
-
-    void Update(){
-        if(Input.GetKeyDown("e") == true && canMoveOutside){
-            SwitchLayer();       
-        }
-    }
-
-    
+  
     void FixedUpdate()
     {
-
         /*
         ---- Camera Positioning Relative to the Player ----
         */
@@ -55,24 +42,24 @@ public class PlayerCameraController : MonoBehaviour
         cameraFollowObj.position = targetPosition;
     }
 
+
+    void Update(){
+        if(Input.GetKeyDown("e") && canMoveOutside){
+            SwitchLayer(); //help
+        }
+
+    }
+
+    public void SetMoveOutside(bool state){
+        canMoveOutside = state;
+    }
+
     public void SwitchLayer(){
+        Debug.Log("switch");
         this.gameObject.layer = ((this.gameObject.layer == 6) ? 7 : 6);
         //flipping the bit of the camera culling mask.
         //IDK WTF this code does but its what I was told to do lol.
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Outside_Train");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Inside_Train");   
-    }
-
-    //adding layer changes
-    void OnTriggerEnter2D(Collider2D other){
-        if(other.transform.tag == "Train_Exit"){
-            canMoveOutside = true;
-        }
-    }
-    //
-    void OnTriggerExit2D(Collider2D other){
-        if(other.transform.tag == "Train_Exit"){
-            canMoveOutside = false;
-        }
     }
 }
