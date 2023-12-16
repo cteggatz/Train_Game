@@ -55,9 +55,8 @@ public class PlayerCameraController : MonoBehaviour
     }
 
     public void SwitchLayer(){
-        Debug.Log("switch");
+        //switches the layer of the player between the two layers
         this.gameObject.layer = ((this.gameObject.layer == 6) ? 7 : 6);
-        //flipping the bit of the camera culling mask.
         //IDK WTF this code does but its what I was told to do lol.
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Outside_Train");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Inside_Train");   
