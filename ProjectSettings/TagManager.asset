@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Train_Exit
-  - Grabbable
+  - Fuel
   layers:
   - Default
   - TransparentFX
