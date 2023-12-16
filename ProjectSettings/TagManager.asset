@@ -43,6 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Outside
+    uniqueID: 2748222441
+    locked: 0
   - name: PlayerRenderingLayer
     uniqueID: 913276795
     locked: 0
