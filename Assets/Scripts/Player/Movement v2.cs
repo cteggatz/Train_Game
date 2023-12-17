@@ -41,7 +41,7 @@ public class Movementv2 : MonoBehaviour
         }
 
 
-        if(Input.GetKey(KeyCode.W) && grounded){
+        if(Input.GetAxisRaw("Vertical") > 0 && grounded){
             body.velocity = new Vector2(body.velocity.x, jumphight);
             grounded = false;
         }
