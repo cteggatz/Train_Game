@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 public class PlayerCameraController : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class PlayerCameraController : MonoBehaviour
 
 
     private bool canMoveOutside;
+
+    public event EventHandler<LayerChangeArgs> OnLayerChange;
+    public class LayerChangeArgs : EventArgs{
+        public int layer;
+    }
   
     void FixedUpdate()
     {
@@ -46,6 +52,7 @@ public class PlayerCameraController : MonoBehaviour
     void Update(){
         if(Input.GetKeyDown("e") && canMoveOutside){
             SwitchLayer(); //help
+            if(OnLayerChange != null)OnLayerChange(this, new LayerChangeArgs{layer = gameObject.layer});
         }
 
     }
