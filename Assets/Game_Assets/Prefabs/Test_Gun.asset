@@ -22,4 +22,4 @@ MonoBehaviour:
   magazineSize: 0
   reloadTime: 0
   shootCooldown: 0
-  gunType: 3
+  gunType: 0

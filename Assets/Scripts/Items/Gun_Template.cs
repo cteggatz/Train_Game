@@ -8,10 +8,10 @@ using UnityEditor;
 #endif
 
 [CreateAssetMenu(fileName = "Test_Gun", menuName = "ScriptableObjects/Gun/Test_Gun")]
-public class Gun : ScriptableObject
+public class Gun : Item_Template
 {
     public enum GunType{SingleFire, SpreadFire, BurstFire, Custom}
-
+    /*
     // ---- Graphics Settings ----
     [Header("Graphics")]
     public Sprite sprite;
@@ -22,6 +22,8 @@ public class Gun : ScriptableObject
     public new string name;
     public string description;
 
+    */
+
     [Header("Bullet")]
     public GameObject projectile;
     public int bulletDamage;
@@ -29,9 +31,9 @@ public class Gun : ScriptableObject
 
     // ---- Gun Settings ----
     [Header("Gun")]
-    [Min(0)] public int magazineSize;
-    [Min(0f)] public float reloadTime;
-    [Min(0f)] public float shootCooldown;
+    //[Min(0)] public int magazineSize;
+    //[Min(0f)] public float reloadTime;
+    //[Min(0f)] public float shootCooldown;
     public GunType gunType;
 
     [Min(0f)] int bulletNumber;
@@ -71,6 +73,7 @@ public class Gun : ScriptableObject
                     gun.bulletDelay = EditorGUILayout.FloatField("Burst Fire Delay",gun.bulletDelay);
                     break;
             }
+            gun.useIncrement = gun.bulletNumber;
             EditorGUI.indentLevel --;
         }
     }
@@ -78,7 +81,7 @@ public class Gun : ScriptableObject
     #endregion
     // -- magazine settings -- 
     // ---- Methods ----
-    public void Shoot(PlayerItemController itemController, float angle, Vector3 position, float spawnDistance, int layer){
+    public override void Use(PlayerItemController itemController, float angle, Vector3 position, float spawnDistance, int layer){
         for(int i = 0; i < bulletNumber; i++){
             itemController.StartCoroutine(ShootWithDelay(i, angle, position, spawnDistance, layer));
         }

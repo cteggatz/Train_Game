@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerItemController : MonoBehaviour
@@ -14,38 +15,118 @@ public class PlayerItemController : MonoBehaviour
     [Header("Gun")]
     [SerializeField] private Gun gun;
 
+    /*
+    readonly struct ItemData{
+        public Item_Template itemReference {get;}
+        public float coolDown {get;}
+        public int uses {get;}
+
+        public ItemData(Item_Template item){
+            itemReference = item;
+            coolDown = item.useCooldown;
+            uses = item.numberOfUses;
+        }
+    }
+    */
+    class ItemData{
+        public Item_Template _itemReference {get;}
+        public float _maxCoolDown {get;}
+        public int _maxUses {get;}
+        public int _useIncrment;
+        public bool canUse;
+        public bool needReload;
+        public float currentCoolDown;
+        public int currentUses;
+
+        public ItemData(Item_Template item){
+            _itemReference = item;
+            _maxCoolDown = item.useCooldown;
+            _maxUses = item.numberOfUses;
+            _useIncrment = item.useIncrement;
+
+            currentUses = _maxUses;
+            currentCoolDown = _maxCoolDown;
+            canUse = true;
+            needReload = false;
+        }
+        public void Update(float dt){
+            if(currentUses <= 0){
+                needReload = true;
+                currentCoolDown = _itemReference.rearmTime;
+            }
+            if(needReload){
+                currentCoolDown -= dt;
+                if(currentCoolDown <= 0){
+                    Debug.Log("done");
+                    needReload = false;
+                    currentUses = _maxUses;
+                    currentCoolDown = _maxCoolDown;
+                }
+            }
+            if(!canUse){
+                currentCoolDown -= dt;
+                if(currentCoolDown <= 0){
+                    canUse = true;
+                    currentCoolDown = _maxCoolDown;
+                }
+            }
+        }
+    }
+
+    private List<ItemData> EquiptedData = new List<ItemData>();
+    [SerializeField] private ItemData currentItem;
+
     // Update is called once per frame
     void Awake(){
         //setting renderer size and shape
-        itemRenderer.GetComponent<SpriteRenderer>().sprite = gun.sprite;
-        itemRenderer.transform.localScale = gun.sprite_Size;
         gameObject.GetComponent<PlayerCameraController>().OnLayerChange += (object obj,  PlayerCameraController.LayerChangeArgs e) =>{
             itemRenderer.layer = e.layer;
         };
+        AddItem(gun);
+        SetCurrentItem(0);
     }
     
     
     
     void Update()
     {
+        //Debug.Log(Time.deltaTime);
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float angle = Mathf.Atan2(
                 transform.position.y - mousePos.y,
                 transform.position.x - mousePos.x
         );
-
-        if(Input.GetKeyDown(KeyCode.E)) itemRenderer.layer = gameObject.layer;
         itemRenderer.transform.eulerAngles = new Vector3(0,0,angle * Mathf.Rad2Deg);
         itemRenderer.transform.position = new Vector3(
                     transform.position.x - Mathf.Cos(angle)* itemDistance,
                     transform.position.y - Mathf.Sin(angle)* itemDistance,
                     transform.position.z
         );
-        
 
-        if(Input.GetMouseButtonDown(0)){
-            gun.Shoot(this, angle, transform.position, itemDistance, gameObject.layer);
+        currentItem.Update(Time.deltaTime);
+
+        //shoot
+        if(Input.GetMouseButton(0) && !currentItem.needReload && currentItem.canUse){
+            currentItem._itemReference.Use(this, angle, transform.position, itemDistance, gameObject.layer);
+            currentItem.canUse = false;
+            currentItem.currentUses -= currentItem._useIncrment;
         }
-        
+        if(Input.GetKeyDown(KeyCode.R) && currentItem.currentUses != currentItem._maxUses){
+            Debug.Log("reloading!");
+            currentItem.needReload = true;
+        }
+    }
+
+    public void AddItem(Item_Template item){
+        EquiptedData.Add(new ItemData(item));
+    }
+    void SetCurrentItem(int index){
+        if(index < 0 || index >= EquiptedData.Count){
+            Debug.LogError($"Index out of Bounds! [provided index: {index}]");
+        }
+
+        currentItem = EquiptedData[index];
+        itemRenderer.GetComponent<SpriteRenderer>().sprite = currentItem._itemReference.sprite;
+        itemRenderer.transform.localScale = currentItem._itemReference.sprite_Size;
     }
 }
