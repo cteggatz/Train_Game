@@ -63,13 +63,13 @@ public class GruntAI : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // Find direction
         Vector2 force = direction * speed * Time.deltaTime;
 
-        if (jumpEnabled && isGrounded && direction.y > jumpNodeHeightReq) //bouncy
+        if (jumpEnabled && isGrounded && target.position.y - 1f > rb.transform.position.y && target.GetComponent<Rigidbody2D>().velocity.y == 0 && path.path.Count < 20) //bouncy
         {
             rb.AddForce(Vector2.up * speed * jumpMod);
         }
 
         // Applying force
-        if (!isGrounded) force.y = 0; //no workie, can still jump in the air
+        if (!isGrounded) force.y = 0; //no workie, can still float in the air
         rb.velocity = Vector2.SmoothDamp(rb.velocity, force, ref currentVelocity, 0.5f);
 
         // Waypoint reached check
