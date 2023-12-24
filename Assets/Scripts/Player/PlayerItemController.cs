@@ -13,7 +13,7 @@ public class PlayerItemController : MonoBehaviour
     [SerializeField] private float itemDistance = 0.5f;
 
     [Header("Gun")]
-    [SerializeField] private Gun gun;
+    //[SerializeField] private Gun gun;
 
     [SerializeField] private Gun primary;
     [SerializeField] private Gun secondary;
@@ -70,8 +70,11 @@ public class PlayerItemController : MonoBehaviour
         }
     }
 
-    private List<ItemData> EquiptedData = new List<ItemData>();
-    [SerializeField] private ItemData currentItem;
+    //private List<ItemData> EquiptedData = new List<ItemData>();
+
+    private ItemData[] EquiptedData = new ItemData[3];
+    private int currItemIndex = 0;
+    //[SerializeField] private ItemData currentItem;
 
     // Update is called once per frame
     void Awake(){
@@ -79,7 +82,12 @@ public class PlayerItemController : MonoBehaviour
         gameObject.GetComponent<PlayerCameraController>().OnLayerChange += (object obj,  PlayerCameraController.LayerChangeArgs e) =>{
             itemRenderer.layer = e.layer;
         };
-        AddItem(gun);
+        
+        EquiptedData[0] = new ItemData(primary);
+        EquiptedData[1] = new ItemData(secondary);
+        EquiptedData[2] = new ItemData(consumable);
+
+
         SetCurrentItem(0);
     }
     
@@ -104,6 +112,7 @@ public class PlayerItemController : MonoBehaviour
 
         
         // ---- Inputs ----
+        ItemData currentItem = EquiptedData[currItemIndex];
         currentItem.Update(Time.deltaTime);
         if(Input.GetMouseButton(0) && !currentItem.isReloading && currentItem.canUse && currentItem.currentUses > 0){
             currentItem._itemReference.Use(this, angle, transform.position, itemDistance, gameObject.layer);
@@ -116,18 +125,24 @@ public class PlayerItemController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             Debug.Log("Switching to Primary");
+            SetCurrentItem(0);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2)){
+            Debug.Log("Switching to Secondary");
+            SetCurrentItem(1);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3)){
+            Debug.Log("Switching to Consumable");
+            SetCurrentItem(2);
         }
     }
-
-    public void AddItem(Item_Template item){
-        EquiptedData.Add(new ItemData(item));
-    }
     void SetCurrentItem(int index){
-        if(index < 0 || index >= EquiptedData.Count){
+        if(index < 0 || index >= EquiptedData.Length){
             Debug.LogError($"Index out of Bounds! [provided index: {index}]");
         }
 
-        currentItem = EquiptedData[index];
+        currItemIndex = index;
+        ItemData currentItem = EquiptedData[currItemIndex];
         itemRenderer.GetComponent<SpriteRenderer>().sprite = currentItem._itemReference.sprite;
         itemRenderer.transform.localScale = currentItem._itemReference.sprite_Size;
     }
