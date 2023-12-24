@@ -15,13 +15,17 @@ public class PlayerItemController : MonoBehaviour
     [Header("Gun")]
     [SerializeField] private Gun gun;
 
+    [SerializeField] private Gun primary;
+    [SerializeField] private Gun secondary;
+    [SerializeField] private Gun consumable;
+
     class ItemData{
         public Item_Template _itemReference {get;}
         public float _maxCoolDown {get;}
         public int _maxUses {get;}
         public int _useIncrment;
         public bool canUse;
-        public bool needReload;
+        public bool isReloading;
         public float currentCoolDown;
         public int currentUses;
 
@@ -34,18 +38,15 @@ public class PlayerItemController : MonoBehaviour
             currentUses = _maxUses;
             currentCoolDown = _maxCoolDown;
             canUse = true;
-            needReload = false;
+            isReloading = false;
         }
         public void Update(float dt){
-            //Debug.Log($"{currentCoolDown}");
-            if(currentUses <= 0 && !needReload){
-                currentCoolDown = _itemReference.rearmTime;
-            }
-            if(needReload){
+            
+            if(isReloading){
                 currentCoolDown -= dt;
                 if(currentCoolDown <= 0){
                     Debug.Log("done");
-                    needReload = false;
+                    isReloading = false;
                     canUse = true;
                     currentUses = _maxUses;
                     currentCoolDown = _maxCoolDown;
@@ -56,6 +57,15 @@ public class PlayerItemController : MonoBehaviour
                     canUse = true;
                     currentCoolDown = _maxCoolDown;
                 }
+            }
+        }
+
+        public void IncrementItem(){
+            canUse = false;
+            currentUses -= _useIncrment;
+            if(currentUses <= 0){
+                currentCoolDown = _itemReference.rearmTime;
+                Debug.Log("Need Reload");
             }
         }
     }
@@ -77,7 +87,7 @@ public class PlayerItemController : MonoBehaviour
     
     void Update()
     {
-        //Debug.Log(Time.deltaTime);
+        // ---- Item Positioning Around The Player ----
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float angle = Mathf.Atan2(
                 transform.position.y - mousePos.y,
@@ -90,20 +100,22 @@ public class PlayerItemController : MonoBehaviour
                     transform.position.z
         );
 
-        currentItem.Update(Time.deltaTime);
+        
 
-        //shoot
-        if(Input.GetMouseButton(0) && !currentItem.needReload && currentItem.canUse){
+        
+        // ---- Inputs ----
+        currentItem.Update(Time.deltaTime);
+        if(Input.GetMouseButton(0) && !currentItem.isReloading && currentItem.canUse && currentItem.currentUses > 0){
             currentItem._itemReference.Use(this, angle, transform.position, itemDistance, gameObject.layer);
-            currentItem.canUse = false;
-            currentItem.currentUses -= currentItem._useIncrment;
-            if(currentItem.currentUses <= 0)Debug.Log("Need Reload");
+            currentItem.IncrementItem();
         }
         if(Input.GetKeyDown(KeyCode.R) && currentItem.currentUses != currentItem._maxUses){
-            Debug.Log(currentItem);
-            Debug.Log("reloading!");
-            currentItem.needReload = true;
+            currentItem.isReloading = true;
             currentItem.currentCoolDown = currentItem._itemReference.rearmTime;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1)){
+            Debug.Log("Switching to Primary");
         }
     }
 
