@@ -16,10 +16,11 @@ MonoBehaviour:
   sprite_Size: {x: 1, y: 1, z: 1}
   name: Pistol
   description: Basic, Cookie Cutter Pistol
+  numberOfUses: 3
+  useIncrement: 1
+  rearmTime: 1
+  useCooldown: 0.125
   projectile: {fileID: 3166372697761311189, guid: c7e9233bf4202ce4ba8020e28dccc378, type: 3}
   bulletDamage: 0
-  bulletThrust: 4
-  magazineSize: 0
-  reloadTime: 0
-  shootCooldown: 0
+  bulletThrust: 10
   gunType: 0
