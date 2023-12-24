@@ -12,6 +12,8 @@ public class PlayerItemController : MonoBehaviour
     [SerializeField] private GameObject itemRenderer;
     [SerializeField] private float itemDistance = 0.5f;
 
+    private Vector3 offset;
+
     [Header("Gun")]
     //[SerializeField] private Gun gun;
 
@@ -87,8 +89,10 @@ public class PlayerItemController : MonoBehaviour
         EquiptedData[1] = new ItemData(secondary);
         EquiptedData[2] = new ItemData(consumable);
 
-
         SetCurrentItem(0);
+
+        offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset();
+        
     }
     
     
@@ -96,33 +100,52 @@ public class PlayerItemController : MonoBehaviour
     void Update()
     {
         // ---- Item Positioning Around The Player ----
+        //accounts for camera offset
+        Vector3 offsetPosition = new Vector3(
+            transform.position.x +offset.x,
+            transform.position.y +offset.y,
+            transform.position.z +offset.z
+        );
+        //gets mouse pos and get the angle
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float angle = Mathf.Atan2(
-                transform.position.y - mousePos.y,
-                transform.position.x - mousePos.x
+                offsetPosition.y - mousePos.y,
+                offsetPosition.x- mousePos.x
         );
-        itemRenderer.transform.eulerAngles = new Vector3(0,0,angle * Mathf.Rad2Deg);
+        //moves item into the right position relative to the mouse
         itemRenderer.transform.position = new Vector3(
-                    transform.position.x - Mathf.Cos(angle)* itemDistance,
-                    transform.position.y - Mathf.Sin(angle)* itemDistance,
-                    transform.position.z
+                    offsetPosition.x - Mathf.Cos(angle)* itemDistance,
+                    offsetPosition.y- Mathf.Sin(angle)* itemDistance,
+                    offsetPosition.z
         );
 
-        
 
-        
+        // ---- Rotation and textures ----
+        //rotates renderer
+        itemRenderer.transform.eulerAngles = new Vector3(0,0,angle * Mathf.Rad2Deg);
+        //flips texture if past 90 degrees
+        if(Mathf.Abs(itemRenderer.transform.eulerAngles.z - 180) > 90){
+            itemRenderer.GetComponent<SpriteRenderer>().flipY = false;
+        } else {
+            itemRenderer.GetComponent<SpriteRenderer>().flipY = true;
+        }
+
+
         // ---- Inputs ----
         ItemData currentItem = EquiptedData[currItemIndex];
         currentItem.Update(Time.deltaTime);
+        //checks for shooting
         if(Input.GetMouseButton(0) && !currentItem.isReloading && currentItem.canUse && currentItem.currentUses > 0){
-            currentItem._itemReference.Use(this, angle, transform.position, itemDistance, gameObject.layer);
+            currentItem._itemReference.Use(this, angle, offsetPosition, itemDistance, gameObject.layer);
             currentItem.IncrementItem();
         }
+        //checks for reload
         if(Input.GetKeyDown(KeyCode.R) && currentItem.currentUses != currentItem._maxUses){
             currentItem.isReloading = true;
             currentItem.currentCoolDown = currentItem._itemReference.rearmTime;
         }
 
+        //switching guns
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             Debug.Log("Switching to Primary");
             SetCurrentItem(0);

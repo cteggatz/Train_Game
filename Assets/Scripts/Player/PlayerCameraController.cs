@@ -14,7 +14,6 @@ public class PlayerCameraController : MonoBehaviour
     [Header("Camera Look Settings")]
     [SerializeField] private float lookThreshHold = 3f;
     [SerializeField] private Vector3 offset;
-    //private CinemachineBrain _camera;
 
 
     private bool canMoveOutside;
@@ -29,18 +28,23 @@ public class PlayerCameraController : MonoBehaviour
         /*
         ---- Camera Positioning Relative to the Player ----
         */
+        Vector3 playerPos = new Vector3(
+            transform.position.x + offset.x,
+            transform.position.y + offset.y,
+            transform.position.z + offset.y
+        );
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 targetPosition = (this.transform.position + mousePos) / 2f;
+        Vector3 targetPosition = (playerPos + mousePos) / 2f;
 
         targetPosition.x = Mathf.Clamp(
             targetPosition.x, 
-            this.transform.position.x - lookThreshHold , 
-            this.transform.position.x + lookThreshHold
+            playerPos.x - lookThreshHold , 
+            playerPos.x + lookThreshHold
         );
         targetPosition.y = Mathf.Clamp(
             targetPosition.y, 
-            this.transform.position.y - lookThreshHold , 
-            this.transform.position.y + lookThreshHold
+            playerPos.y - lookThreshHold , 
+            playerPos.y + lookThreshHold
         );
         //Debug.Log(targetPosition.x);
         targetPosition.z = 0;
@@ -58,6 +62,9 @@ public class PlayerCameraController : MonoBehaviour
 
     public void SetMoveOutside(bool state){
         canMoveOutside = state;
+    }
+    public Vector3 GetCameraOffset(){
+        return offset;
     }
 
     public void SwitchLayer(){
