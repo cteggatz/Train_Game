@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15d2ea0499c76b44ab563512ae733351, type: 3}
-  m_Name: Test_Gun
+  m_Name: Test_Secondary
   m_EditorClassIdentifier: 
   sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  sprite_Size: {x: 1, y: 1, z: 1}
-  name: Pistol
-  description: Basic, Cookie Cutter Pistol
+  sprite_Size: {x: 1, y: 1, z: 0}
+  name: Little Pew Pew
+  description: 
+  numberOfUses: 1
+  useIncrement: 3
+  rearmTime: 0.5
+  useCooldown: 0.3
   projectile: {fileID: 3166372697761311189, guid: c7e9233bf4202ce4ba8020e28dccc378, type: 3}
   bulletDamage: 0
-  bulletThrust: 4
-  magazineSize: 0
-  reloadTime: 0
-  shootCooldown: 0
-  gunType: 2
+  bulletThrust: 10
+  gunType: 1

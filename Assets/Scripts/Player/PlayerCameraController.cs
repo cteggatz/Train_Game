@@ -52,7 +52,6 @@ public class PlayerCameraController : MonoBehaviour
     void Update(){
         if(Input.GetKeyDown("e") && canMoveOutside){
             SwitchLayer(); //help
-            if(OnLayerChange != null)OnLayerChange(this, new LayerChangeArgs{layer = gameObject.layer});
         }
 
     }
@@ -66,6 +65,8 @@ public class PlayerCameraController : MonoBehaviour
         this.gameObject.layer = ((this.gameObject.layer == 6) ? 7 : 6);
         //IDK WTF this code does but its what I was told to do lol.
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Outside_Train");
-        cam.cullingMask ^= 1 << LayerMask.NameToLayer("Inside_Train");   
+        cam.cullingMask ^= 1 << LayerMask.NameToLayer("Inside_Train");
+
+        if(OnLayerChange != null) OnLayerChange(this, new LayerChangeArgs{layer = gameObject.layer});   
     }
 }
