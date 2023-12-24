@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c3c2df98b62e2c40ba38f1085a50ea6
+guid: 6cd74882a692d064ab432fcb01a72b6c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,11 +110,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flintlocks_0
+      name: test guns_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 17
+        x: 0
+        y: 27
         width: 19
         height: 5
       alignment: 0
@@ -124,18 +124,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07fb33f1e8a6cdf4fad5c25b28c545e3
-      internalID: 894163959
+      spriteID: 6639f681ac70cc441b3f42022bb3fef2
+      internalID: 1058679507
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Flintlocks_1
+      name: test guns_1
       rect:
         serializedVersion: 2
-        x: 6
-        y: 11
+        x: 20
+        y: 28
         width: 10
         height: 4
       alignment: 0
@@ -145,8 +145,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d464fa21dc01a224baccdf471139c92c
-      internalID: 119791970
+      spriteID: 83089c12a0f7e184797abb35e41e4872
+      internalID: 1752913623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test guns_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 21
+        width: 22
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dbeed892fd31b4418f062bfeff157b0
+      internalID: 605875277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test guns_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15
+        width: 13
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40cf1f4842068674198ba9ff976a84bb
+      internalID: 1908183220
       vertices: []
       indices: 
       edges: []
@@ -162,8 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Flintlocks_0: 894163959
-      Flintlocks_1: 119791970
+      test guns_0: 1058679507
+      test guns_1: 1752913623
+      test guns_2: 605875277
+      test guns_3: 1908183220
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
