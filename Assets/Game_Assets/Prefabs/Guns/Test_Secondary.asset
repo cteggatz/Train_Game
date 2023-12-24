@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d2ea0499c76b44ab563512ae733351, type: 3}
   m_Name: Test_Secondary
   m_EditorClassIdentifier: 
-  sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: 1752913623, guid: 6cd74882a692d064ab432fcb01a72b6c, type: 3}
   sprite_Size: {x: 1, y: 1, z: 0}
   name: Little Pew Pew
   description: 
-  numberOfUses: 1
+  numberOfUses: 3
   useIncrement: 3
   rearmTime: 0.5
   useCooldown: 0.3

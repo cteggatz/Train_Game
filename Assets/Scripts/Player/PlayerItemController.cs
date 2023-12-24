@@ -72,23 +72,27 @@ public class PlayerItemController : MonoBehaviour
         }
     }
 
-    //private List<ItemData> EquiptedData = new List<ItemData>();
-
     private ItemData[] EquiptedData = new ItemData[3];
     private int currItemIndex = 0;
-    //[SerializeField] private ItemData currentItem;
-
-    // Update is called once per frame
+    private bool isGrabbing = false;
     void Awake(){
-        //setting renderer size and shape
+        //subscribing to camera to see when changing layer
         gameObject.GetComponent<PlayerCameraController>().OnLayerChange += (object obj,  PlayerCameraController.LayerChangeArgs e) =>{
             itemRenderer.layer = e.layer;
+        };
+        //subscribing to grab script to see when item is grabbed
+        gameObject.GetComponent<PlayerGrab>().OnGrabInteraction += (object obj, PlayerGrab.GrabArgs e) => {
+            isGrabbing = e.isGrabbed;
+            if(isGrabbing){
+                itemRenderer.GetComponent<SpriteRenderer>().sprite = null;
+            } else {
+                itemRenderer.GetComponent<SpriteRenderer>().sprite = EquiptedData[currItemIndex]._itemReference.sprite;
+            }
         };
         
         EquiptedData[0] = new ItemData(primary);
         EquiptedData[1] = new ItemData(secondary);
         EquiptedData[2] = new ItemData(consumable);
-
         SetCurrentItem(0);
 
         offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset();
@@ -99,6 +103,12 @@ public class PlayerItemController : MonoBehaviour
     
     void Update()
     {
+        //if item is grabbed, nothing happens here.
+        if(isGrabbing){
+            return;
+        }
+
+
         // ---- Item Positioning Around The Player ----
         //accounts for camera offset
         Vector3 offsetPosition = new Vector3(
@@ -118,7 +128,6 @@ public class PlayerItemController : MonoBehaviour
                     offsetPosition.y- Mathf.Sin(angle)* itemDistance,
                     offsetPosition.z
         );
-
 
         // ---- Rotation and textures ----
         //rotates renderer

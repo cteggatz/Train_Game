@@ -361,18 +361,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.006107807}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 2.4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2.5025434}
   m_EdgeRadius: 0
 --- !u!212 &361018875
 SpriteRenderer:
@@ -415,7 +415,7 @@ SpriteRenderer:
   m_SortingLayerID: 913276795
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -840874890, guid: 83fdb6e70a63b7744b2a7b0df24daf5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
   cameraFollowObj: {fileID: 1401033903}
   cam: {fileID: 519420031}
   lookThreshHold: 3
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0.5, z: 0}
 --- !u!50 &361018880
 Rigidbody2D:
   serializedVersion: 4
@@ -521,7 +521,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemRenderer: {fileID: 1749078273}
   itemDistance: 1
-  gun: {fileID: 11400000, guid: 99d744ad7753b6d4b8f1ede7ce7de9f1, type: 2}
+  primary: {fileID: 11400000, guid: 99d744ad7753b6d4b8f1ede7ce7de9f1, type: 2}
+  secondary: {fileID: 11400000, guid: b2f24b0eb644a6f4292dd0df19c48211, type: 2}
+  consumable: {fileID: 11400000, guid: 99d744ad7753b6d4b8f1ede7ce7de9f1, type: 2}
 --- !u!1 &462611115
 GameObject:
   m_ObjectHideFlags: 0
@@ -7280,7 +7282,7 @@ Transform:
   m_GameObject: {fileID: 1749078273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

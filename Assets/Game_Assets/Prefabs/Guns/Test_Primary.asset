@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d2ea0499c76b44ab563512ae733351, type: 3}
   m_Name: Test_Primary
   m_EditorClassIdentifier: 
-  sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  sprite_Size: {x: 2, y: 0.1, z: 1}
+  sprite: {fileID: 1058679507, guid: 6cd74882a692d064ab432fcb01a72b6c, type: 3}
+  sprite_Size: {x: 1, y: 1, z: 1}
   name: Pistol
   description: Basic, Cookie Cutter Pistol
   numberOfUses: 3
