@@ -8,19 +8,9 @@ using UnityEditor;
 #endif
 
 [CreateAssetMenu(fileName = "Test_Gun", menuName = "ScriptableObjects/Gun/Test_Gun")]
-public class Gun : ScriptableObject
+public class Gun : Item_Template
 {
     public enum GunType{SingleFire, SpreadFire, BurstFire, Custom}
-
-    // ---- Graphics Settings ----
-    [Header("Graphics")]
-    public Sprite sprite;
-    public Vector3 sprite_Size = new Vector3(1,1,1);
-
-    // ---- General setting ----
-    [Header("General")]
-    public new string name;
-    public string description;
 
     [Header("Bullet")]
     public GameObject projectile;
@@ -29,9 +19,6 @@ public class Gun : ScriptableObject
 
     // ---- Gun Settings ----
     [Header("Gun")]
-    [Min(0)] public int magazineSize;
-    [Min(0f)] public float reloadTime;
-    [Min(0f)] public float shootCooldown;
     public GunType gunType;
 
     [Min(0f)] int bulletNumber;
@@ -71,26 +58,37 @@ public class Gun : ScriptableObject
                     gun.bulletDelay = EditorGUILayout.FloatField("Burst Fire Delay",gun.bulletDelay);
                     break;
             }
+            gun.useIncrement = gun.bulletNumber;
             EditorGUI.indentLevel --;
         }
     }
 #endif
     #endregion
-    // -- magazine settings -- 
+
     // ---- Methods ----
-    public void Shoot(PlayerItemController itemController, float angle, Vector3 position, float spawnDistance, int layer){
+    
+    //this handles the call to use the gun. Calls the Shoot function to spawn bullets.
+    public override void Use(PlayerItemController itemController, float angle, Vector3 position, float spawnDistance, int layer){
         for(int i = 0; i < bulletNumber; i++){
             itemController.StartCoroutine(ShootWithDelay(i, angle, position, spawnDistance, layer));
         }
     }
+
+    /*
+    this handles spawning in the bullets for the gun. I know its confusing as shit
+    Basically: 
+        [*] in order to give the effect of a burst, I am creating corutines (simolar to loading the job onto another thread) and having those corutines start at different times.
+        [*] in order to give the effect of a shotgun, I am taking the initial angle of the input handler and subtracting the angle offset of the particular bullet in the burst.
+        [*] finally, when spawining the bullet, it is adding in half of the guns length in order for the bullet to look like its coming out of the gun.
+    */
     private IEnumerator ShootWithDelay(int index, float angle, Vector3 position, float spawnDistance, int layer){
         yield return new WaitForSeconds(bulletDelay * index);
         float spreadOffset = (angle * Mathf.Rad2Deg - shotSpread * Mathf.Floor((float)bulletNumber/2) + shotSpread*index) * Mathf.Deg2Rad;
             GameObject obj = (GameObject) Instantiate(
                 projectile,
                 new Vector3(
-                    position.x - Mathf.Cos(spreadOffset) * spawnDistance,
-                    position.y  - Mathf.Sin(spreadOffset) * spawnDistance,
+                    position.x - Mathf.Cos(spreadOffset) * spawnDistance - Mathf.Cos(spreadOffset) * sprite_Size.x * 0.5f,
+                    position.y  - Mathf.Sin(spreadOffset) * spawnDistance - Mathf.Sin(spreadOffset) * sprite_Size.x * 0.5f,
                     position.z
                 ),
                 Quaternion.Euler(0,0,spreadOffset * Mathf.Rad2Deg)
