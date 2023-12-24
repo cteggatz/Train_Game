@@ -15,19 +15,6 @@ public class PlayerItemController : MonoBehaviour
     [Header("Gun")]
     [SerializeField] private Gun gun;
 
-    /*
-    readonly struct ItemData{
-        public Item_Template itemReference {get;}
-        public float coolDown {get;}
-        public int uses {get;}
-
-        public ItemData(Item_Template item){
-            itemReference = item;
-            coolDown = item.useCooldown;
-            uses = item.numberOfUses;
-        }
-    }
-    */
     class ItemData{
         public Item_Template _itemReference {get;}
         public float _maxCoolDown {get;}
@@ -50,8 +37,8 @@ public class PlayerItemController : MonoBehaviour
             needReload = false;
         }
         public void Update(float dt){
-            if(currentUses <= 0){
-                needReload = true;
+            //Debug.Log($"{currentCoolDown}");
+            if(currentUses <= 0 && !needReload){
                 currentCoolDown = _itemReference.rearmTime;
             }
             if(needReload){
@@ -59,11 +46,11 @@ public class PlayerItemController : MonoBehaviour
                 if(currentCoolDown <= 0){
                     Debug.Log("done");
                     needReload = false;
+                    canUse = true;
                     currentUses = _maxUses;
                     currentCoolDown = _maxCoolDown;
                 }
-            }
-            if(!canUse){
+            }else if(!canUse){
                 currentCoolDown -= dt;
                 if(currentCoolDown <= 0){
                     canUse = true;
@@ -110,10 +97,13 @@ public class PlayerItemController : MonoBehaviour
             currentItem._itemReference.Use(this, angle, transform.position, itemDistance, gameObject.layer);
             currentItem.canUse = false;
             currentItem.currentUses -= currentItem._useIncrment;
+            if(currentItem.currentUses <= 0)Debug.Log("Need Reload");
         }
         if(Input.GetKeyDown(KeyCode.R) && currentItem.currentUses != currentItem._maxUses){
+            Debug.Log(currentItem);
             Debug.Log("reloading!");
             currentItem.needReload = true;
+            currentItem.currentCoolDown = currentItem._itemReference.rearmTime;
         }
     }
 

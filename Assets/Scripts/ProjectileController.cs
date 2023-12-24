@@ -23,6 +23,7 @@ public class ProjectileScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.GetComponent<ProjectileScript>() != null) return;
+        if(other.gameObject.tag == "Interactable")return;
         Destroy(gameObject);
     }
     public void SetBulletArgs(int layer, int thrust, int damage){
