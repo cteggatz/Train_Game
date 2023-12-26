@@ -1,8 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using Pathfinding;
-
+/* TO DO 
+   Fix floating
+   Fix stuck on wall :(
+   Add grunt Damage
+   Add player damage
+   Climb ladder
+ */
 public class GruntAI : MonoBehaviour
 {
     [Header("Pathfinding")]
@@ -13,13 +18,10 @@ public class GruntAI : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float nextWaypointDistance, jumpNodeHeightReq, jumpMod, jumpCheckOffset;
 
-    [Header("Custom Behavior")]
-    [SerializeField] private bool followEnabled;
-    [SerializeField] private bool jumpEnabled, directionLookEnabled;
 
     private Path path;
     private int currentWaypoint = 0;
-    private bool isGrounded = false;
+    private bool isGrounded = false, collided;
     private Seeker seeker;
     private Rigidbody2D rb;
     private Vector2 currentVelocity;
@@ -34,7 +36,7 @@ public class GruntAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (TargetInDistance() && followEnabled)
+        if (TargetInDistance())
         {
             PathFollow();
         }
@@ -42,7 +44,7 @@ public class GruntAI : MonoBehaviour
 
     private void UpdatePath()
     {
-        if (TargetInDistance() && seeker.IsDone() && followEnabled)
+        if (TargetInDistance() && seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
@@ -56,6 +58,10 @@ public class GruntAI : MonoBehaviour
         }
         if (currentWaypoint >= path.vectorPath.Count) //If at target
         {
+            if (target.GetComponent<PlayerHealth>() != null)
+            {
+                target.GetComponent<PlayerHealth>().health -= 0.5f;
+            }
             return;
         }
 
@@ -63,7 +69,7 @@ public class GruntAI : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // Find direction
         Vector2 force = direction * speed * Time.deltaTime;
 
-        if (jumpEnabled && isGrounded && target.position.y - 1f > rb.transform.position.y && target.GetComponent<Rigidbody2D>().velocity.y == 0 && path.path.Count < 20) //bouncy
+        if (isGrounded && target.position.y - 1f > rb.transform.position.y && target.GetComponent<Rigidbody2D>().velocity.y == 0 && path.path.Count < 20) //bouncy
         {
             rb.AddForce(Vector2.up * speed * jumpMod);
         }
@@ -80,8 +86,6 @@ public class GruntAI : MonoBehaviour
         }
 
         // Direction Look
-        if (directionLookEnabled)
-        {
             if (rb.velocity.x > 0.05f)
             {
                 transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
@@ -90,7 +94,6 @@ public class GruntAI : MonoBehaviour
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
-        }
     }
 
     private bool TargetInDistance()
@@ -104,6 +107,15 @@ public class GruntAI : MonoBehaviour
         {
             path = p;
             currentWaypoint = 0;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            target = collision.gameObject.transform;
+            target.gameObject.GetComponent<PlayerHealth>().health -= 0.5f;
         }
     }
 }
