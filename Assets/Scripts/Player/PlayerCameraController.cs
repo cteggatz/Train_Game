@@ -11,6 +11,8 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] private Transform cameraFollowObj;
     [SerializeField] private Camera cam;
 
+    [SerializeField] private GameObject BackgroundBlur;
+
     [Header("Camera Look Settings")]
     [SerializeField] private float lookThreshHold = 3f;
     [SerializeField] private Vector3 offset;
@@ -69,7 +71,15 @@ public class PlayerCameraController : MonoBehaviour
 
     public void SwitchLayer(){
         //switches the layer of the player between the two layers
-        this.gameObject.layer = ((this.gameObject.layer == 6) ? 7 : 6);
+        //this.gameObject.layer = ((this.gameObject.layer == 6) ? 7 : 6);
+
+        if(this.gameObject.layer == 6){
+            this.gameObject.layer = 7;
+            BackgroundBlur.SetActive(false);
+        } else {
+            this.gameObject.layer = 6;
+            BackgroundBlur.SetActive(true);
+        }
         //IDK WTF this code does but its what I was told to do lol.
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Outside_Train");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Inside_Train");
