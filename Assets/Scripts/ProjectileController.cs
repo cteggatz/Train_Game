@@ -9,7 +9,7 @@ public class ProjectileScript : MonoBehaviour
 {
     
     [SerializeField]private float thrust = 10;
-
+    public float damage;
     private Rigidbody2D _rb;
 
     private void Awake(){
@@ -30,7 +30,7 @@ public class ProjectileScript : MonoBehaviour
     public void SetBulletArgs(int layer, int thrust, int damage){
 
         gameObject.layer = layer;
-
+        this.damage = damage;
         Collider2D _col = gameObject.GetComponent<Collider2D>();
         _col.includeLayers ^= 1 << gameObject.layer;   
 

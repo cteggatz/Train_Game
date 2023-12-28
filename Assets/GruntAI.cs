@@ -5,19 +5,20 @@ using Pathfinding;
    Fix floating
    Fix stuck on wall :(
    Add grunt Damage
-   Add player damage
    Climb ladder
  */
 public class GruntAI : MonoBehaviour
 {
     [Header("Pathfinding")]
-    [SerializeField] private Transform target;
+    public Transform target;
     [SerializeField] private float activateDistance, pathUpdateSeconds;
 
     [Header("Physics")]
     [SerializeField] private float speed;
     [SerializeField] private float nextWaypointDistance, jumpNodeHeightReq, jumpMod, jumpCheckOffset;
 
+    [Header("Other")]
+    [SerializeField] private float health;
 
     private Path path;
     private int currentWaypoint = 0;
@@ -39,6 +40,10 @@ public class GruntAI : MonoBehaviour
         if (TargetInDistance())
         {
             PathFollow();
+        }
+        if (health <= 0f)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -116,6 +121,10 @@ public class GruntAI : MonoBehaviour
         {
             target = collision.gameObject.transform;
             target.gameObject.GetComponent<PlayerHealth>().health -= 0.5f;
+        }
+        if (collision.gameObject.GetComponent<ProjectileScript>() != null)
+        {
+            health -= collision.gameObject.GetComponent<ProjectileScript>().damage;
         }
     }
 }
