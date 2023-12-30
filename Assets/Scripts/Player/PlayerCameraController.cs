@@ -17,6 +17,9 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] private float lookThreshHold = 3f;
     [SerializeField] private Vector3 offset;
 
+    [SerializeField] private float MinYLevel = -1f;
+    [SerializeField] private float MaxYLevel = 10f;
+
 
     private bool canMoveOutside;
 
@@ -43,11 +46,12 @@ public class PlayerCameraController : MonoBehaviour
             playerPos.x - lookThreshHold , 
             playerPos.x + lookThreshHold
         );
-        targetPosition.y = Mathf.Clamp(
-            targetPosition.y, 
-            playerPos.y - lookThreshHold , 
-            playerPos.y + lookThreshHold
+        targetPosition.y = Math.Clamp(
+            Mathf.Clamp(targetPosition.y, playerPos.y - lookThreshHold , playerPos.y + lookThreshHold),
+            MinYLevel,
+            MaxYLevel
         );
+        
         //Debug.Log(targetPosition.x);
         targetPosition.z = 0;
 

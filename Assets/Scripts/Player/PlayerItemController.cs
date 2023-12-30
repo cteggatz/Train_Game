@@ -12,7 +12,7 @@ public class PlayerItemController : MonoBehaviour
     [SerializeField] private GameObject itemRenderer;
     [SerializeField] private float itemDistance = 0.5f;
 
-    private Vector3 offset;
+    [SerializeField] private Vector3 offset;
 
     [Header("Gun")]
     //[SerializeField] private Gun gun;
@@ -95,7 +95,7 @@ public class PlayerItemController : MonoBehaviour
         EquiptedData[2] = new ItemData(consumable);
         SetCurrentItem(0);
 
-        offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset();
+        offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset() + offset;
         
     }
     

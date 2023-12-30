@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8954048786703536603
+--- !u!114 &-2492020076489597578
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Screen_Blur
-  m_Shader: {fileID: -6465566751694194690, guid: 760e374d708c63a44a7cd1c37ed47c30, type: 3}
+  m_Name: SwayAndMove
+  m_Shader: {fileID: -6465566751694194690, guid: 2969c17f2721cfa4c8ef62d40012fa58, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -54,6 +54,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlurAmmount: 0.0314
-    m_Colors: []
+    - _Intensity: 1
+    - _MoveDirection: 10
+    - _Scale: 0.2
+    m_Colors:
+    - _Direction: {r: 1, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
