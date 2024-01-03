@@ -17,7 +17,7 @@ TagManager:
   - Inside_Train
   - Outside_Train
   - Player
-  - 
+  - Background
   - 
   - 
   - 
@@ -41,8 +41,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2821613741
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 3631834883
     locked: 0
   - name: Outside
     uniqueID: 2748222441

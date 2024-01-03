@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 83fdb6e70a63b7744b2a7b0df24daf5a
+guid: 60cacf156a7a31e4f8a7de073219ec06
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,8 +48,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 10
-  spriteBorder: {x: 11, y: 0, z: 0, w: 8}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -110,22 +110,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player1_0
+      name: Train_Ground_Textures 1_4
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 10
-        height: 24
+        x: 0
+        y: 32
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c986136be7f5f0439b60ab3a7decb2d
-      internalID: -840874890
+      spriteID: de3003eb81790a74083223b57db34bd0
+      internalID: -814727698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Train_Ground_Textures 1_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af472909556ba3449a65f28ebf3327fe
+      internalID: 1907490961
       vertices: []
       indices: 
       edges: []
@@ -134,14 +155,19 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player1_0: -840874890
+      Train_Ground_Textures 1_0: 1315216059
+      Train_Ground_Textures 1_1: -1324075579
+      Train_Ground_Textures 1_2: 798846485
+      Train_Ground_Textures 1_3: 1132117656
+      Train_Ground_Textures 1_4: -814727698
+      Train_Ground_Textures 1_5: 1907490961
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
