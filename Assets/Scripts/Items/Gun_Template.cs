@@ -87,8 +87,8 @@ public class Gun : Item_Template
             GameObject obj = (GameObject) Instantiate(
                 projectile,
                 new Vector3(
-                    position.x - Mathf.Cos(spreadOffset) * spawnDistance - Mathf.Cos(spreadOffset) * sprite_Size.x * 0.5f,
-                    position.y  - Mathf.Sin(spreadOffset) * spawnDistance - Mathf.Sin(spreadOffset) * sprite_Size.x * 0.5f,
+                    position.x - Mathf.Cos(spreadOffset) * spawnDistance - Mathf.Cos(spreadOffset) * sprite.bounds.extents.x,
+                    position.y  - Mathf.Sin(spreadOffset) * spawnDistance - Mathf.Sin(spreadOffset) * sprite.bounds.extents.x,
                     position.z
                 ),
                 Quaternion.Euler(0,0,spreadOffset * Mathf.Rad2Deg)
