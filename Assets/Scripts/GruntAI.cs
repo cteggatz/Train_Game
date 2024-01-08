@@ -74,7 +74,7 @@ public class GruntAI : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // Find direction
         Vector2 force = direction * speed * Time.deltaTime;
 
-        if (isGrounded && target.position.y - 1f > rb.transform.position.y && target.GetComponent<Rigidbody2D>().velocity.y == 0 && path.path.Count < 20) //bouncy
+        if (isGrounded && target.position.y - 1f > rb.transform.position.y && gameObject.GetComponent<Rigidbody2D>().velocity.y == 0 && path.path.Count < 20) //bouncy
         {
             rb.AddForce(Vector2.up * speed * jumpMod);
         }
