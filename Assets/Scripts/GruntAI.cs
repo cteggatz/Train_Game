@@ -2,7 +2,6 @@
 using UnityEngine;
 using Pathfinding;
 /* TO DO 
-   Fix floating
    Fix stuck on wall :(
    Add grunt Damage
    Climb ladder
@@ -15,7 +14,7 @@ public class GruntAI : MonoBehaviour
 
     [Header("Physics")]
     [SerializeField] private float speed;
-    [SerializeField] private float nextWaypointDistance, jumpNodeHeightReq, jumpMod, jumpCheckOffset;
+    [SerializeField] private float nextWaypointDistance, jumpMod, jumpCheckOffset;
 
     [Header("Other")]
     [SerializeField] private float health;
@@ -71,6 +70,7 @@ public class GruntAI : MonoBehaviour
         }
 
         isGrounded = Physics2D.Raycast(transform.position, -Vector3.up, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
+        Debug.Log(isGrounded);
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // Find direction
         Vector2 force = direction * speed * Time.deltaTime;
 
