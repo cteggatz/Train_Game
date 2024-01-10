@@ -7,10 +7,14 @@ public class BackgroundMover : MonoBehaviour
     public float backSpeed = 5.0f;
     private Rigidbody2D rb;
     private float deSpawn = -30f;
+
+    public BoxCollider2D backGroundBoxCollider;
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(-backSpeed, 0);
+        backGroundBoxCollider = this.GetComponent<BoxCollider2D>();
+        
     }
 
     // Update is called once per frame
