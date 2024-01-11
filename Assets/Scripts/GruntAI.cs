@@ -70,18 +70,17 @@ public class GruntAI : MonoBehaviour
         }
 
         isGrounded = Physics2D.Raycast(transform.position, -Vector3.up, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
-        Debug.Log(isGrounded);
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // Find direction
         Vector2 force = direction * speed * Time.deltaTime;
 
-        if (isGrounded && target.position.y - 1f > rb.transform.position.y && gameObject.GetComponent<Rigidbody2D>().velocity.y == 0 && path.path.Count < 20) //bouncy
+    if (isGrounded && target.position.y - 1f > rb.transform.position.y && gameObject.GetComponent<Rigidbody2D>().velocity.y == 0 && path.path.Count < 20) //bouncy
         {
             rb.AddForce(Vector2.up * speed * jumpMod);
         }
 
         // Applying force
+        //rb.velocity = Vector2.SmoothDamp(rb.velocity, force, ref currentVelocity, 0.5f);
         if (!isGrounded) force.y = 0; //no workie, can still float in the air
-        rb.velocity = Vector2.SmoothDamp(rb.velocity, force, ref currentVelocity, 0.5f);
 
         // Waypoint reached check
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
