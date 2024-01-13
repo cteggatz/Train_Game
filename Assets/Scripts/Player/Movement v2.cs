@@ -37,7 +37,12 @@ public class Movementv2 : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         if (horizontalInput != 0) // Flippy flippy
         {
-            transform.localRotation = Quaternion.Euler(0, horizontalInput > 0 ? 0 : 180, 0);
+            //transform.localRotation = Quaternion.Euler(0, horizontalInput > 0 ? 0 : 180, 0);
+            if(horizontalInput > 0){
+                transform.GetComponent<SpriteRenderer>().flipX = false;
+            } else {
+                transform.GetComponent<SpriteRenderer>().flipX = true;
+            }
         }
 
 
