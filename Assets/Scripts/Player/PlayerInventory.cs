@@ -40,11 +40,11 @@ public class PlayerInventory : MonoBehaviour
     //---- Actual Inventory ----
     private ItemInstance[] inventory = new ItemInstance[4];
     private int currentItem;
-    private class ItemInstance{
+    public class ItemInstance{
         public Usable_Item reference;
-        int ammo;
-        bool onUseCooldown;
-        bool reloading;
+        public int ammo {get; private set;}
+        public bool onUseCooldown {get; private set;}
+        public bool reloading {get; private set;}
         
         
         public ItemInstance(Usable_Item reference){
@@ -118,10 +118,6 @@ public class PlayerInventory : MonoBehaviour
                 grabbedObject.GetComponent<BoxCollider2D>().includeLayers ^= 1 << e.layer;
 
                 grabbedObject.layer = e.layer;
-
-                
-                ///grab.cullingMask ^= 1 << LayerMask.NameToLayer("Outside_Train");
-                //cam.cullingMask ^= 1 << LayerMask.NameToLayer("Inside_Train");
             }
         };
         //offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset();
@@ -241,5 +237,9 @@ public class PlayerInventory : MonoBehaviour
         currentItem = index;
         itemRenderer.GetComponent<SpriteRenderer>().sprite = inventory[index].reference.sprite;
         itemRenderer.transform.localScale = inventory[index].reference.sprite_Size;
+    }
+
+    public ItemInstance GetCurrentItem(){
+        return inventory[currentItem];
     }
 }

@@ -15,18 +15,18 @@ MonoBehaviour:
   sprite: {fileID: 1058679507, guid: 6cd74882a692d064ab432fcb01a72b6c, type: 3}
   sprite_Size: {x: 1, y: 1, z: 0}
   collidable: 0
-  name: 
+  name: Gunny
   description: 
-  maxUseQuantity: 0
-  useIncrement: 0
+  maxUseQuantity: 12
+  useIncrement: 1
   useCooldown: 0
   automatic: 0
   gunType: 0
   shootType: 0
-  reloadSpeed: 0
-  burstAmmount: 0
-  burstDelay: 0
+  reloadSpeed: 1
+  burstAmmount: 3
+  burstDelay: 0.125
   shotSpread: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 3166372697761311189, guid: c7e9233bf4202ce4ba8020e28dccc378, type: 3}
   bulletDamage: 0
-  thrust: 0
+  thrust: 10
