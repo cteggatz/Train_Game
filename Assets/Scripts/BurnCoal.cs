@@ -5,7 +5,6 @@ public class BurnCoal : MonoBehaviour
 {
     private float timer, fuel;
     [SerializeField] private float delayAmount;
-    [SerializeField] private Text speedText;
 
     // Update is called once per frame
     void Update()
@@ -14,9 +13,11 @@ public class BurnCoal : MonoBehaviour
         if (timer >= delayAmount)
         {
             timer = 0f;
-            fuel -= 0.5f;
+            if(fuel >= 0){
+                fuel -= 0.5f;
+            }
         }
-        speedText.text = "Fuel: " + fuel.ToString();
+        Debug.Log($"Fuel : {fuel}");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
