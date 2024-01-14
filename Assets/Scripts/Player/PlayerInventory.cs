@@ -18,11 +18,24 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Usable_Item _secondary;
     [SerializeField] private Usable_Item _consumable;
 
+     // ---- Grab Script ----
+     /*
+        This needs to change later! I am not going to change how items like fuel works, but we need a new system layer! -Chris
+     */
+    [Header("Other Item Grabbing")]
+    [Tooltip("Point where the ray is casted from")] [SerializeField] private Transform rayPoint;
+    [Tooltip("Point where a grabed object will teleport")] [SerializeField] private Transform grabPoint;
+    [SerializeField]  private GameObject coalPrefab,  grabbedObject; //... the current grabbed object
+    [SerializeField] private float rayDistance; //This should be self explanitory
+    private bool isGrabbing;
+
+
     //---- item rendering ----
     [Header("Item Renderer")]
     [SerializeField] private GameObject itemRenderer;
     [SerializeField] private float itemDistance = 0.5f;
     [SerializeField] private Vector3 offset;
+
 
     //---- Actual Inventory ----
     private ItemInstance[] inventory = new ItemInstance[4];
@@ -84,10 +97,6 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    
-    
-
-
     void Start()
     {
         //creating instances of the item data fed. 
@@ -99,12 +108,57 @@ public class PlayerInventory : MonoBehaviour
         gameObject.GetComponent<PlayerCameraController>().OnLayerChange += (object obj,  PlayerCameraController.LayerChangeArgs e) =>{
             itemRenderer.layer = e.layer;
         };
-        offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset();
+        //offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset();
+
+        isGrabbing = false;
     }
 
     void Update()
     {
-        //itemRenderer.transform.rotation = Quaternion.Euler (0.0f, 0.0f, gameObject.transform.rotation.z * -1.0f);
+
+        //---- Item Grabbing ----
+        /*
+        We need to change this later but this will do. This is basically just the grab script inside this script.
+        Its litterally two different systems in one and we need to change that.
+
+        We do the grab first because we dont want the item to render if the item is picked up.
+        */
+        if(Input.GetKey("f") && !isGrabbing)
+        {
+            //casts ray at foot to see if then can grab anything
+            RaycastHit2D hitinfo = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance);
+            if(hitinfo.collider == null)return;
+
+
+            //checks if the object is one of the grabbable things, if not then function will return;
+            if(hitinfo.collider.gameObject.tag == "Fuel") { 
+                grabbedObject = hitinfo.collider.gameObject; 
+            } 
+            else if(hitinfo.collider.gameObject.name == "Grabbable - Spawner") { 
+                grabbedObject = Instantiate(coalPrefab); 
+            }
+            else return;
+            grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
+            grabbedObject.transform.position = grabPoint.position;
+            grabbedObject.transform.SetParent(transform);
+
+            isGrabbing = true;
+            itemRenderer.transform.localScale = Vector3.zero;
+        }else if ( isGrabbing && (Input.GetKeyUp(KeyCode.F) == true || grabbedObject == null)){
+            //if item exits, gets rid of it and puts it on ground
+            if(grabbedObject != null){
+                grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
+                grabbedObject.transform.SetParent(null);
+                grabbedObject = null;
+            }
+            isGrabbing = false;
+            itemRenderer.transform.localScale = inventory[currentItem].reference.sprite_Size;
+        } else if(isGrabbing){
+            return;
+        }
+
+
+
         // ---- Item Positioning Around The Player ----
         //accounts for camera offset
         Vector3 offsetPosition = new Vector3(
@@ -135,6 +189,7 @@ public class PlayerInventory : MonoBehaviour
             itemRenderer.GetComponent<SpriteRenderer>().flipY = true;
         } 
 
+
         // ---- Inputs ---
         //switching guns
         if(Input.GetKeyDown(KeyCode.Alpha1)){
@@ -150,13 +205,14 @@ public class PlayerInventory : MonoBehaviour
             SetCurrentItem(2);
         }
 
-        if(Input.GetMouseButtonDown(0)){
-            inventory[currentItem].Use(transform, offsetPosition, angle, itemRenderer.layer);
-        }
+        //Using Guns
         if(Input.GetKeyDown(KeyCode.R)){
             inventory[currentItem].Reload(transform);
         }
-
+        if(Input.GetMouseButtonDown(0)){
+            inventory[currentItem].Use(transform, offsetPosition, angle, itemRenderer.layer);
+        }
+ 
     }
 
 

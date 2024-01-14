@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d517a45937637b5f48e9512584f2fb1c, type: 3}
   m_Name: New_Test_Gun
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  sprite_Size: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 1058679507, guid: 6cd74882a692d064ab432fcb01a72b6c, type: 3}
+  sprite_Size: {x: 1, y: 1, z: 0}
   collidable: 0
   name: 
   description: 
@@ -23,6 +23,7 @@ MonoBehaviour:
   automatic: 0
   gunType: 0
   shootType: 0
+  reloadSpeed: 0
   burstAmmount: 0
   burstDelay: 0
   shotSpread: 0
