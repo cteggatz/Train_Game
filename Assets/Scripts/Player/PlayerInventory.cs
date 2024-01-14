@@ -107,6 +107,22 @@ public class PlayerInventory : MonoBehaviour
 
         gameObject.GetComponent<PlayerCameraController>().OnLayerChange += (object obj,  PlayerCameraController.LayerChangeArgs e) =>{
             itemRenderer.layer = e.layer;
+            if(isGrabbing){
+                /**
+                This is basically switching the layers the collider includers when switching layers
+                */
+                grabbedObject.GetComponent<BoxCollider2D>().excludeLayers ^= 1 << grabbedObject.layer;
+                grabbedObject.GetComponent<BoxCollider2D>().excludeLayers ^= 1 << e.layer;
+
+                grabbedObject.GetComponent<BoxCollider2D>().includeLayers ^= 1 << grabbedObject.layer;
+                grabbedObject.GetComponent<BoxCollider2D>().includeLayers ^= 1 << e.layer;
+
+                grabbedObject.layer = e.layer;
+
+                
+                ///grab.cullingMask ^= 1 << LayerMask.NameToLayer("Outside_Train");
+                //cam.cullingMask ^= 1 << LayerMask.NameToLayer("Inside_Train");
+            }
         };
         //offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset();
 
@@ -127,7 +143,7 @@ public class PlayerInventory : MonoBehaviour
         {
             //casts ray at foot to see if then can grab anything
             RaycastHit2D hitinfo = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance);
-            if(hitinfo.collider == null)return;
+            if(hitinfo.collider == null || hitinfo.collider.gameObject.layer != gameObject.layer)return;
 
 
             //checks if the object is one of the grabbable things, if not then function will return;
