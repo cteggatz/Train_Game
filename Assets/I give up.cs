@@ -5,20 +5,16 @@ using UnityEngine;
 public class Igiveup : MonoBehaviour
 {
     [Header("Pathfinding")]
-    [SerializeField] public Transform target;
-    public float activateDistance = 50f;
-    public float pathUpdateSeconds = 0.5f;
+    [SerializeField] private Transform target;
+    [SerializeField] private float activateDistance, pathUpdateSeconds;
 
     [Header("Physics")]
-    public float speed = 200f, jumpForce = 100f;
-    public float nextWaypointDistance = 3f;
-    public float jumpNodeHeightRequirement = 0.8f;
-    public float jumpModifier = 0.3f;
-    public float jumpCheckOffset = 0.1f;
+    [SerializeField] private float speed;
+    [SerializeField] private float jumpForce, nextWaypointDistance, jumpNodeHeightRequirement, jumpModifier, jumpCheckOffset;
 
     [Header("Custom Behavior")]
-    public bool isJumping, isInAir;
-    public bool directionLookEnabled = true;
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool isInAir;
 
     [SerializeField] Vector3 startOffset;
 
@@ -109,8 +105,6 @@ public class Igiveup : MonoBehaviour
         }
 
         // Direction Graphics Handling
-        if (directionLookEnabled)
-        {
             if (rb.velocity.x > 0.05f)
             {
                 transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
@@ -119,7 +113,6 @@ public class Igiveup : MonoBehaviour
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
-        }
     }
 
     private bool TargetInDistance()
