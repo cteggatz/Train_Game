@@ -1,4 +1,4 @@
-﻿using Pathfinding;
+using Pathfinding;
 using System.Collections;
 using UnityEngine;
 
@@ -13,8 +13,9 @@ public class Igiveup : MonoBehaviour
     [SerializeField] private float jumpForce, nextWaypointDistance, jumpNodeHeightRequirement, jumpModifier, jumpCheckOffset;
 
     [Header("Custom Behavior")]
-    [SerializeField] private bool isJumping;
     [SerializeField] private bool isInAir;
+    [SerializeField] private float attckRange, attackForce;
+    [SerializeField] private bool hittingTarget;
 
     [SerializeField] Vector3 startOffset;
 
@@ -29,7 +30,6 @@ public class Igiveup : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        isJumping = false;
         isInAir = false;
         isOnCoolDown = false; 
 
@@ -41,6 +41,9 @@ public class Igiveup : MonoBehaviour
         if (TargetInDistance())
         {
             PathFollow();
+        }
+        if(Vector2.Distance(transform.position, target.transform.position) < attckRange){
+            Attack();
         }
     }
 
@@ -79,14 +82,12 @@ public class Igiveup : MonoBehaviour
             if (direction.y > jumpNodeHeightRequirement)
             {
                 if (isInAir) return; 
-                isJumping = true;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 StartCoroutine(JumpCoolDown());
             }
         }
         if (isGrounded)
         {
-            isJumping = false;
             isInAir = false; 
         }
         else
@@ -128,11 +129,27 @@ public class Igiveup : MonoBehaviour
             currentWaypoint = 0;
         }
     }
-
     IEnumerator JumpCoolDown()
     {
         isOnCoolDown = true; 
         yield return new WaitForSeconds(1f);
         isOnCoolDown = false;
+    }
+
+    private void Attack(){
+        if (isInAir) return; 
+        rb.velocity = new Vector2(rb.velocity.x, attackForce);
+        StartCoroutine(JumpCoolDown());
+    }
+
+    private void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.transform == target){
+            hittingTarget = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.transform == target){
+            hittingTarget = false;
+        }
     }
 }
