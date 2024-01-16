@@ -5,11 +5,9 @@ using UnityEngine;
 public class BackgroundSpawner : MonoBehaviour
 {
     public GameObject backgroundPrefab;
-    private float spawnPos = 50f;
-    //private BoxCollider2D bc;
+    private float spawnPos = 40.1f;
 
     void Start(){
-        //bc = this.GetComponent<BoxCollider2D>();
         spawnChunk();
     }
     private void spawnChunk(){
@@ -17,7 +15,7 @@ public class BackgroundSpawner : MonoBehaviour
         GameObject a = Instantiate(backgroundPrefab) as GameObject;
         a.transform.position = new Vector2(spawnPos, -1);
     }
-    void OnTriggerExit(Collider backGroundBoxCollider)
+    void OnTriggerExit2D(Collider2D bc)
     {
         spawnChunk();
         Debug.Log("Trigger Exit");

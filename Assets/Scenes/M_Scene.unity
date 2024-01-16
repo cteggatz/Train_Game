@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1165979765}
   - component: {fileID: 1165979767}
   - component: {fileID: 1165979768}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background spawn point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,10 +154,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 503
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -174,7 +174,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.5019062, y: 1.3580627}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -185,7 +185,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.1490884, y: 13.177713}
+  m_Size: {x: 0.01, y: 15}
   m_EdgeRadius: 0
 --- !u!4 &1165979766
 Transform:
@@ -196,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 1165979764}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.51, y: -0.85, z: -23.620274}
+  m_LocalPosition: {x: 30, y: 0, z: -23.620274}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

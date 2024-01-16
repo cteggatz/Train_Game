@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2021053400856630478}
   - component: {fileID: 5350659515388121090}
   - component: {fileID: 305251875171629437}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1568197073054605929}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.36, y: -0.06, z: 0}
-  m_LocalScale: {x: 37.15067, y: 37.15067, z: 37.15067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 64, y: 64, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backSpeed: 5
+  bc: {fileID: 0}
 --- !u!61 &305251875171629437
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,10 +140,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 503
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -159,7 +160,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.15614408, y: 0.12574387}
+  m_Offset: {x: 0.15489224, y: -0.0004208088}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -170,5 +171,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0077118278, y: 0.009002358}
+  m_Size: {x: 0.010868013, y: 0.26220405}
   m_EdgeRadius: 0
