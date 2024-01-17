@@ -14,8 +14,7 @@ public class Igiveup : MonoBehaviour
 
     [Header("Custom Behavior")]
     [SerializeField] private bool isInAir;
-    [SerializeField] private float attckRange, attackForce;
-    [SerializeField] private bool hittingTarget;
+    [SerializeField] private float attckRange, attackForce, damage;
 
     [SerializeField] Vector3 startOffset;
 
@@ -136,20 +135,26 @@ public class Igiveup : MonoBehaviour
         isOnCoolDown = false;
     }
 
+    IEnumerator AttackCoolDown()
+    {
+        isOnCoolDown = true; 
+        yield return new WaitForSeconds(1f);
+        isOnCoolDown = false;
+    }
+
     private void Attack(){
         if (isInAir) return; 
         rb.velocity = new Vector2(rb.velocity.x, attackForce);
         StartCoroutine(JumpCoolDown());
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.transform == target){
-            hittingTarget = true;
+    void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.transform == target){
+            //if(target.GetComponent<PlayerHealth>().health != null){
+                //health -= damage;
+            //    StartCoroutine(AttackCoolDown());
+            //}
         }
     }
-    private void OnTriggerExit2D(Collider2D other){
-        if(other.gameObject.transform == target){
-            hittingTarget = false;
-        }
-    }
+    
 }
