@@ -11,14 +11,14 @@ public class BackgroundSpawner : MonoBehaviour
         spawnChunk();
     }
     private void spawnChunk(){
-        Debug.Log("spawned!");
+        //Debug.Log("spawned!");
         GameObject a = Instantiate(backgroundPrefab) as GameObject;
         a.transform.position = new Vector2(spawnPos, -1);
     }
     void OnTriggerExit2D(Collider2D bc)
     {
         spawnChunk();
-        Debug.Log("Trigger Exit");
+        //Debug.Log("Trigger Exit");
     }
 
 }

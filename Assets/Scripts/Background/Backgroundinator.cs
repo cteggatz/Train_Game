@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackgroundMover : MonoBehaviour
 {
-    public float backSpeed = 5.0f;
+    private float backSpeed = 5.0f;
     private Rigidbody2D rb;
     private float deSpawn = -30f;
     public BoxCollider2D bc;
