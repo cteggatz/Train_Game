@@ -17,7 +17,7 @@ public class BurnCoal : MonoBehaviour
                 fuel -= 0.5f;
             }
         }
-        Debug.Log($"Fuel : {fuel}");
+        //Debug.Log($"Fuel : {fuel}");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

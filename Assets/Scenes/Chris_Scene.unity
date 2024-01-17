@@ -782,7 +782,7 @@ MonoBehaviour:
   rayDistance: 1
   itemRenderer: {fileID: 1749078273}
   itemDistance: 0.5
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &362515309
 GameObject:
   m_ObjectHideFlags: 0
@@ -19425,7 +19425,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'Gun : [Ammo 12/12]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19742,7 +19742,7 @@ GameObject:
   - component: {fileID: 2131957224}
   - component: {fileID: 2131957226}
   - component: {fileID: 2131957223}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Furnace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19762,7 +19762,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayAmount: 0.5
-  speedText: {fileID: 0}
 --- !u!212 &2131957224
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19842,10 +19841,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
