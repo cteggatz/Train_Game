@@ -9454,10 +9454,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2248732212179056967, guid: b89a13232932d214486268598d00bcd4, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 361018876}
     - target: {fileID: 2373761937586878413, guid: b89a13232932d214486268598d00bcd4, type: 3}
       propertyPath: m_Name
       value: Little Guy
@@ -9501,6 +9497,14 @@ PrefabInstance:
     - target: {fileID: 5312470605036786623, guid: b89a13232932d214486268598d00bcd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7697099168103752374, guid: b89a13232932d214486268598d00bcd4, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 361018876}
+    - target: {fileID: 7697099168103752374, guid: b89a13232932d214486268598d00bcd4, type: 3}
+      propertyPath: activateDistance
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
