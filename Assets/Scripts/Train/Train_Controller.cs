@@ -5,8 +5,13 @@ using UnityEngine;
 public class Train_Controller : MonoBehaviour
 {
     
+    
     [SerializeField, Range(0,100)] float speed = 0;
     [SerializeField, Range(0,100)] float targetSpeed = 50f;
+
+    
+    private float timer;
+    [SerializeField] private float delayAmount;
     [SerializeField, Min(0)] float fuel = 0;
 
 
@@ -16,25 +21,24 @@ public class Train_Controller : MonoBehaviour
         
     }
 
-    void FixedUpdate()
+    void Update()
     {
-
-
-        if(fuel > 0){
-            if(speed <= targetSpeed){
-                speed = speed + .1f;
-            }   
-            fuel -= Time.deltaTime;
-        } else {
-            speed -= .5f;
+       timer += Time.deltaTime;
+        if (timer >= delayAmount)
+        {
+            timer = 0f;
+            if(fuel > 0){
+                fuel -= 0.5f;
+            }
         }
     }
 
     void UpdateSpeed(float speed){
         this.speed += speed;
     }
-    public float GetSpeed(){
-        return this.speed;
+    public void AddSpeed(float fuel){
+        this.fuel += fuel;
     }
-
+    public float GetFuel(){return this.fuel;}
+    public float GetSpeed(){return this.speed;}
 }
