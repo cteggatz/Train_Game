@@ -10,7 +10,7 @@ public class BurnCoal : MonoBehaviour
     {
         if (collision.gameObject.tag == "Fuel")
         {
-            trainController.GetComponent<Train_Controller>().AddSpeed(10f);
+            trainController.GetComponent<Train_Controller>().AddFuel(40f);
             Destroy(collision.gameObject);
         }
     }

@@ -33,7 +33,7 @@ public class PlayerUIController : MonoBehaviour
             playerItemInfo.text = $"{item.reference.name} : [Ammo : {item.ammo} / {item.reference.maxUseQuantity}]";
         }
 
-        trainFuel.text = $"Fuel : {trainControllerInstance.GetFuel()} | Speed : {trainControllerInstance.GetSpeed()}";
+        trainFuel.text = $"Fuel : {(int)trainControllerInstance.GetFuel()} | Speed : {(float)Mathf.Round(trainControllerInstance.GetSpeed()*10) * .1f}";
         playerHealthText.text = $"Health : {health.health}";
     }
 }
