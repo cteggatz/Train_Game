@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackgroundSpawner : MonoBehaviour
 {
     public GameObject backgroundPrefab;
-    private float spawnPos = 40.1f;
+    [SerializeField] private float spawnPos = 40.1f;
 
     void Start(){
         spawnChunk();
