@@ -201,16 +201,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  activateDistance: 0
-  pathUpdateSeconds: 0
-  speed: 0
-  jumpForce: 0
-  nextWaypointDistance: 0
-  jumpNodeHeightRequirement: 0
-  jumpModifier: 0
-  jumpCheckOffset: 0
+  activateDistance: 50
+  pathUpdateSeconds: 0.5
+  speed: 4
+  jumpForce: 5
+  nextWaypointDistance: 3
+  jumpNodeHeightRequirement: 0.8
+  jumpModifier: 6
+  jumpCheckOffset: 0.1
   isInAir: 0
-  attckRange: 0
-  attackForce: 0
-  damage: 0
+  attckRange: 4
+  attackForce: 5
+  damage: 3
   startOffset: {x: 0, y: 0, z: 0}

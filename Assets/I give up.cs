@@ -15,12 +15,13 @@ public class Igiveup : MonoBehaviour
     [Header("Custom Behavior")]
     [SerializeField] private bool isInAir;
     [SerializeField] private float attckRange, attackForce, damage;
+    [SerializeField] private int layermask;
 
     [SerializeField] Vector3 startOffset;
 
     private Path path;
     private int currentWaypoint = 0;
-    [SerializeField] public RaycastHit2D isGrounded;
+     private bool isGrounded;
     Seeker seeker;
     Rigidbody2D rb;
     private bool isOnCoolDown;
@@ -69,7 +70,7 @@ public class Igiveup : MonoBehaviour
 
         // See if colliding with anything
         startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset, transform.position.z);
-        isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
+        isGrounded = Physics2D.OverlapPoint(startOffset, layermask, 0.00f, 0.5f);
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
