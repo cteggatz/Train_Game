@@ -111,13 +111,14 @@ public class PlayerInventory : MonoBehaviour
                 /**
                 This is basically switching the layers the collider includers when switching layers
                 */
-                grabbedObject.GetComponent<BoxCollider2D>().excludeLayers ^= 1 << grabbedObject.layer;
-                grabbedObject.GetComponent<BoxCollider2D>().excludeLayers ^= 1 << e.layer;
-
-                grabbedObject.GetComponent<BoxCollider2D>().includeLayers ^= 1 << grabbedObject.layer;
-                grabbedObject.GetComponent<BoxCollider2D>().includeLayers ^= 1 << e.layer;
-
-                grabbedObject.layer = e.layer;
+                switch(LayerMask.LayerToName(e.layer)){
+                    case "Outside_Train":
+                        LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Outside_Train, grabbedObject);
+                        break;
+                    case "Inside_Train":
+                        LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Inside_Train, grabbedObject);
+                        break;
+                }
             }
         };
         //offset = transform.GetComponent<PlayerCameraController>().GetCameraOffset();

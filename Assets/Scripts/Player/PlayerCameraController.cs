@@ -108,12 +108,21 @@ public class PlayerCameraController : MonoBehaviour
 
     public void SwitchLayer(){
         //switches the layer of the player between the two layers
-        this.gameObject.layer = (this.gameObject.layer == 6) ? 7 : 6;
+        //this.gameObject.layer = (this.gameObject.layer == 6) ? 7 : 6;
+
+        if(gameObject.layer == 6){
+            LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Outside_Train, gameObject);
+        } else {
+            LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Inside_Train, gameObject);
+        }
 
         //This switches off the binary bits of the camera culling mask
         //essentually, it is turning switching these layers from visibile to invisible
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Outside_Train");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("Inside_Train");
+
+        //Configures the collision
+        
 
 
         //broadcasts newest changes to subscribers
