@@ -22,7 +22,7 @@ public class BackgroundSpawner : MonoBehaviour
     void OnTriggerExit2D(Collider2D bc)
     {
         spawnChunk();
-        //Debug.Log("Trigger Exit");
+        Debug.Log("Trigger Exit");
     }
 
 }
