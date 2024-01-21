@@ -10,7 +10,7 @@ public class BackgroundSpawner : MonoBehaviour
 
     void Start(){
         spawnChunk();
-        spawnPos = transform.position.x + 0.01f + backgroundPrefab.GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
+        spawnPos = transform.position.x - 0.1f + backgroundPrefab.GetComponent<SpriteRenderer>().sprite.bounds.extents.x;
         Debug.Log(transform.position.x);
         Debug.Log(backgroundPrefab.gameObject.transform.localScale.x);
     }
