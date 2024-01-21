@@ -20,7 +20,7 @@ public class PlayerUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerInventory.ItemInstance item = player.GetComponent<PlayerInventory>().GetCurrentItem();
+        ItemInstance item = player.GetComponent<PlayerInventory>().GetCurrentItem();
         PlayerHealth health = player.GetComponent<PlayerHealth>();
         Train_Controller trainControllerInstance = trainController.GetComponent<Train_Controller>();
 
