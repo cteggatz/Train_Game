@@ -1,13 +1,13 @@
 using Pathfinding;
 using System.Collections;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Igiveup : MonoBehaviour
 {
     [Header("Pathfinding")]
     public Transform target;
-    [SerializeField] private float activateDistance, pathUpdateSeconds;
+    public float awareness, health;
+    [SerializeField] private float pathUpdateSeconds;
 
     [Header("Physics")]
     [SerializeField] private float speed;
@@ -16,7 +16,6 @@ public class Igiveup : MonoBehaviour
     [Header("Custom Behavior")]
     [SerializeField] private bool isInAir;
     [SerializeField] private float attckRange, attackForce, damage, g_rayDistance;
-    public float health;
     //[SerializeField] private int layermask;
 
     [SerializeField] Vector3 startOffset;
@@ -30,6 +29,7 @@ public class Igiveup : MonoBehaviour
 
     public void Start()
     {
+        gameObject.GetComponent<CircleCollider2D>().radius = awareness;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         isInAir = false;
@@ -40,10 +40,7 @@ public class Igiveup : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (TargetInDistance())
-        {
-            PathFollow();
-        }
+        PathFollow();
         if(Vector2.Distance(transform.position, target.transform.position) < attckRange){
             Attack();
         }
@@ -55,7 +52,7 @@ public class Igiveup : MonoBehaviour
 
     private void UpdatePath()
     {
-        if (TargetInDistance() && seeker.IsDone())
+        if (seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
@@ -75,8 +72,8 @@ public class Igiveup : MonoBehaviour
         }
 
         // See if colliding with anything
-        isGrounded = Physics2D.Raycast(gameObject.transform.position, -Vector2.up, g_rayDistance);
-        //Debug.DrawRay(gameObject.transform.position, -Vector2.up, Color.green, g_rayDistance);
+        isGrounded = Physics2D.Raycast(gameObject.transform.position, -Vector3.up, g_rayDistance);
+        //Debug.DrawRay(startOffset, -Vector3.up, Color.blue, g_rayDistance);
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
@@ -122,10 +119,6 @@ public class Igiveup : MonoBehaviour
             }
     }
 
-    private bool TargetInDistance()
-    {
-        return Vector2.Distance(transform.position, target.transform.position) < activateDistance;
-    }
 
     private void OnPathComplete(Path p)
     {
@@ -157,12 +150,18 @@ public class Igiveup : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.transform == target){
-            Debug.Log("HIT");
-            target.GetComponent<PlayerHealth>().health -= damage;
-            //if (target.GetComponent<PlayerHealth>() != null){ //FUCK
-         //       target.GetComponent<PlayerHealth>().health -= damage;
-         //       StartCoroutine(AttackCoolDown());
-       //     }
+            if (target.GetComponent<PlayerHealth>() != null){ //FUCK
+                target.GetComponent<PlayerHealth>().health -= damage;
+                StartCoroutine(AttackCoolDown());
+            }
         }
-    }    
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.GetComponent<Movementv2>() != null)
+        {
+            target = collision.gameObject.transform;
+        }
+    }
 }

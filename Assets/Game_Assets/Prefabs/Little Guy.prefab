@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1908655867732821527}
   - component: {fileID: 212067477930635768}
   - component: {fileID: 7697099168103752374}
+  - component: {fileID: 8408583312751711087}
   m_Layer: 0
   m_Name: Little Guy
   m_TagString: Untagged
@@ -201,6 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  awareness: 4
+  health: 10
   activateDistance: 50
   pathUpdateSeconds: 0.5
   speed: 4
@@ -208,11 +211,45 @@ MonoBehaviour:
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.8
   jumpModifier: 6
-  jumpCheckOffset: 0.1
+  jumpCheckOffset: 0
   isInAir: 0
   attckRange: 4
   attackForce: 5
   damage: 3
   g_rayDistance: 0.5
-  health: 10
   startOffset: {x: 0, y: 0, z: 0}
+--- !u!58 &8408583312751711087
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2373761937586878413}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4

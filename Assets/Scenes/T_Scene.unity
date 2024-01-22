@@ -6687,7 +6687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 482206545}
-  - component: {fileID: 482206544}
+  - component: {fileID: 482206546}
   m_Layer: 0
   m_Name: spawn
   m_TagString: Untagged
@@ -6695,20 +6695,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &482206544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 482206543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0e77331fabd50f4bafd7bf211b23ea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grunt: {fileID: 2373761937586878413, guid: b89a13232932d214486268598d00bcd4, type: 3}
-  furnace: {fileID: 361018876}
 --- !u!4 &482206545
 Transform:
   m_ObjectHideFlags: 0
@@ -6724,6 +6710,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &482206546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482206543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c66139e45827d14b83267ce1720b72d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayAmount: 3
+  grunt: {fileID: 2373761937586878413, guid: b89a13232932d214486268598d00bcd4, type: 3}
+  location: {x: 0, y: 0}
+  targets:
+  - {fileID: 2131957225}
+  - {fileID: 361018876}
 --- !u!1001 &506227966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7992,7 +7996,7 @@ RectTransform:
   m_AnchoredPosition: {x: -100, y: 0}
   m_SizeDelta: {x: 200, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!43 &1042817779
+--- !u!43 &1095106775
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15007,8 +15011,8 @@ MonoBehaviour:
   - {x: 33, y: 4, z: 0}
   - {x: 33, y: 0, z: 0}
   m_ShapePathHash: 0
-  m_Mesh: {fileID: 1042817779}
-  m_InstanceId: 29350
+  m_Mesh: {fileID: 1095106775}
+  m_InstanceId: 30506
   m_LocalBounds:
     m_Center: {x: 13.5, y: 2, z: 0}
     m_Extent: {x: 19.5, y: 2, z: 0}
