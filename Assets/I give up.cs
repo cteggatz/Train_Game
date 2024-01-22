@@ -1,5 +1,6 @@
 using Pathfinding;
 using System.Collections;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Igiveup : MonoBehaviour
@@ -14,14 +15,14 @@ public class Igiveup : MonoBehaviour
 
     [Header("Custom Behavior")]
     [SerializeField] private bool isInAir;
-    [SerializeField] private float attckRange, attackForce, damage;
-    [SerializeField] private int layermask;
+    [SerializeField] private float attckRange, attackForce, damage, g_rayDistance, health;
+    //[SerializeField] private int layermask;
 
     [SerializeField] Vector3 startOffset;
 
     private Path path;
     private int currentWaypoint = 0;
-     private bool isGrounded;
+    private RaycastHit2D isGrounded;
     Seeker seeker;
     Rigidbody2D rb;
     private bool isOnCoolDown;
@@ -44,6 +45,10 @@ public class Igiveup : MonoBehaviour
         }
         if(Vector2.Distance(transform.position, target.transform.position) < attckRange){
             Attack();
+        }
+        if(health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -69,8 +74,8 @@ public class Igiveup : MonoBehaviour
         }
 
         // See if colliding with anything
-        startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset, transform.position.z);
-        isGrounded = Physics2D.OverlapPoint(startOffset, layermask, 0.00f, 0.5f);
+        isGrounded = Physics2D.Raycast(gameObject.transform.position, -Vector2.up, g_rayDistance);
+        //Debug.DrawRay(gameObject.transform.position, -Vector2.up, Color.green, g_rayDistance);
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
@@ -139,7 +144,7 @@ public class Igiveup : MonoBehaviour
     IEnumerator AttackCoolDown()
     {
         isOnCoolDown = true; 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         isOnCoolDown = false;
     }
 
@@ -151,10 +156,17 @@ public class Igiveup : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.transform == target){
-            //if(target.GetComponent<PlayerHealth>().health != null){
-                //health -= damage;
-            //    StartCoroutine(AttackCoolDown());
-            //}
+            Debug.Log("HIT");
+            target.GetComponent<PlayerHealth>().health -= damage;
+            //if (target.GetComponent<PlayerHealth>() != null){ //FUCK
+         //       target.GetComponent<PlayerHealth>().health -= damage;
+         //       StartCoroutine(AttackCoolDown());
+       //     }
+        }
+        if(collision.gameObject.GetComponent<ProjectileScript>() != null) //BROKE
+        {
+            Debug.Log("OW");
+            health -= 1f;
         }
     }
     

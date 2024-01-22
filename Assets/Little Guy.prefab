@@ -213,4 +213,6 @@ MonoBehaviour:
   attckRange: 4
   attackForce: 5
   damage: 3
+  g_rayDistance: 0.5
+  health: 10
   startOffset: {x: 0, y: 0, z: 0}
