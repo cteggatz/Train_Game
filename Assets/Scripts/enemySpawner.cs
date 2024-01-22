@@ -19,7 +19,7 @@ public class enemySpawner : MonoBehaviour
         if (timer >= delayAmount)
         {
             timer = 0f;
-            Instantiate(grunt).GetComponent<GruntAI>().target = furnace;
+            Instantiate(grunt).GetComponent<Igiveup>().target = furnace;
         }
     }
 }

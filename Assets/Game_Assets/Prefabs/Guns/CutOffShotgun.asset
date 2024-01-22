@@ -28,5 +28,5 @@ MonoBehaviour:
   burstDelay: 0
   shotSpread: 5
   projectile: {fileID: 3166372697761311189, guid: c7e9233bf4202ce4ba8020e28dccc378, type: 3}
-  bulletDamage: 0
+  bulletDamage: 3
   thrust: 12

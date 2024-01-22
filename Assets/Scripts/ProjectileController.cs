@@ -25,6 +25,9 @@ public class ProjectileScript : MonoBehaviour
         if(other.gameObject.GetComponent<PlatformEffector2D>() != null)return;
         if(other.gameObject.GetComponent<ProjectileScript>() != null) return;
         if(other.gameObject.tag == "Interactable")return;
+        if(other.gameObject.GetComponent<Igiveup>() != null){
+            other.gameObject.GetComponent<Igiveup>().health -= damage;
+        }
         Destroy(gameObject);
     }
     public void SetBulletArgs(int layer, int thrust, int damage){

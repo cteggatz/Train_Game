@@ -6,7 +6,7 @@ using UnityEngine;
 public class Igiveup : MonoBehaviour
 {
     [Header("Pathfinding")]
-    [SerializeField] private Transform target;
+    public Transform target;
     [SerializeField] private float activateDistance, pathUpdateSeconds;
 
     [Header("Physics")]
@@ -15,7 +15,8 @@ public class Igiveup : MonoBehaviour
 
     [Header("Custom Behavior")]
     [SerializeField] private bool isInAir;
-    [SerializeField] private float attckRange, attackForce, damage, g_rayDistance, health;
+    [SerializeField] private float attckRange, attackForce, damage, g_rayDistance;
+    public float health;
     //[SerializeField] private int layermask;
 
     [SerializeField] Vector3 startOffset;
@@ -163,11 +164,5 @@ public class Igiveup : MonoBehaviour
          //       StartCoroutine(AttackCoolDown());
        //     }
         }
-        if(collision.gameObject.GetComponent<ProjectileScript>() != null) //BROKE
-        {
-            Debug.Log("OW");
-            health -= 1f;
-        }
-    }
-    
+    }    
 }
