@@ -11,7 +11,8 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField]private float thrust = 10;
     public float damage;
     private Rigidbody2D _rb;
-    [SerializeField] private AudioClip ghurt, bang;
+    [SerializeField] private AudioClip ghurt, bang, s_wall;
+    [SerializeField] private ParticleSystem p_wall;
 
     private void Awake(){
         AudioSource.PlayClipAtPoint(bang, transform.position);
@@ -29,9 +30,14 @@ public class ProjectileScript : MonoBehaviour
         if(other.gameObject.tag == "Interactable")return;
         if (other.GetType() == typeof(CircleCollider2D)) return;
         if(other.gameObject.GetComponent<Igiveup>() != null){
-            if ((other.gameObject.GetComponent<Igiveup>().health -= damage) !<= 0) { AudioSource.PlayClipAtPoint(ghurt, transform.position); }
+            if ((other.gameObject.GetComponent<Igiveup>().health -= damage) > 0)
+            {
+                AudioSource.PlayClipAtPoint(ghurt, transform.position);
+            }
             other.gameObject.GetComponent<Igiveup>().health -= damage;
         }
+        AudioSource.PlayClipAtPoint(s_wall, transform.position);
+        Instantiate(p_wall).transform.position = gameObject.transform.position;
         Destroy(gameObject);
     }
     public void SetBulletArgs(int layer, int thrust, int damage){

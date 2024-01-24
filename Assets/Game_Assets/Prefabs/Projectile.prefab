@@ -103,6 +103,8 @@ MonoBehaviour:
   damage: 0
   ghurt: {fileID: 8300000, guid: ddd619eca05b0094cb04fca25c5c846d, type: 3}
   bang: {fileID: 8300000, guid: dbd708a49bd66d342b5d99c873d3b751, type: 3}
+  s_wall: {fileID: 8300000, guid: 7ea587d714b0a1e4cb5a6d9a4412cf7f, type: 3}
+  p_wall: {fileID: 1033559401604345010, guid: 01ba960880e0df44e9380fdbcf3bb83f, type: 3}
 --- !u!50 &7940593166136694507
 Rigidbody2D:
   serializedVersion: 4
