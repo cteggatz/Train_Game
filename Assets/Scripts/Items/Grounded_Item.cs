@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
+using GameItems;
 
-public class ItemInstance{
+namespace GameItems
+{
+    public class ItemInstance{
         public Usable_Item reference;
         public int ammo {get; private set;}
         public bool onUseCooldown {get; private set;}
@@ -59,21 +62,17 @@ public class ItemInstance{
             reloading = false;
         }
 }
-
-
-[RequireComponent(typeof(SpriteRenderer))]
-public class Grounded_Item : MonoBehaviour
-{
-    [SerializeField] private ItemInstance item;
-    [SerializeField] private GameObject prefab;
-    void Start()
+    
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class Grounded_Item : MonoBehaviour
     {
-        SpriteRenderer spriteRenderer = transform.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = item.reference.sprite;
-    }
+        [SerializeField] private ItemInstance item;
+        [SerializeField] private GameObject prefab;
+        void Start()
+        {
+            SpriteRenderer spriteRenderer = transform.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = item.reference.sprite;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
     }
 }
