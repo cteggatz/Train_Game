@@ -11,8 +11,10 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField]private float thrust = 10;
     public float damage;
     private Rigidbody2D _rb;
+    [SerializeField] private AudioClip ghurt, bang;
 
     private void Awake(){
+        AudioSource.PlayClipAtPoint(bang, transform.position);
         _rb = gameObject.GetComponent<Rigidbody2D>();
     }
     private void Update(){
@@ -27,6 +29,7 @@ public class ProjectileScript : MonoBehaviour
         if(other.gameObject.tag == "Interactable")return;
         if (other.GetType() == typeof(CircleCollider2D)) return;
         if(other.gameObject.GetComponent<Igiveup>() != null){
+            if ((other.gameObject.GetComponent<Igiveup>().health -= damage) !<= 0) { AudioSource.PlayClipAtPoint(ghurt, transform.position); }
             other.gameObject.GetComponent<Igiveup>().health -= damage;
         }
         Destroy(gameObject);

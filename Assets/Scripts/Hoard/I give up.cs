@@ -16,6 +16,8 @@ public class Igiveup : MonoBehaviour
     [Header("Custom Behavior")]
     [SerializeField] private bool isInAir;
     [SerializeField] private float attckRange, attackForce, damage, g_rayDistance;
+    [SerializeField] private ParticleSystem death;
+    [SerializeField] private AudioClip dsound, bite;
     //[SerializeField] private int layermask;
 
     [SerializeField] Vector3 startOffset;
@@ -42,11 +44,13 @@ public class Igiveup : MonoBehaviour
     {
         PathFollow();
         if(Vector2.Distance(transform.position, target.transform.position) < attckRange){
-            Attack();
+            //Attack();
         }
         if(health <= 0)
         {
+            AudioSource.PlayClipAtPoint(dsound, transform.position);
             Destroy(gameObject);
+            Instantiate(death).transform.position = gameObject.transform.position;
         }
     }
 
@@ -150,9 +154,10 @@ public class Igiveup : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.transform == target){
-            if (target.GetComponent<PlayerHealth>() != null){ //FUCK
+            if (target.GetComponent<PlayerHealth>() != null){
                 target.GetComponent<PlayerHealth>().health -= damage;
-                StartCoroutine(AttackCoolDown());
+                AudioSource.PlayClipAtPoint(bite, transform.position);
+                // StartCoroutine(AttackCoolDown());
             }
         }
     }
