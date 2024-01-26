@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
 using GameItems;
+using System.Runtime.CompilerServices;
 
 namespace GameItems
 {
@@ -67,11 +68,15 @@ namespace GameItems
     public class Grounded_Item : MonoBehaviour
     {
         [SerializeField] private ItemInstance item;
-        [SerializeField] private GameObject prefab;
-        void Start()
-        {
-            SpriteRenderer spriteRenderer = transform.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = item.reference.sprite;
+        
+        public void SetItem(ItemInstance item, LayerHelper.TrainLayer layer){
+            this.item = item;
+
+            gameObject.GetComponent<SpriteRenderer>().sprite = item.reference.sprite;
+
+            gameObject.GetComponent<BoxCollider2D>().size = item.reference.sprite.bounds.size;
+
+            LayerHelper.SwitchLayers(layer, gameObject);
         }
 
     }

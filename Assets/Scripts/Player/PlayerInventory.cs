@@ -37,6 +37,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private float itemDistance = 0.5f;
     [SerializeField] private Vector3 offset;
 
+    [SerializeField] private GameObject groundedItemPrefab;
+
 
     //---- Actual Inventory ----
     private ItemInstance[] inventory = new ItemInstance[4];
@@ -169,6 +171,13 @@ public class PlayerInventory : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0)){
             inventory[currentItem].Use(transform, offsetPosition, angle, itemRenderer.layer);
+        }
+
+        if(Input.GetKeyDown(KeyCode.C)){
+            GameObject item = Instantiate(groundedItemPrefab);
+            if(item.GetComponent<Grounded_Item>() != null){
+                item.GetComponent<Grounded_Item>().SetItem(inventory[currentItem], (LayerHelper.TrainLayer)gameObject.layer);
+            }
         }
  
     }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class LayerHelper : MonoBehaviour
 {
     public enum TrainLayer{
-        Outside_Train,
-        Inside_Train,
+        Outside_Train = 7,
+        Inside_Train = 6,
     }
     public static string LayerToString(TrainLayer _layer){
         if(_layer is TrainLayer.Outside_Train) return "Outside_Train";
