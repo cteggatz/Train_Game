@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d517a45937637b5f48e9512584f2fb1c, type: 3}
-  m_Name: New_Test_Gun
+  m_Name: SMG_temp
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1058679507, guid: 6cd74882a692d064ab432fcb01a72b6c, type: 3}
+  sprite: {fileID: 1908183220, guid: 6cd74882a692d064ab432fcb01a72b6c, type: 3}
   sprite_Size: {x: 1, y: 1, z: 0}
   collidable: 0
-  name: Gunny
+  name: SMG
   description: 
-  maxUseQuantity: 12
+  maxUseQuantity: 30
   useIncrement: 1
   useCooldown: 0
-  automatic: 0
+  automatic: 1
   gunType: 0
   shootType: 0
   reloadSpeed: 1
   shell: {fileID: 5655894131590389429, guid: c90500f2bdf9eb046abc51abd0034391, type: 3}
-  burstAmmount: 3
-  burstDelay: 0.125
+  burstAmmount: 1
+  burstDelay: 0
   shotSpread: 0
-  projectile: {fileID: 3166372697761311189, guid: c7e9233bf4202ce4ba8020e28dccc378, type: 3}
+  projectile: {fileID: 3166372697761311189, guid: ed31233d98792194e92763f5c70a9881, type: 3}
   bulletDamage: 1
-  thrust: 10
+  thrust: 19

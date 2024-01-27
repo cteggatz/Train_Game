@@ -16,6 +16,7 @@ public class New_Gun_Template : Usable_Item
     public GunType gunType; /**<summary> Determins what slot the player can equipt it too </summary> */
     public ShootType shootType; /**<summary> Determins how the gun shoots the projectiles </summary> */
     public float reloadSpeed;
+    [SerializeField] private ParticleSystem shell;
     [Min(0f)] public int burstAmmount;
     [Min(0f)] public float burstDelay;
     [Range(0f, 180f)] public float shotSpread;
@@ -55,6 +56,7 @@ public class New_Gun_Template : Usable_Item
             player
                 .GetComponent<PlayerInventory>()
                 .StartCoroutine(ShootWithDelay(i, angle, position, layer));
+            Instantiate(shell, position, player.rotation, player); //the rotation should be baised on the weapon direction, not the player- this is a cheap fix.
         }
     }
 
