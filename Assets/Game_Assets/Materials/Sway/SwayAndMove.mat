@@ -54,8 +54,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Intensity: 1
-    - _MoveDirection: 10
+    - _Intensity: 0.2
+    - _MoveDirection: 2.82
     - _Scale: 0.2
     m_Colors:
     - _Direction: {r: 1, g: 2, b: 0, a: 0}

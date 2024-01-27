@@ -14,7 +14,7 @@ public class LayerHelper : MonoBehaviour
         return "";
     }
 
-    [SerializeField] TrainLayer layer;
+    [SerializeField] private TrainLayer layer;
     void Start()
     {
         LayerHelper.SwitchLayers(layer, gameObject);
@@ -127,4 +127,5 @@ public class LayerHelper : MonoBehaviour
         }
     }
 
+    public TrainLayer GetLayer() => this.layer;
 }

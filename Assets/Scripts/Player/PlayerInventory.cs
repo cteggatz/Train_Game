@@ -29,6 +29,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]  private GameObject coalPrefab,  grabbedObject; //... the current grabbed object
     [SerializeField] private float rayDistance; //This should be self explanitory
     private bool isGrabbing;
+    public bool canCreatCoal;
+
+    [SerializeField] private GameObject CoalSpawner;
 
 
     //---- item rendering ----
@@ -85,19 +88,23 @@ public class PlayerInventory : MonoBehaviour
         */
         if(Input.GetKey("f") && !isGrabbing)
         {
-            //casts ray at foot to see if then can grab anything
-            RaycastHit2D hitinfo = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance);
-            if(hitinfo.collider == null || hitinfo.collider.gameObject.layer != gameObject.layer)return;
+            if(canCreatCoal){
+                grabbedObject = CoalSpawner.GetComponent<CoalSpawner>().SpawnCoal();
+            } else {
+                //casts ray at foot to see if then can grab anything
+                RaycastHit2D hitinfo = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance);
+                if(hitinfo.collider == null || hitinfo.collider.gameObject.layer != gameObject.layer)return;
 
 
-            //checks if the object is one of the grabbable things, if not then function will return;
-            if(hitinfo.collider.gameObject.tag == "Fuel") { 
-                grabbedObject = hitinfo.collider.gameObject; 
-            } 
-            else if(hitinfo.collider.gameObject.name == "Grabbable - Spawner") { 
-                grabbedObject = Instantiate(coalPrefab); 
+                //checks if the object is one of the grabbable things, if not then function will return;
+                if(hitinfo.collider.gameObject.tag == "Fuel") { 
+                    grabbedObject = hitinfo.collider.gameObject; 
+                } 
+                else if(hitinfo.collider.gameObject.name == "Grabbable - Spawner") { 
+                    grabbedObject = Instantiate(coalPrefab); 
+                }
+                else return;
             }
-            else return;
             grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
             grabbedObject.transform.position = grabPoint.position;
             grabbedObject.transform.SetParent(transform);
