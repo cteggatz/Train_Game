@@ -7,6 +7,7 @@ public class Movementv2 : MonoBehaviour
     [SerializeField] private float DefaultSpeed, SprintSpeed, CurrentSpeed, SpeedLoss, SprintGain;
     [SerializeField] private float jumphight;
     [SerializeField] private float climbMultiplier;
+    [SerializeField] private Animator animator;
     private Rigidbody2D body;
     private bool grounded;
     private bool canClimb = false ;
@@ -35,6 +36,7 @@ public class Movementv2 : MonoBehaviour
         }
         body.velocity = new Vector2(Input.GetAxis("Horizontal") * CurrentSpeed, body.velocity.y); //Actual move part
         float horizontalInput = Input.GetAxis("Horizontal");
+        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         if (horizontalInput != 0) // Flippy flippy
         {
             transform.localRotation = Quaternion.Euler(0, horizontalInput > 0 ? 0 : 180, 0);

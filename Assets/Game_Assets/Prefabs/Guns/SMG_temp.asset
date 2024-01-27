@@ -22,12 +22,12 @@ MonoBehaviour:
   useCooldown: 0
   automatic: 1
   gunType: 0
-  shootType: 0
+  shootType: 3
   reloadSpeed: 1
   shell: {fileID: 5655894131590389429, guid: c90500f2bdf9eb046abc51abd0034391, type: 3}
   burstAmmount: 1
-  burstDelay: 0
+  burstDelay: 0.09
   shotSpread: 0
   projectile: {fileID: 3166372697761311189, guid: ed31233d98792194e92763f5c70a9881, type: 3}
-  bulletDamage: 1
+  bulletDamage: 2
   thrust: 19

@@ -56,7 +56,7 @@ public class New_Gun_Template : Usable_Item
             player
                 .GetComponent<PlayerInventory>()
                 .StartCoroutine(ShootWithDelay(i, angle, position, layer));
-            Instantiate(shell, position, player.rotation, player); //the rotation should be baised on the weapon direction, not the player- this is a cheap fix.
+            Instantiate(shell, position, player.rotation); //the rotation should be baised on the weapon direction, not the player- this is a cheap fix.
         }
     }
 
