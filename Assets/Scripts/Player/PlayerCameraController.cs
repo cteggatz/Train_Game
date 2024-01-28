@@ -93,6 +93,7 @@ public class PlayerCameraController : MonoBehaviour
     public void SetMoveOutside(bool state){
         canMoveOutside = state;
     }
+    public bool GetMoveOutside() => canMoveOutside;
     
     /**
     <summary>

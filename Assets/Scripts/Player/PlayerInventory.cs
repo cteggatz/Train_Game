@@ -204,4 +204,10 @@ public class PlayerInventory : MonoBehaviour
     public ItemInstance GetCurrentItem(){
         return inventory[currentItem];
     }
+
+    private void OnTriggerEnter2D(Collider2D collider){
+        if(collider.GetComponent<CoalSpawner>() != null){
+            CoalSpawner = collider.gameObject;
+        }
+    }
 }
