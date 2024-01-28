@@ -1,11 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BurnCoal : MonoBehaviour
-{
-    [SerializeField] GameObject trainController;
 
-    // Update is called once per frame
+
+
+//i need to change this, this needs to be in its own namespace etc.
+public interface ISettableObject{
+    public void SetObject(GameObject train);
+}
+
+public class BurnCoal : MonoBehaviour, ISettableObject
+{
+    private GameObject trainController;
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Fuel")
@@ -13,5 +21,8 @@ public class BurnCoal : MonoBehaviour
             trainController.GetComponent<Train_Controller>().AddFuel(40f);
             Destroy(collision.gameObject);
         }
+    }
+    public void SetObject(GameObject train){
+        trainController = train;
     }
 }

@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -17,6 +17,9 @@ public class CartController : MonoBehaviour
     [SerializeField] private Tilemap insideNonCollision;
     [SerializeField] private Tilemap universal;
 
+    [SerializeField] private GameObject center;
+    [SerializeField] private List<GameObject> cartObjectSetter;
+
     public List<Tilemap> GetTilemaps(){
         List<Tilemap> tilemaps = new List<Tilemap>();
         tilemaps.Add(outsideCollision);
@@ -27,12 +30,20 @@ public class CartController : MonoBehaviour
         return tilemaps;
     }
 
-    void Start()
+    void Awake()
     {
-        
+        //Debug.Log(transform.parent);
+        Destroy(center);
     }
 
-    
+    public void SetCart(GameObject obj){
+        foreach(GameObject cartObject in cartObjectSetter){
+            
+            foreach(ISettableObject comp in cartObject.GetComponents<MonoBehaviour>().OfType<ISettableObject>().ToArray()){
+                comp.SetObject(obj);
+            }
+        }
+    }
 }
 
 [CustomEditor(typeof(CartController))]

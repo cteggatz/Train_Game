@@ -29,8 +29,6 @@ public class TrainCartController : MonoBehaviour
             if(Carts[i] == null) Carts.RemoveAt(i);
         }
 
-
-
         GameObject cartInstance = null;
         if(Carts.Count == 0){
             cartInstance = Instantiate(cart);
@@ -42,14 +40,14 @@ public class TrainCartController : MonoBehaviour
 
             //int xDistance = Mathf.FloorToInt(Carts[Carts.Count-1].transform.localPosition.x) - Mathf.FloorToInt(Carts[Carts.Count-1].GetComponent<CartController>().cartSize.x/2 + cart.GetComponent<CartController>().cartSize.x/2 + (float)cartDistance -1);
             float xDistance = Mathf.Ceil(Carts[Carts.Count-1].transform.localPosition.x) - Mathf.Ceil(Carts[Carts.Count-1].GetComponent<CartController>().cartSize.x/2) - Mathf.Ceil(cart.GetComponent<CartController>().cartSize.x/2) - cartDistance + 1;
-            Debug.Log($"POS : {Mathf.FloorToInt(Carts[Carts.Count-1].transform.localPosition.x)} | Distance : {xDistance}");
+            //Debug.Log($"POS : {Mathf.FloorToInt(Carts[Carts.Count-1].transform.localPosition.x)} | Distance : {xDistance}");
             cartInstance.transform.localPosition = new Vector3(
                     xDistance, 
                     offset.y,
                     offset.z
             );    
-            
         }
+        cartInstance.GetComponent<CartController>().SetCart(gameObject);
         Carts.Add(cartInstance);
 
     }
@@ -57,6 +55,7 @@ public class TrainCartController : MonoBehaviour
     private void Awake(){
         
         for(int i = 0; i < transform.childCount; i++){
+            transform.GetChild(i).GetComponent<CartController>().SetCart(gameObject);
             Carts.Add(transform.GetChild(i).gameObject);
         }
 

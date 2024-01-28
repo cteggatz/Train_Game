@@ -17,10 +17,6 @@ public class CoalSpawner : MonoBehaviour
         //SpawnCoal();
     }
 
-
-
-
-
     void OnTriggerExit2D(Collider2D collider){
         PlayerInventory inventory = collider.gameObject.GetComponent<PlayerInventory>();
         if(collider.gameObject.GetComponent<PlayerInventory>() != null){
