@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -37,17 +38,12 @@ public class Movementv2 : MonoBehaviour
         body.velocity = new Vector2(Input.GetAxis("Horizontal") * CurrentSpeed, body.velocity.y); //Actual move part
         float horizontalInput = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-        if (horizontalInput != 0) // Flippy flippy
+        if (gameObject.transform.position.x > Camera.main.ScreenToWorldPoint(Input.mousePosition).x) // Flippy flippy
         {
-            transform.localRotation = Quaternion.Euler(0, horizontalInput > 0 ? 0 : 180, 0);
-            /*
-            
-            if(horizontalInput > 0){
-                transform.GetComponent<SpriteRenderer>().flipX = false;
-            } else {
-                transform.GetComponent<SpriteRenderer>().flipX = true;
-            }
-            */
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+        else{
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
 
