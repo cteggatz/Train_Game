@@ -17,6 +17,7 @@ public class ItemDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         PlayerInventory.ItemInstance item = player.GetComponent<PlayerInventory>().GetCurrentItem();
         if(item.reloading){
             text.text = "reloading...";
@@ -25,5 +26,6 @@ public class ItemDisplay : MonoBehaviour
         }else {
             text.text = $"{item.reference.name} : [Ammo : {item.ammo} / {item.reference.maxUseQuantity}]";
         }
+        */
     }
 }

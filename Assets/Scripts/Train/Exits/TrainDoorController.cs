@@ -25,9 +25,14 @@ public class DoorController : MonoBehaviour
         }
         if(state == DoorState.Optional){
             other.gameObject.GetComponent<PlayerCameraController>().SetMoveOutside(true);
-        }
+            //Debug.Log("Can move outside");
+        }  
+    }
 
-        
+    void OnTriggerStay2D(Collider2D other){
+        if(other.gameObject.name == "Player" && state == DoorState.Optional && other.gameObject.GetComponent<PlayerCameraController>().GetMoveOutside() == false){
+            other.gameObject.GetComponent<PlayerCameraController>().SetMoveOutside(true);
+        }
     }
 
     void OnTriggerExit2D(Collider2D other){
@@ -38,6 +43,7 @@ public class DoorController : MonoBehaviour
 
         if(state == DoorState.Optional){
             other.gameObject.GetComponent<PlayerCameraController>().SetMoveOutside(false);
+           // Debug.Log("Cant Lol");
         }
 
         if(state == DoorState.Exit_Left && other.transform.position.x < transform.position.x){
