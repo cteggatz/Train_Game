@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BackgroundMover : MonoBehaviour
 {
-    private float backSpeed = 5.0f;
+    private float backSpeed = 5.0f; 
     private Rigidbody2D rb;
-    private float deSpawn = -30f;
+    private float deSpawn = -115f;
     public BoxCollider2D bc;
     void Start()
     {
