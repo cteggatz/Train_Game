@@ -54,7 +54,7 @@ public class New_Gun_Template : Usable_Item
         for(int i = 0; i < burstAmmount; i++){
             player
                 .GetComponent<PlayerInventory>()
-                .StartCoroutine(ShootWithDelay(i, angle, position, layer));
+                .StartCoroutine(ShootWithDelay(i, angle, position, layer, player.gameObject));
         }
     }
 
@@ -68,7 +68,7 @@ public class New_Gun_Template : Usable_Item
 
 
     */
-    private IEnumerator ShootWithDelay(int index, float angle, Vector3 position, int layer){
+    private IEnumerator ShootWithDelay(int index, float angle, Vector3 position, int layer, GameObject player){
         yield return new WaitForSeconds(burstDelay * index);
         float spreadOffset = (angle * Mathf.Rad2Deg - shotSpread * Mathf.Floor((float)burstAmmount/2) + shotSpread*index) * Mathf.Deg2Rad;
             GameObject obj = (GameObject) Instantiate(
@@ -80,7 +80,7 @@ public class New_Gun_Template : Usable_Item
                 ),
                 Quaternion.Euler(0,0,spreadOffset * Mathf.Rad2Deg)
             );
-        obj.GetComponent<ProjectileScript>().SetBulletArgs(layer, thrust, bulletDamage);
+        obj.GetComponent<ProjectileScript>().SetBulletArgs(layer, thrust, bulletDamage, player);
     }
 
 
