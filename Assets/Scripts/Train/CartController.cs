@@ -5,6 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public interface ISettableObject{
+        public void SetObject(GameObject train);
+}
 
 public class CartController : MonoBehaviour
 {

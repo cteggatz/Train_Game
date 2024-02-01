@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
-
+// ---- Coal Spawner ----
 [RequireComponent(typeof(BoxCollider2D), typeof(LayerHelper))]
 public class CoalSpawner : MonoBehaviour
 {
@@ -12,10 +11,6 @@ public class CoalSpawner : MonoBehaviour
     private List<GameObject> GlobalCoalList = new List<GameObject>();
 
     [SerializeField] private int maxCoalCount = 5;
-
-    void Awake(){
-        //SpawnCoal();
-    }
 
     void OnTriggerExit2D(Collider2D collider){
         PlayerInventory inventory = collider.gameObject.GetComponent<PlayerInventory>();
@@ -40,7 +35,7 @@ public class CoalSpawner : MonoBehaviour
         }
 
         GameObject obj = Instantiate(coal);
-        //LayerHelper.SwitchLayers(gameObject.GetComponent<LayerHelper>().GetLayer(), obj);
+        LayerHelper.SwitchLayers(gameObject.GetComponent<LayerHelper>().GetLayer(), obj);
 
         GlobalCoalList.Add(obj);
         return obj;
