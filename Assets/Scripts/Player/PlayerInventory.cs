@@ -5,13 +5,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using GameItems;
 
+/// <summary>
+/// This class is responsible for organizing the inventory of the player and rendering it out
+/// </summary>
 public class PlayerInventory : MonoBehaviour
 {
-    /**
-    <summary>
-    This class is responsible for organizing the inventory of the player and rendering it out
-    </summary>
-    */
     //---- Item Settings ----
     [Header("Items")]
     //item references which we will then turn into item instances

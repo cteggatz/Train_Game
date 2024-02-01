@@ -19,7 +19,7 @@ MonoBehaviour:
   description: 
   maxUseQuantity: 12
   useIncrement: 1
-  useCooldown: 0
+  useCooldown: 1
   automatic: 0
   gunType: 0
   shootType: 0
