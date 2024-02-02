@@ -1106,6 +1106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundPrefab: {fileID: 7291167628445649053, guid: 823bcbf6de074164b8fc96d2bc718c0b, type: 3}
   spawnPos: 115
+  spawnOffSet: 0.8
 --- !u!50 &382034065
 Rigidbody2D:
   serializedVersion: 4
