@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class p_movement : MonoBehaviour
@@ -21,9 +17,10 @@ public class p_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         timeLastOnGround += Time.deltaTime;
-        timeLastPressedJump += Time.deltaTime;
-        if(Time.time - timeLastOnGround <= coyoteTimeInterval){
+        timeLastPressedJump -= Time.deltaTime;
+        if (Time.time - timeLastOnGround <= coyoteTimeInterval){
             grounded = true;
         }
         float targetHorizontalSpeed = Input.GetAxisRaw("Horizontal") * walkspeed;
@@ -36,12 +33,13 @@ public class p_movement : MonoBehaviour
         else{
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-        //if(Input.GetAxisRaw("Vertical") > 0){
-        //    timeLastPressedJump = 0;
-        //}
-        if (Input.GetAxisRaw("Vertical") > 0 && grounded){
-            body.velocity = new Vector2(body.velocity.x, jumphight);
+        if(Input.GetAxisRaw("Vertical") > 0){
+            timeLastPressedJump = jumpBufferInterval;
+        }
+        if (grounded && timeLastPressedJump > 0){
+            timeLastPressedJump = 0;
             grounded = false;
+            body.velocity = new Vector2(body.velocity.x, jumphight);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
