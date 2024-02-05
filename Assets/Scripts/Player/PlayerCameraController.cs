@@ -111,10 +111,30 @@ public class PlayerCameraController : MonoBehaviour
         //switches the layer of the player between the two layers
         //this.gameObject.layer = (this.gameObject.layer == 6) ? 7 : 6;
 
+
+        void switchChildren(GameObject gameObject){
+            for(int i = 0; i < gameObject.transform.childCount; i ++)
+            {
+                GameObject child = gameObject.transform.GetChild(i).gameObject;
+                LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Outside_Train, child);
+                if(child.gameObject.transform.childCount > 0) switchChildren( child);
+            }
+        }
+
         if(gameObject.layer == 6){
             LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Outside_Train, gameObject);
+            switchChildren(gameObject);
         } else {
             LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Inside_Train, gameObject);
+            for(int i = 0; i < gameObject.transform.childCount; i ++)
+            {
+                GameObject child = gameObject.transform.GetChild(i).gameObject;
+                LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Inside_Train, child);
+                for(int j = 0; j < child.transform.childCount; j ++)
+                {
+                LayerHelper.SwitchLayers(LayerHelper.TrainLayer.Inside_Train, child.transform.GetChild(i).gameObject);
+                }
+            }
         }
 
         //This switches off the binary bits of the camera culling mask
