@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 
 public class p_movement : MonoBehaviour
@@ -11,6 +12,7 @@ public class p_movement : MonoBehaviour
     [SerializeField] private float maxFallSpeed, fallGravityMult, f_FallGravityMult, maxFastFallSpeed, jumpHangTimeThreshold, jumpHangGravityMult, jumpHangAccelerationMult, jumpHangMaxSpeedMult, jumpCutGravityMult;
     private float timeLastOnGround, timeLastPressedJump;
     private bool grounded, IsJumping, _isJumpCut, _isJumpFalling;
+    [SerializeField] private Animator squashAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,8 @@ public class p_movement : MonoBehaviour
         timeLastOnGround += Time.deltaTime;
         timeLastPressedJump -= Time.deltaTime;
         Run(1);
+        Vector2 scale = gameObject.transform.localScale;
+        //gameObject.transform.localScale = new Vector2 (scale.x , scale.y + body.velocity.y/100);
         if (Time.time - timeLastOnGround <= coyoteTimeInterval){
             grounded = true;
         }
@@ -41,13 +45,14 @@ public class p_movement : MonoBehaviour
         {
             timeLastPressedJump = jumpBufferInterval;
         }
-        if(Input.GetKeyUp(KeyCode.W)) {
+        else if(Input.GetKeyUp(KeyCode.W)) {
             _isJumpCut = true;
         }
         if (grounded && timeLastPressedJump > 0){
             timeLastPressedJump = 0;
             IsJumping = true;
             grounded = false;
+            squashAnimator.SetTrigger("Jump");
             body.velocity = new Vector2(body.velocity.x, jumphight);
         }
         if (IsJumping && body.velocity.y < 0)
@@ -56,14 +61,12 @@ public class p_movement : MonoBehaviour
             _isJumpFalling = true;
         }
 
-
         if (timeLastOnGround > 0 && !IsJumping)
         {
             _isJumpCut = false;
             if (!IsJumping)
                 _isJumpFalling = false;
         }
-
         //gravity
         if (body.velocity.y < 0 && _moveInput.y < 0)
         {
@@ -124,11 +127,12 @@ public class p_movement : MonoBehaviour
         //acctually add the final force
         body.AddForce((targetSpeed - body.velocity.x) * accelRate * Vector2.right, ForceMode2D.Force);
     }
-        private void OnCollisionEnter2D(Collision2D collision)
-    {
-        timeLastOnGround = 0;
-        grounded = true;
-    }
+    private void OnCollisionEnter2D(Collision2D collision)
+        {
+            squashAnimator.SetTrigger("Landing");
+            timeLastOnGround = 0;
+            grounded = true;
+        }
     public void SetGravityScale(float scale)
     {
         body.gravityScale = scale;
