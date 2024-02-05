@@ -495,6 +495,7 @@ MonoBehaviour:
   jumpHangMaxSpeedMult: 0.5
   jumpCutGravityMult: 1
   squashAnimator: {fileID: 2031596802}
+  jumpParticle: {fileID: 6337983017110141198, guid: 758308f251c30984584da4b47ec06012, type: 3}
 --- !u!50 &550320808
 Rigidbody2D:
   serializedVersion: 4

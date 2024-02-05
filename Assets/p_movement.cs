@@ -13,6 +13,7 @@ public class p_movement : MonoBehaviour
     private float timeLastOnGround, timeLastPressedJump;
     private bool grounded, IsJumping, _isJumpCut, _isJumpFalling;
     [SerializeField] private Animator squashAnimator;
+    [SerializeField] private ParticleSystem jumpParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +54,7 @@ public class p_movement : MonoBehaviour
             IsJumping = true;
             grounded = false;
             squashAnimator.SetTrigger("Jump");
+            Instantiate(jumpParticle).transform.position = squashAnimator.gameObject.transform.position;
             body.velocity = new Vector2(body.velocity.x, jumphight);
         }
         if (IsJumping && body.velocity.y < 0)
