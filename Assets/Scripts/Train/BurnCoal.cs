@@ -1,18 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 
 
 
 //i need to change this, this needs to be in its own namespace etc.
-public interface ISettableObject{
-    public void SetObject(GameObject train);
-}
-
-public class BurnCoal : MonoBehaviour, ISettableObject
+public class Furnace : MonoBehaviour, ISettableObject
 {
     private GameObject trainController;
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,5 +20,8 @@ public class BurnCoal : MonoBehaviour, ISettableObject
     }
     public void SetObject(GameObject train){
         trainController = train;
+    }
+    public void DamageTrain(int damage){
+        trainController.GetComponent<Train_Controller>().DecrimentHealth(damage);
     }
 }

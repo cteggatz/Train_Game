@@ -7,6 +7,7 @@ public class Igiveup : MonoBehaviour
     [Header("Pathfinding")]
     public Transform target;
     public float awareness, health;
+    public Vector3 size;
     [SerializeField] private float pathUpdateSeconds;
 
     [Header("Physics")]
@@ -17,7 +18,7 @@ public class Igiveup : MonoBehaviour
     [SerializeField] private bool isInAir;
     [SerializeField] private float attckRange, attackForce, damage, g_rayDistance;
     [SerializeField] private ParticleSystem death;
-    [SerializeField] private AudioClip dsound, bite;
+    [SerializeField] private AudioClip dsound, bite, jump;
     //[SerializeField] private int layermask;
 
     [SerializeField] Vector3 startOffset;
@@ -31,11 +32,13 @@ public class Igiveup : MonoBehaviour
 
     public void Start()
     {
+        gameObject.transform.localScale = size;
         gameObject.GetComponent<CircleCollider2D>().radius = awareness;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         isInAir = false;
-        isOnCoolDown = false; 
+        isOnCoolDown = false;
+        speed = 40 / health;
 
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
@@ -68,7 +71,7 @@ public class Igiveup : MonoBehaviour
         {
             return;
         }
-
+        
         // Reached end of path
         if (currentWaypoint >= path.vectorPath.Count)
         {
@@ -88,6 +91,7 @@ public class Igiveup : MonoBehaviour
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
+                AudioSource.PlayClipAtPoint(jump, transform.position);
                 if (isInAir) return; 
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 StartCoroutine(JumpCoolDown());

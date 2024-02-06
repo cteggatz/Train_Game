@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8694710140569084804}
   m_Layer: 0
   m_Name: Train_Exit
-  m_TagString: Train_Exit
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

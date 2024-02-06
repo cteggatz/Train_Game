@@ -24,9 +24,10 @@ MonoBehaviour:
   gunType: 1
   shootType: 2
   reloadSpeed: 2
+  shell: {fileID: 5655894131590389429, guid: c90500f2bdf9eb046abc51abd0034391, type: 3}
   burstAmmount: 5
   burstDelay: 0
   shotSpread: 5
   projectile: {fileID: 3166372697761311189, guid: c7e9233bf4202ce4ba8020e28dccc378, type: 3}
-  bulletDamage: 3
+  bulletDamage: 4
   thrust: 12

@@ -27,17 +27,21 @@ public class hoardLogic : MonoBehaviour
         if (timer >= delayAmount)
         {
             timer = 0f;
-            spawnGrunt(0, H_location, Random.Range(4, 6), 10);
+            float random = Random.Range(0.5f, 1.5f);
+            Vector3 size = new Vector3(random, random, random);
+            spawnGrunt(0, H_location, Random.Range(4, 6), (int) (10 * random), size);
         }
+        
     }
 
-    void spawnGrunt(int target, Vector2 spawn, float awareness, float health)
+    void spawnGrunt(int target, Vector2 spawn, float awareness, float health, Vector3 size)
     {
         GameObject lad = Instantiate(grunt);
         lad.transform.SetParent(gameObject.transform);
         lad.GetComponent<Igiveup>().target = targets[target];
         lad.GetComponent<Igiveup>().awareness = awareness;
         lad.GetComponent<Igiveup>().health = health;
+        lad.GetComponent<Igiveup>().size = size;
         lad.transform.position = spawn;
     }
 
