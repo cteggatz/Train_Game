@@ -7,6 +7,7 @@ TagManager:
   - Train_Exit
   - Fuel
   - Interactable
+  - Train (primary)
   layers:
   - Default
   - TransparentFX
