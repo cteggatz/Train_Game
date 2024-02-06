@@ -2360,6 +2360,58 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &398016604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 398016606}
+  - component: {fileID: 398016605}
+  m_Layer: 0
+  m_Name: hoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &398016605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398016604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c66139e45827d14b83267ce1720b72d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayAmount: 0.1
+  runtime: 0
+  difficulty: 0
+  grunt: {fileID: 2373761937586878413, guid: b89a13232932d214486268598d00bcd4, type: 3}
+  H_location: {x: -95, y: 0}
+  targets:
+  - {fileID: 9221646016298866342, guid: 320653acf93ef444bab15626c4c2cd3e, type: 3}
+  - {fileID: 361018876}
+--- !u!4 &398016606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398016604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -95.6, y: -0.2, z: 0.16104965}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417005917
 GameObject:
   m_ObjectHideFlags: 0
@@ -4921,6 +4973,8 @@ MonoBehaviour:
   playerHealthText: {fileID: 417816751}
   player: {fileID: 361018872}
   trainFuel: {fileID: 1030711275}
+  trainHealth: {fileID: 0}
+  distance: {fileID: 0}
   trainController: {fileID: 2035663125}
 --- !u!1 &1398131486
 GameObject:
@@ -8997,6 +9051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6476823974f0f36f080d37ae6ab31da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
   speed: 0
   fuel: 100
   acceleration: 1
@@ -9365,3 +9421,4 @@ SceneRoots:
   - {fileID: 211610291}
   - {fileID: 361018876}
   - {fileID: 1364918561}
+  - {fileID: 398016606}
