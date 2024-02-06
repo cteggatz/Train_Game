@@ -21,4 +21,7 @@ public class Furnace : MonoBehaviour, ISettableObject
     public void SetObject(GameObject train){
         trainController = train;
     }
+    public void DamageTrain(int damage){
+        trainController.GetComponent<Train_Controller>().DecrimentHealth(damage);
+    }
 }

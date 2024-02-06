@@ -14,6 +14,8 @@ public class PlayerUIController : MonoBehaviour
 
     [Header("Train Text")]
     [SerializeField] private TMP_Text trainFuel;
+    [SerializeField] private TMP_Text trainHealth;
+    [SerializeField] private TMP_Text distance;
     [SerializeField] private GameObject trainController;
      
 
@@ -26,6 +28,8 @@ public class PlayerUIController : MonoBehaviour
         Train_Controller trainControllerInstance = trainController.GetComponent<Train_Controller>();
 
 
+
+
         if(item.reloading){
             playerItemInfo.text = "reloading...";
         } else if(item.ammo ==0){
@@ -35,6 +39,7 @@ public class PlayerUIController : MonoBehaviour
         }
 
         trainFuel.text = $"Fuel : {(int)trainControllerInstance.GetFuel()} | Speed : {(float)Mathf.Round(trainControllerInstance.GetSpeed()*10) * .1f}";
+        trainHealth.text = $"Engine Health : [{trainControllerInstance.Health}/{trainControllerInstance.MaxHealth}]";
         playerHealthText.text = $"Health : {health.health}";
     }
 }

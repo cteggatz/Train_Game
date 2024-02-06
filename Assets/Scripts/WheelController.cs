@@ -18,9 +18,7 @@ public class WheelController : MonoBehaviour
     {
         var rot = transform.localEulerAngles;
         rot.z += -Time.deltaTime * 100;
-        Debug.Log(transform.eulerAngles.z);
         if(rot.z <= -360){
-            Debug.Log("Sping");
             rot.z = 0;
         }
         transform.localEulerAngles = rot;   

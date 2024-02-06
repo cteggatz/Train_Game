@@ -7,7 +7,9 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-//[ExecuteInEditMode]
+/// <summary>
+/// Controls the train in the main scene
+/// </summary>
 public class TrainCartController : MonoBehaviour
 {
     public GameObject genericTrainCart;
@@ -23,7 +25,10 @@ public class TrainCartController : MonoBehaviour
 
 
 
-
+    /// <summary>
+    /// Adds cart prefab to train's known carts
+    /// </summary>
+    /// <param name="cart">the cart prefab that will be added to the trian</param>
     public void AddCart(GameObject cart){
         for(int i = 0; i < Carts.Count; i++){
             if(Carts[i] == null) Carts.RemoveAt(i);
@@ -61,7 +66,6 @@ public class TrainCartController : MonoBehaviour
 
         AddCart(coalCart);
         AddCart(genericTrainCart);
-        
         
         for(int i = 0; i < Carts.Count; i++){
             if(Carts[i] == null) Carts.RemoveAt(i);

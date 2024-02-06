@@ -1,20 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Train_Controller : MonoBehaviour
 {
-    
+    [Header("Train Health")]
+    [SerializeField, Min(0)] private int health;
+    [SerializeField, Min(0)] private int maxHealth;
+
+    public int MaxHealth{
+        get{return maxHealth;}
+        private set{this.maxHealth=value;}
+    }
+    public int Health{
+        get{return health;}
+        private set{this.health = value;}
+    }
+
+
+    [Header("Movement Settings")]
     [SerializeField, Range(0,100)] float speed = 0;
     [SerializeField, Min(0)] float fuel = 100;
 
-    
-    
-
-
     [Header("Speed Settings")]
 
-    /**<summary>The degress at which the train speed accelerates when the fuel threshold is met</summary>*/
+    ///<summary>The degress at which the train speed accelerates when the fuel threshold is met</summary>
     [SerializeField, Min(0f)] private float acceleration = 1f;
 
     /**<summary>The degree to which the train slows down when the threshhold is not met. Basically air resistance coefficient</summary>*/
@@ -70,4 +81,10 @@ public class Train_Controller : MonoBehaviour
         this.fuel += fuel;
     }
 
+    public void DecrimentHealth(int damage){
+        this.health -= damage;
+        if(this.health <= 0){
+            Debug.Log("You lose");
+        }
+    }
 }
