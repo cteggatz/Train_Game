@@ -5,8 +5,10 @@ using UnityEngine;
 public class Igiveup : MonoBehaviour
 {
     [Header("Pathfinding")]
-    [SerializeField] private Transform target;
-    [SerializeField] private float activateDistance, pathUpdateSeconds;
+    public Transform target;
+    public float awareness, health;
+    public Vector3 size;
+    [SerializeField] private float pathUpdateSeconds;
 
     [Header("Physics")]
     [SerializeField] private float speed;
@@ -14,42 +16,50 @@ public class Igiveup : MonoBehaviour
 
     [Header("Custom Behavior")]
     [SerializeField] private bool isInAir;
-    [SerializeField] private float attckRange, attackForce;
-    [SerializeField] private bool hittingTarget;
+    [SerializeField] private float attckRange, attackForce, damage, g_rayDistance;
+    [SerializeField] private ParticleSystem death;
+    [SerializeField] private AudioClip dsound, bite, jump;
+    //[SerializeField] private int layermask;
 
     [SerializeField] Vector3 startOffset;
 
     private Path path;
     private int currentWaypoint = 0;
-    [SerializeField] public RaycastHit2D isGrounded;
+    private RaycastHit2D isGrounded;
     Seeker seeker;
     Rigidbody2D rb;
     private bool isOnCoolDown;
 
     public void Start()
     {
+        gameObject.transform.localScale = size;
+        gameObject.GetComponent<CircleCollider2D>().radius = awareness;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         isInAir = false;
-        isOnCoolDown = false; 
+        isOnCoolDown = false;
+        speed = 40 / health;
 
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
 
     private void FixedUpdate()
     {
-        if (TargetInDistance())
-        {
-            PathFollow();
-        }
+        PathFollow();
         if(Vector2.Distance(transform.position, target.transform.position) < attckRange){
-            Attack();
+            //Attack();
+        }
+        if(health <= 0)
+        {
+            AudioSource.PlayClipAtPoint(dsound, transform.position);
+            Destroy(gameObject);
+            Instantiate(death).transform.position = gameObject.transform.position;
         }
     }
 
     private void UpdatePath()
     {
-        if (TargetInDistance() && seeker.IsDone())
+        if (seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
@@ -61,7 +71,7 @@ public class Igiveup : MonoBehaviour
         {
             return;
         }
-
+        
         // Reached end of path
         if (currentWaypoint >= path.vectorPath.Count)
         {
@@ -69,8 +79,8 @@ public class Igiveup : MonoBehaviour
         }
 
         // See if colliding with anything
-        startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset, transform.position.z);
-        isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
+        isGrounded = Physics2D.Raycast(gameObject.transform.position, -Vector3.up, g_rayDistance);
+        //Debug.DrawRay(startOffset, -Vector3.up, Color.blue, g_rayDistance);
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
@@ -81,6 +91,7 @@ public class Igiveup : MonoBehaviour
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
+                AudioSource.PlayClipAtPoint(jump, transform.position);
                 if (isInAir) return; 
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 StartCoroutine(JumpCoolDown());
@@ -116,10 +127,6 @@ public class Igiveup : MonoBehaviour
             }
     }
 
-    private bool TargetInDistance()
-    {
-        return Vector2.Distance(transform.position, target.transform.position) < activateDistance;
-    }
 
     private void OnPathComplete(Path p)
     {
@@ -136,20 +143,34 @@ public class Igiveup : MonoBehaviour
         isOnCoolDown = false;
     }
 
+    IEnumerator AttackCoolDown()
+    {
+        isOnCoolDown = true; 
+        yield return new WaitForSeconds(2f);
+        isOnCoolDown = false;
+    }
+
     private void Attack(){
         if (isInAir) return; 
         rb.velocity = new Vector2(rb.velocity.x, attackForce);
         StartCoroutine(JumpCoolDown());
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.transform == target){
-            hittingTarget = true;
+    void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.transform == target){
+            if (target.GetComponent<PlayerHealth>() != null){
+                target.GetComponent<PlayerHealth>().health -= damage;
+                AudioSource.PlayClipAtPoint(bite, transform.position);
+                // StartCoroutine(AttackCoolDown());
+            }
         }
     }
-    private void OnTriggerExit2D(Collider2D other){
-        if(other.gameObject.transform == target){
-            hittingTarget = false;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.GetComponent<Movementv2>() != null)
+        {
+            target = collision.gameObject.transform;
         }
     }
 }

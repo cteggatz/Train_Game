@@ -24,6 +24,7 @@ public class New_Gun_Template : Usable_Item
     public bool automatic; /**<summary> determines wether you can hold down click or you need to actively click </summary> */
     public GunType gunType; /**<summary> Determins what slot the player can equipt it too </summary> */
     public ShootType shootType; /**<summary> Determins how the gun shoots the projectiles </summary> */
+    [SerializeField] private ParticleSystem shell;
     public float reloadSpeed; /**<summary>The time it takes to reload the gun</summary>*/
     [Min(0f)] public int burstAmmount; /**<summary>The ammount of bullets shot per click</summary>*/
     [Min(0f)] public float burstDelay; /**<summary>The time between bullet shots in a burst</summary>*/

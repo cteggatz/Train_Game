@@ -24,6 +24,7 @@ MonoBehaviour:
   gunType: 0
   shootType: 0
   reloadSpeed: 1
+  shell: {fileID: 5655894131590389429, guid: c90500f2bdf9eb046abc51abd0034391, type: 3}
   burstAmmount: 3
   burstDelay: 0.125
   shotSpread: 0
