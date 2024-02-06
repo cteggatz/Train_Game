@@ -209,9 +209,9 @@ MonoBehaviour:
   speed: 4
   jumpForce: 8
   nextWaypointDistance: 3
-  jumpNodeHeightRequirement: 0.8
+  jumpNodeHeightRequirement: 0.2
   jumpModifier: 6
-  jumpCheckOffset: 0.15
+  jumpCheckOffset: 0.1
   isInAir: 0
   attckRange: 4
   attackForce: 5
