@@ -168,7 +168,7 @@ public class Igiveup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<Movementv2>() != null)
+        if(collision.gameObject.GetComponent<p_movement>() != null)
         {
             target = collision.gameObject.transform;
         }
