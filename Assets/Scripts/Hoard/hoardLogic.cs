@@ -37,6 +37,11 @@ public class hoardLogic : MonoBehaviour
     void spawnGrunt(int target, Vector2 spawn, float awareness, float health, Vector3 size)
     {
         GameObject lad = Instantiate(grunt);
+        lad.layer = 6;
+        if (Random.Range(1, 3) > 2)
+        {
+            lad.layer = 7;
+        }
         lad.transform.SetParent(gameObject.transform);
         lad.GetComponent<Igiveup>().target = targets[target];
         lad.GetComponent<Igiveup>().awareness = awareness;

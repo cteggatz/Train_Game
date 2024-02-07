@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 212067477930635768}
   - component: {fileID: 7697099168103752374}
   - component: {fileID: 8408583312751711087}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Little Guy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ MonoBehaviour:
   attckRange: 4
   attackForce: 5
   damage: 3
-  g_rayDistance: 0.5
+  g_rayDistance: 0.17
   death: {fileID: 5296030653974338088, guid: 719e9638890de7b46be2ebb77bde0342, type: 3}
   dsound: {fileID: 8300000, guid: 3c879c66c6facb04ba072ff436362136, type: 3}
   bite: {fileID: 8300000, guid: da5f6011a8d636c4f8538a5394a36aec, type: 3}
