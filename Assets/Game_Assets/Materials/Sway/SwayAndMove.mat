@@ -55,7 +55,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Intensity: 1
-    - _MoveDirection: 2.82
+    - _MoveDirection: 1
     - _Scale: 1
     m_Colors:
     - _Direction: {r: 1, g: 2, b: 0, a: 0}

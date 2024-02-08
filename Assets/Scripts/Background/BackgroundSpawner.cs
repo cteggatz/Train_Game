@@ -15,8 +15,8 @@ public class BackgroundSpawner : MonoBehaviour
     void Start(){
         spawnChunk();
         spawnPos = transform.position.x - spawnOffSet + backgroundPrefab.GetComponent<SpriteRenderer>().sprite.bounds.extents.x*backgroundPrefab.GetComponent<Transform>().localScale.x;
-        Debug.Log(transform.position.x);
-        Debug.Log(backgroundPrefab.gameObject.transform.localScale.x);
+        //Debug.Log(transform.position.x);
+        //Debug.Log(backgroundPrefab.gameObject.transform.localScale.x);
     }
     private void spawnChunk(){
         //Debug.Log("spawned!");
