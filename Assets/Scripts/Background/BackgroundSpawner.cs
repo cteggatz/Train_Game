@@ -21,7 +21,7 @@ public class BackgroundSpawner : MonoBehaviour
     private void spawnChunk(){
         //Debug.Log("spawned!");
         GameObject a = Instantiate(backgroundPrefab) as GameObject;
-        a.transform.position = new Vector2(spawnPos,0.6f);
+        a.transform.position = new Vector2(spawnPos,4.1f);
         a.transform.parent = this.gameObject.transform;
         if(orderTracker){
             a.GetComponent<SortingGroup>().sortingOrder = 1;
