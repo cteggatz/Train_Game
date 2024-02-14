@@ -24,7 +24,7 @@ public class Igiveup : MonoBehaviour
 
     private Path path;
     private int currentWaypoint = 0;
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     Seeker seeker;
     Rigidbody2D rb;
     private bool isOnCoolDown;
@@ -88,6 +88,7 @@ public class Igiveup : MonoBehaviour
                 AudioSource.PlayClipAtPoint(jump, transform.position);
                 if (!isGrounded) return; 
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                isGrounded = false;
                 StartCoroutine(JumpCoolDown());
             }
         }
@@ -131,14 +132,15 @@ public class Igiveup : MonoBehaviour
 
 
     void OnCollisionEnter2D(Collision2D collision) {
-        isGrounded = true;
-        if (collision.gameObject.transform == target){
-            if (target.GetComponent<PlayerHealth>() != null){
-                target.GetComponent<PlayerHealth>().health -= damage;
-                AudioSource.PlayClipAtPoint(bite, transform.position);
-                // StartCoroutine(AttackCoolDown());
+            isGrounded = true;
+            if (collision.gameObject.transform == target)
+            {
+                if (target.GetComponent<PlayerHealth>() != null)
+                {
+                    target.GetComponent<PlayerHealth>().health -= damage;
+                    AudioSource.PlayClipAtPoint(bite, transform.position);
+                }
             }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
