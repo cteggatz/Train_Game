@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using DataSaving;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 
-public class Train_Controller : MonoBehaviour
+public class Train_Controller : MonoBehaviour, ISavable
 {
     [Header("Train Health")]
     [SerializeField, Min(0)] private int health;
@@ -87,4 +88,16 @@ public class Train_Controller : MonoBehaviour
             Debug.Log("You lose");
         }
     }
+
+
+
+
+
+    public void Save(ref GameData gameData){
+        gameData.fuel = this.fuel;
+    }
+    public void Load(){
+
+    }
+
 }

@@ -13,7 +13,6 @@ public class CartController : MonoBehaviour
 {
     [SerializeField] public Vector3 cartSize;
 
-
     [SerializeField] private Tilemap outsideCollision;
     [SerializeField] private Tilemap outsideNonCollision;
     [SerializeField] private Tilemap insideCollision;
