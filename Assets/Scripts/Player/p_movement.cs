@@ -21,6 +21,11 @@ public class p_movement : MonoBehaviour
         SetGravityScale(gravityScale);
     }
 
+    private void FixedUpdate()
+    {
+        Run(1);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,7 +33,6 @@ public class p_movement : MonoBehaviour
         _moveInput.y = Input.GetAxisRaw("Vertical");
         timeLastOnGround += Time.deltaTime;
         timeLastPressedJump -= Time.deltaTime;
-        Run(1);
         Vector2 scale = gameObject.transform.localScale;
         //gameObject.transform.localScale = new Vector2 (scale.x , scale.y + body.velocity.y/100);
         if (Time.time - timeLastOnGround <= coyoteTimeInterval){
