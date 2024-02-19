@@ -15,7 +15,7 @@ public class Igiveup : MonoBehaviour
     [SerializeField] private float jumpForce, nextWaypointDistance, jumpNodeHeightRequirement, jumpModifier, jumpCheckOffset;
 
     [Header("Custom Behavior")]
-    [SerializeField] private float attckRange, attackForce, damage, g_rayDistance;
+    [SerializeField] private float damage, attckRange, attackForce, g_rayDistance;
     [SerializeField] private ParticleSystem death;
     [SerializeField] private AudioClip dsound, bite, jump;
     //[SerializeField] private int layermask;
@@ -28,6 +28,7 @@ public class Igiveup : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
     private bool isOnCoolDown;
+    private Transform oldtarget;
 
     public void Start()
     {
@@ -52,6 +53,11 @@ public class Igiveup : MonoBehaviour
             AudioSource.PlayClipAtPoint(dsound, transform.position);
             Destroy(gameObject);
             Instantiate(death).transform.position = gameObject.transform.position;
+        }
+        if(gameObject.layer != target.gameObject.layer)
+        {
+            oldtarget = target; //broken?!
+            target = GameObject.FindWithTag("Interactable").transform;
         }
     }
 
@@ -140,7 +146,7 @@ public class Igiveup : MonoBehaviour
                     target.GetComponent<PlayerHealth>().health -= damage;
                     AudioSource.PlayClipAtPoint(bite, transform.position);
                 }
-            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -148,6 +154,15 @@ public class Igiveup : MonoBehaviour
         if(collision.gameObject.GetComponent<p_movement>() != null)
         {
             target = collision.gameObject.transform;
+        }
+        if (collision.gameObject.GetComponent<Furnace>() != null) //needs fixing so it's not the circle collider being the one to trigger damage
+        {
+            collision.gameObject.GetComponent<Furnace>().DamageTrain((int)damage);
+        }
+        if (collision.gameObject.GetComponent<DoorController>() != null) //needs fixing so it's not the circle collider
+        {
+            gameObject.layer = target.gameObject.layer;
+            target = oldtarget;
         }
     }
 }

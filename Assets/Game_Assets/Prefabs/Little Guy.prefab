@@ -212,16 +212,16 @@ MonoBehaviour:
   jumpNodeHeightRequirement: 0.2
   jumpModifier: 6
   jumpCheckOffset: 0.1
-  isInAir: 0
+  damage: 3
   attckRange: 4
   attackForce: 5
-  damage: 3
   g_rayDistance: 0.17
   death: {fileID: 5296030653974338088, guid: 719e9638890de7b46be2ebb77bde0342, type: 3}
   dsound: {fileID: 8300000, guid: 3c879c66c6facb04ba072ff436362136, type: 3}
   bite: {fileID: 8300000, guid: da5f6011a8d636c4f8538a5394a36aec, type: 3}
   jump: {fileID: 8300000, guid: 4b4e76fd78fd6cc4aad9060e6dc7c3a2, type: 3}
   startOffset: {x: 0, y: 0, z: 0}
+  isGrounded: 0
 --- !u!58 &8408583312751711087
 CircleCollider2D:
   m_ObjectHideFlags: 0
