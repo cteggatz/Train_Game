@@ -24,7 +24,7 @@ public class Igiveup : MonoBehaviour
 
     private Path path;
     private int currentWaypoint = 0;
-    [SerializeField] private bool isGrounded;
+    [SerializeField] public bool isGrounded;
     Seeker seeker;
     Rigidbody2D rb;
     private bool isOnCoolDown;

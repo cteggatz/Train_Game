@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 212067477930635768}
   - component: {fileID: 7697099168103752374}
   - component: {fileID: 8408583312751711087}
+  - component: {fileID: -3705614130111988925}
   m_Layer: 6
   m_Name: Little Guy
   m_TagString: Untagged
@@ -212,7 +213,6 @@ MonoBehaviour:
   jumpNodeHeightRequirement: 0.2
   jumpModifier: 6
   jumpCheckOffset: 0.1
-  isInAir: 0
   attckRange: 4
   attackForce: 5
   damage: 3
@@ -222,6 +222,7 @@ MonoBehaviour:
   bite: {fileID: 8300000, guid: da5f6011a8d636c4f8538a5394a36aec, type: 3}
   jump: {fileID: 8300000, guid: 4b4e76fd78fd6cc4aad9060e6dc7c3a2, type: 3}
   startOffset: {x: 0, y: 0, z: 0}
+  isGrounded: 0
 --- !u!58 &8408583312751711087
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -257,3 +258,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &-3705614130111988925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2373761937586878413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08292e806118e6b4f96a62222ec42769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
