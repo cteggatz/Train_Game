@@ -1,8 +1,10 @@
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class p_movement : MonoBehaviour
 {
+    public InputAction PlayerMovement;
     private Rigidbody2D body;
     private Vector2 velocity, _moveInput;
     [SerializeField] private Animator animator;
@@ -14,6 +16,14 @@ public class p_movement : MonoBehaviour
     private bool grounded, IsJumping, _isJumpCut, _isJumpFalling;
     [SerializeField] private Animator squashAnimator;
     [SerializeField] private ParticleSystem jumpParticle;
+
+    private void OnEnable(){
+        PlayerMovement.Enable();
+    }
+
+    private void OnDisable(){
+        PlayerMovement.Disable();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +39,9 @@ public class p_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _moveInput.x = Input.GetAxisRaw("Horizontal");
-        _moveInput.y = Input.GetAxisRaw("Vertical");
+        //_moveInput.x = Input.GetAxisRaw("Horizontal");
+        //_moveInput.y = Input.GetAxisRaw("Vertical");
+        _moveInput = PlayerMovement.ReadValue<Vector2>();
         timeLastOnGround += Time.deltaTime;
         timeLastPressedJump -= Time.deltaTime;
         Vector2 scale = gameObject.transform.localScale;

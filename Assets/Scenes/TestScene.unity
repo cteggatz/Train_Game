@@ -933,6 +933,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8754078f9e2f84b890ff6033c11615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerMovement:
+    m_Name: Player Movement
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 415d3fee-52ff-4760-8147-d19857a2cc5a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: WASD Player 1
+      m_Id: a1cb16e6-a11c-4c7a-8c6a-729040626d6b
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement
+      m_Flags: 4
+    - m_Name: up
+      m_Id: b64d85c7-16ad-4a6d-b4b9-0f3f0ed88a3b
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement
+      m_Flags: 8
+    - m_Name: down
+      m_Id: ab0a7871-7d74-42af-9fd5-40cb66e4fc47
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 4dd9048e-05db-4543-85fc-6ba63d6f5f89
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement
+      m_Flags: 8
+    - m_Name: right
+      m_Id: f5a7cdab-f928-4bb6-8fd6-f79dd0d75fac
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement
+      m_Flags: 8
+    m_Flags: 0
   animator: {fileID: 923986533}
   lerpAmount: 0.1
   accelAmount: 1
