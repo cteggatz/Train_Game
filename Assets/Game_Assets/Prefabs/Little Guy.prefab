@@ -222,6 +222,7 @@ MonoBehaviour:
   jump: {fileID: 8300000, guid: 4b4e76fd78fd6cc4aad9060e6dc7c3a2, type: 3}
   startOffset: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  oldtarget: {fileID: 0}
 --- !u!58 &8408583312751711087
 CircleCollider2D:
   m_ObjectHideFlags: 0

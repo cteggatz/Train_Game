@@ -28,7 +28,7 @@ public class Igiveup : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
     private bool isOnCoolDown;
-    private Transform oldtarget;
+    [SerializeField] private Transform oldtarget;
 
     public void Start()
     {
@@ -38,16 +38,13 @@ public class Igiveup : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         isOnCoolDown = false;
         speed = 40 / health;
-
+        oldtarget = target;
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
 
     private void FixedUpdate()
     {
         PathFollow();
-        if(Vector2.Distance(transform.position, target.transform.position) < attckRange){
-            //Attack();
-        }
         if(health <= 0)
         {
             AudioSource.PlayClipAtPoint(dsound, transform.position);
@@ -161,8 +158,12 @@ public class Igiveup : MonoBehaviour
         }
         if (collision.gameObject.GetComponent<DoorController>() != null) //needs fixing so it's not the circle collider
         {
-            gameObject.layer = target.gameObject.layer;
-            target = oldtarget;
+            if(gameObject.layer != oldtarget.gameObject.layer){
+                Debug.Log("FUCK");
+                gameObject.layer = oldtarget.gameObject.layer;
+                target = oldtarget;
+                oldtarget = null;
+            }
         }
     }
 }
