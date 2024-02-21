@@ -49,19 +49,19 @@ public class p_movement : MonoBehaviour
         if (Time.time - timeLastOnGround <= coyoteTimeInterval){
             grounded = true;
         }
-        animator.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));//animation stuff
-        if (gameObject.transform.position.x > Camera.main.ScreenToWorldPoint(Input.mousePosition).x) //looks in the direction of the mouse
+        animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));//animation stuff
+        if (gameObject.transform.position.x > Camera.main.ScreenToWorldPoint(Input.mousePosition).x) //looks in the direction of the mouse (needs to be converted to new input)
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
         else{
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(KeyCode.W)) //needs new input
         {
             timeLastPressedJump = jumpBufferInterval;
         }
-        else if(Input.GetKeyUp(KeyCode.W)) {
+        else if(Input.GetKeyUp(KeyCode.W)) { //needs new input
             _isJumpCut = true;
         }
         if (grounded && timeLastPressedJump > 0){
