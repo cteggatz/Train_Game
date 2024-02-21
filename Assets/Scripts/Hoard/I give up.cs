@@ -1,5 +1,7 @@
 using Pathfinding;
 using System.Collections;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Igiveup : MonoBehaviour
@@ -54,7 +56,15 @@ public class Igiveup : MonoBehaviour
         if(gameObject.layer != target.gameObject.layer)
         {
             oldtarget = target; //broken?!
-            target = GameObject.FindWithTag("Interactable").transform;
+            GameObject[] doors = GameObject.FindGameObjectsWithTag("Interactable");
+            float mindist = Mathf.Infinity;
+            for(int i = 0; i < doors.Length; i++){
+                float dist = Vector3.Distance(doors[i].gameObject.transform.position, gameObject.transform.position);
+                if(dist < mindist){
+                    target = doors[i].transform;
+                    mindist = dist;
+                }
+            }
         }
     }
 
@@ -152,17 +162,16 @@ public class Igiveup : MonoBehaviour
         {
             target = collision.gameObject.transform;
         }
-        if (collision.gameObject.GetComponent<Furnace>() != null) //needs fixing so it's not the circle collider being the one to trigger damage
+        if (collision.IsTouching(gameObject.GetComponent<BoxCollider2D>()) && collision.gameObject.GetComponent<Furnace>() != null)
         {
             collision.gameObject.GetComponent<Furnace>().DamageTrain((int)damage);
         }
-        if (collision.gameObject.GetComponent<DoorController>() != null) //needs fixing so it's not the circle collider
+        if (collision.IsTouching(gameObject.GetComponent<BoxCollider2D>()) && collision.gameObject.GetComponent<DoorController>() != null)
         {
             if(gameObject.layer != oldtarget.gameObject.layer){
-                Debug.Log("FUCK");
                 gameObject.layer = oldtarget.gameObject.layer;
-                target = oldtarget;
-                oldtarget = null;
+                target = oldtarget;// I think this is the bad boy
+                //NEED TO FIX OLD TARGET BEING SET TO DOOR STILL SOMETIMES
             }
         }
     }
