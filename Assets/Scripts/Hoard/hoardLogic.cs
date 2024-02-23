@@ -8,7 +8,7 @@ public class hoardLogic : MonoBehaviour
     private float timer, gametime;
     [SerializeField]  private float delayAmount, runtime;
     [SerializeField, Range(0, 100)] private float difficulty;
-    [SerializeField] private GameObject grunt;
+    [SerializeField] private GameObject grunt, side_grunt;
     [SerializeField] private Vector2 H_location;
     [SerializeField] private List<Transform> targets = new List<Transform>();
     
@@ -28,13 +28,17 @@ public class hoardLogic : MonoBehaviour
         {
             timer = 0f;
             float random = Random.Range(0.5f, 1.5f);
-            Vector3 size = new Vector3(random, random, random);
-            spawnGrunt(0, H_location, Random.Range(4, 6), (int) (10 * random), size);
+            if(random >= 0){
+                Instantiate(side_grunt).GetComponent<spawnOnTrain>().spawn = new Vector3(0.0f, 0.0f, 0.0f);
+            }
+            else{
+                spawnGrunt(0, H_location, Random.Range(4, 6), (int) (10 * random));
+            }
         }
         
     }
 
-    void spawnGrunt(int target, Vector2 spawn, float awareness, float health, Vector3 size)
+    void spawnGrunt(int target, Vector2 spawn, float awareness, float health)
     {
         GameObject lad = Instantiate(grunt);
         lad.layer = 6;
@@ -46,12 +50,7 @@ public class hoardLogic : MonoBehaviour
         lad.GetComponent<Igiveup>().target = targets[target];
         lad.GetComponent<Igiveup>().awareness = awareness;
         lad.GetComponent<Igiveup>().health = health;
-        lad.GetComponent<Igiveup>().size = size;
         lad.transform.position = spawn;
     }
 
-    void spawnOnTrain()
-    {
-        Vector2 spawn = new Vector2(0.0f, 0.0f);
-    }
 }

@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 361018884}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1018,6 +1018,7 @@ MonoBehaviour:
   runtime: 0
   difficulty: 0
   grunt: {fileID: 2373761937586878413, guid: b89a13232932d214486268598d00bcd4, type: 3}
+  side_grunt: {fileID: 6907690980672370196, guid: a84e8c0f527f83a49bbb3eef9d0e7292, type: 3}
   H_location: {x: -95, y: 0}
   targets:
   - {fileID: 1624649510}
