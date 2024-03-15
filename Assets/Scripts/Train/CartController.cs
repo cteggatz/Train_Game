@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -22,6 +23,10 @@ public class CartController : MonoBehaviour
     [SerializeField] private GameObject center;
     [SerializeField] private List<GameObject> cartObjectSetter;
 
+    [SerializeField] public string prefabReference;
+
+
+
     public List<Tilemap> GetTilemaps(){
         List<Tilemap> tilemaps = new List<Tilemap>();
         tilemaps.Add(outsideCollision);
@@ -34,16 +39,22 @@ public class CartController : MonoBehaviour
 
     void Awake()
     {
-        //Debug.Log(transform.parent);
         Destroy(center);
+        //Debug.Log(this.prefabReference);
     }
 
-    public void SetCart(GameObject obj){
+    public void SetCart(GameObject obj, GameObject cart, bool existing = false){
         foreach(GameObject cartObject in cartObjectSetter){
-            
             foreach(ISettableObject comp in cartObject.GetComponents<MonoBehaviour>().OfType<ISettableObject>().ToArray()){
                 comp.SetObject(obj);
             }
+        }    
+        if(PrefabUtility.IsPartOfPrefabAsset(cart)){
+            prefabReference = AssetDatabase.GetAssetPath(cart); 
+        }  
+        else {
+            //Debug.Log($" existing cart | {cart.name} | {cart.GetComponent<CartController>().prefabReference}");
+            prefabReference = cart.GetComponent<CartController>().prefabReference;
         }
     }
 }
@@ -59,6 +70,8 @@ public class CartControllerGUI : Editor{
         EditorGUILayout.Separator();
         EditorGUILayout.Separator();
 
+        //GUILayout.TextField($"Prefab Reference : {cart.prefabReference}");
+
         if(GUILayout.Button("Calabrate Size")){
             Vector3 newSize = new Vector3();
             List<Tilemap> tilemaps = cart.GetTilemaps();
@@ -72,5 +85,6 @@ public class CartControllerGUI : Editor{
             }
             cart.cartSize = newSize;
         }
+        this.Repaint();
     }
 }
