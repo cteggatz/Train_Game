@@ -9,7 +9,6 @@ public class Igiveup : MonoBehaviour
     [Header("Pathfinding")]
     public Transform target;
     public float awareness, health;
-    public Vector3 size;
     [SerializeField] private float pathUpdateSeconds;
 
     [Header("Physics")]
@@ -34,7 +33,6 @@ public class Igiveup : MonoBehaviour
 
     public void Start()
     {
-        gameObject.transform.localScale = size;
         gameObject.GetComponent<CircleCollider2D>().radius = awareness;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();

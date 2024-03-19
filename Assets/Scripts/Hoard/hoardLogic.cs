@@ -6,13 +6,12 @@ using static Unity.Collections.Unicode;
 public class hoardLogic : MonoBehaviour
 {
     private float timer, gametime;
-    [SerializeField]  private float delayAmount, runtime, runUpSpeed;
+    [SerializeField] private float delayAmount, runtime;
     [SerializeField, Range(0, 100)] private float difficulty;
     [SerializeField] private GameObject grunt, side_grunt;
     [SerializeField] private Vector2 H_location;
-    [SerializeField] private Vector2 spawnTarget;
     [SerializeField] private List<Transform> targets = new List<Transform>();
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -29,14 +28,15 @@ public class hoardLogic : MonoBehaviour
         {
             timer = 0f;
             float random = Random.Range(0.5f, 1.5f);
-            if(random <= 0){
-                spawnOnTrain();
+            if (random >= 0)
+            {
+                Instantiate(side_grunt).GetComponent<spawnOnTrain>().spawn = new Vector3(0.0f, 0.0f, 0.0f);
             }
-            else{
-                spawnGrunt(0, H_location, Random.Range(4, 6), (int) (10 * random));
+            else
+            {
+                spawnGrunt(0, H_location, Random.Range(4, 6), (int)(10 * random));
             }
         }
-        
     }
 
     void spawnGrunt(int target, Vector2 spawn, float awareness, float health)
@@ -52,15 +52,6 @@ public class hoardLogic : MonoBehaviour
         lad.GetComponent<Igiveup>().awareness = awareness;
         lad.GetComponent<Igiveup>().health = health;
         lad.transform.position = spawn;
-    }
-
-    private void spawnOnTrain()
-    {
-        float smooth = runUpSpeed * Time.deltaTime;
-        GameObject sideman = Instantiate(side_grunt);
-        sideman.transform.SetParent(gameObject.transform);
-        
-        spawnGrunt(0, spawnTarget, Random.Range(4, 6), (int)(10));
     }
 
 }

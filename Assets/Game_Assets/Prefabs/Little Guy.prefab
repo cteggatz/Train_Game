@@ -204,7 +204,6 @@ MonoBehaviour:
   target: {fileID: 0}
   awareness: 4
   health: 10
-  size: {x: 0, y: 0, z: 0}
   pathUpdateSeconds: 0.5
   speed: 4
   jumpForce: 8
