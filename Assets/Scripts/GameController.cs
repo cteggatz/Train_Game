@@ -11,12 +11,16 @@ public class GameController : MonoBehaviour, ISavable
 
     [SerializeField] Train_Controller traincontroller;
 
+
+    void Awake(){
+        SavingManager.Load();
+    }
     void FixedUpdate(){
         distance += Time.deltaTime * traincontroller.GetSpeed() / 60f;
 
         if(distance >= endDistance){
-            this.GetComponent<SavingManager>().Save();
-            this.GetComponent<SavingManager>().Load();
+            SavingManager.Save();
+            SavingManager.Load();
             SceneManager.LoadScene(0);
         }
     }
@@ -29,5 +33,5 @@ public class GameController : MonoBehaviour, ISavable
         data.distance = distance;
         data.endDistance = endDistance;
     }
-    public void Load(){}
+    public void Load(ref GameData data){}
 }

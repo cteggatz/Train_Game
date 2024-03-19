@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using GameItems;
+using DataSaving;
 
 /// <summary>
 /// This class is responsible for organizing the inventory of the player and rendering it out
 /// </summary>
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour, ISavable
 {
     //---- Item Settings ----
     [Header("Items")]
@@ -207,5 +208,15 @@ public class PlayerInventory : MonoBehaviour
         if(collider.GetComponent<CoalSpawner>() != null){
             CoalSpawner = collider.gameObject;
         }
+    }
+
+    public void Save(ref GameData data){
+        foreach(ItemInstance item in inventory){
+            if(item != null && item.reference != null){
+                data.SaveGun(item);
+            }
+        }
+    }
+    public void Load(ref GameData data){
     }
 }

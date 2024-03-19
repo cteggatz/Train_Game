@@ -81,7 +81,7 @@ public class TrainCartController : MonoBehaviour, ISavable
             data.SaveCart(cart);
         }
     }
-    public void Load(){
+    public void Load(ref GameData data){
 
     }
 }
