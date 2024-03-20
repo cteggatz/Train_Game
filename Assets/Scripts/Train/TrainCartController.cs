@@ -63,8 +63,8 @@ public class TrainCartController : MonoBehaviour, ISavable
             exCart.GetComponent<CartController>().SetCart(gameObject, exCart, true);
         }
 
-        AddCart(coalCart);
-        AddCart(genericTrainCart);
+        //AddCart(coalCart);
+        //AddCart(genericTrainCart);
         
         for(int i = 0; i < Carts.Count; i++){
             if(Carts[i] == null) {
@@ -82,7 +82,9 @@ public class TrainCartController : MonoBehaviour, ISavable
         }
     }
     public void Load(ref GameData data){
-
+        foreach(GameData.CartData cart in data.carts.list){
+            AddCart(AssetDatabase.LoadAssetAtPath<GameObject>(cart.Address));
+        }
     }
 }
 

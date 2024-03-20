@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using GameItems;
 using DataSaving;
+using UnityEditor;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 /// <summary>
 /// This class is responsible for organizing the inventory of the player and rendering it out
@@ -49,9 +51,9 @@ public class PlayerInventory : MonoBehaviour, ISavable
     void Start()
     {
         //creating instances of the item data fed. 
-        inventory[0] = new ItemInstance(_primary);
-        inventory[1] = new ItemInstance(_secondary);
-        inventory[2] = new ItemInstance(_consumable);
+        //inventory[0] = new ItemInstance(_primary);
+        //inventory[1] = new ItemInstance(_secondary);
+        //inventory[2] = new ItemInstance(_consumable);
         SetCurrentItem(0);
 
         gameObject.GetComponent<PlayerCameraController>().OnLayerChange += (object obj,  PlayerCameraController.LayerChangeArgs e) =>{
@@ -218,5 +220,18 @@ public class PlayerInventory : MonoBehaviour, ISavable
         }
     }
     public void Load(ref GameData data){
+        void setItem(int index, ref GameData data){
+            inventory[index] = new ItemInstance(AssetDatabase.LoadAssetAtPath<Usable_Item>(data.playerGuns.list[index].reference));
+            inventory[index].ammo = data.playerGuns.list[index].ammo;
+            Debug.Log($"Loading gun {index} | [{inventory[index]}]");
+        }
+        setItem(0, ref data);
+        setItem(1, ref data);
+        setItem(2, ref data);
     }
+
+    public void NewGameInit(){
+        
+    }
+
 }
