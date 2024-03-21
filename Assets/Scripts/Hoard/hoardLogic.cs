@@ -28,9 +28,9 @@ public class hoardLogic : MonoBehaviour
         {
             timer = 0f;
             float random = Random.Range(0.5f, 1.5f);
-            if (random >= 0)
+            if (random >= 1.3)
             {
-                Instantiate(side_grunt).GetComponent<spawnOnTrain>().spawn = new Vector3(0.0f, 0.0f, 0.0f);
+                Instantiate(side_grunt).GetComponent<spawnOnTrain>().spawn = new Vector3(-12f, -3f, 0.0f);
             }
             else
             {
