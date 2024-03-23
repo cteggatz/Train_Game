@@ -95,7 +95,6 @@ public class Train_Controller : MonoBehaviour, ISavable
 
     public void Save(ref GameData gameData){
         gameData.fuel = this.fuel;
-
     }
     public void Load(ref GameData gameData){
 

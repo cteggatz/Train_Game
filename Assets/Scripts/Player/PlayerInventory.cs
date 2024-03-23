@@ -11,7 +11,7 @@ using Unity.VisualScripting.Dependencies.NCalc;
 /// <summary>
 /// This class is responsible for organizing the inventory of the player and rendering it out
 /// </summary>
-public class PlayerInventory : MonoBehaviour, ISavable
+public class PlayerInventory : MonoBehaviour, ISavable, IGameInit
 {
     //---- Item Settings ----
     [Header("Items")]
@@ -198,6 +198,7 @@ public class PlayerInventory : MonoBehaviour, ISavable
         }
 
         currentItem = index;
+
         itemRenderer.GetComponent<SpriteRenderer>().sprite = inventory[index].reference.sprite;
         itemRenderer.transform.localScale = inventory[index].reference.sprite_Size;
     }
@@ -221,6 +222,10 @@ public class PlayerInventory : MonoBehaviour, ISavable
     }
     public void Load(ref GameData data){
         void setItem(int index, ref GameData data){
+            if(data == null || data.playerGuns.list[index].reference == null){
+                inventory[index] = new ItemInstance(_primary);
+                return;
+            }
             inventory[index] = new ItemInstance(AssetDatabase.LoadAssetAtPath<Usable_Item>(data.playerGuns.list[index].reference));
             inventory[index].ammo = data.playerGuns.list[index].ammo;
             Debug.Log($"Loading gun {index} | [{inventory[index]}]");
@@ -230,8 +235,11 @@ public class PlayerInventory : MonoBehaviour, ISavable
         setItem(2, ref data);
     }
 
-    public void NewGameInit(){
-        
+    public void Init(ref GameData data){
+        inventory[0] = new ItemInstance(_primary);
+        inventory[1] = new ItemInstance(_secondary);
+        inventory[2] = new ItemInstance(_consumable);
+        inventory[3] = null;
     }
 
 }

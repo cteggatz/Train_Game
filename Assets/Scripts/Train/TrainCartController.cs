@@ -11,7 +11,7 @@ using UnityEngine;
 /// <summary>
 /// Controls the train in the main scene
 /// </summary>
-public class TrainCartController : MonoBehaviour, ISavable
+public class TrainCartController : MonoBehaviour, ISavable, IGameInit
 {
     public GameObject genericTrainCart;
     public GameObject trainHead;
@@ -85,6 +85,10 @@ public class TrainCartController : MonoBehaviour, ISavable
         foreach(GameData.CartData cart in data.carts.list){
             AddCart(AssetDatabase.LoadAssetAtPath<GameObject>(cart.Address));
         }
+    }
+    public void Init(ref GameData gameData){
+        AddCart(coalCart);
+        AddCart(genericTrainCart);
     }
 }
 

@@ -13,25 +13,20 @@ using UnityEditor.PackageManager;
 namespace DataSaving{
     public class SavingManager : MonoBehaviour
     {
-
-
         public static void Save(){
             GameData gameData = new GameData();
-            //Debug.Log($"game data {gameData}");
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
 
             foreach(ISavable script in savableObjects){
                 script.Save(ref gameData);
             }
-            //Debug.Log(gameData.carts.list.Count);
             FileManager.Save(gameData);
         }
 
-        public static void Load(){
+        public static bool Load(){
             GameData gameData = FileManager.Load();
             if(gameData == null){
-                Debug.Log("No File! Creating Save File");
-                return;
+                return false;
             }
             Debug.Log($"Loading Data : {gameData.ToString()}");
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
@@ -39,7 +34,23 @@ namespace DataSaving{
             foreach(ISavable script in savableObjects){
                 script.Load(ref gameData);
             }
+            return true;
         }
+
+        public static void Init(){
+            Debug.Log("No File! Creating Save File");
+            GameData gameData = new GameData();
+            IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
+
+            foreach(IGameInit script in savableObjects){
+                script.Init(ref gameData);
+            }
+            foreach(ISavable script in savableObjects){
+                script.Save(ref gameData);
+            }
+            FileManager.Save(gameData);
+        }
+    
     }
 
     /// --------
@@ -129,5 +140,8 @@ namespace DataSaving{
     public interface ISavable{
         public void Save(ref GameData gamedata);
         public void Load(ref GameData gamedata);
+    }
+    public interface IGameInit{
+        public void Init(ref GameData gameData){}
     }
 }

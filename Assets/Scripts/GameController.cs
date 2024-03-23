@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DataSaving;
+using System;
 
 public class GameController : MonoBehaviour, ISavable
 {
@@ -11,9 +12,17 @@ public class GameController : MonoBehaviour, ISavable
 
     [SerializeField] Train_Controller traincontroller;
 
+    
+
 
     void Awake(){
-        SavingManager.Load();
+        if(SavingManager.Load() == false){
+            NewGame();
+        }
+    }
+
+    void NewGame(){
+        SavingManager.Init();
     }
     void FixedUpdate(){
         distance += Time.deltaTime * traincontroller.GetSpeed() / 60f;
@@ -35,3 +44,4 @@ public class GameController : MonoBehaviour, ISavable
     }
     public void Load(ref GameData data){}
 }
+
