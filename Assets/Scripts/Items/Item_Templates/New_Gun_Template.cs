@@ -13,7 +13,7 @@ using UnityEngine;
 /// ----Chris Notes----
 
 
-[CreateAssetMenu(fileName = "New_Gun_Template", menuName = "ScriptableObjects/Gun/New_Gun_Template")]
+[CreateAssetMenu(fileName = "New_Gun_Template", menuName = "ScriptableObjects/Gun/New_Gun_Template"), Serializable]
 public class New_Gun_Template : Usable_Item
 {
     public enum GunType {Primary, Secondary}

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using DataSaving;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -10,7 +11,7 @@ using UnityEngine;
 /// <summary>
 /// Controls the train in the main scene
 /// </summary>
-public class TrainCartController : MonoBehaviour
+public class TrainCartController : MonoBehaviour, ISavable, IGameInit
 {
     public GameObject genericTrainCart;
     public GameObject trainHead;
@@ -21,7 +22,7 @@ public class TrainCartController : MonoBehaviour
     public int cartDistance;
     public Vector3 offset;
 
-    private List<GameObject> Carts = new List<GameObject>();
+    [SerializeField] private List<GameObject> Carts = new List<GameObject>();
 
 
 
@@ -29,47 +30,65 @@ public class TrainCartController : MonoBehaviour
     /// Adds cart prefab to train's known carts
     /// </summary>
     /// <param name="cart">the cart prefab that will be added to the trian</param>
-    public void AddCart(GameObject cart){
+    public GameObject AddCart(GameObject cart){
         for(int i = 0; i < Carts.Count; i++){
             if(Carts[i] == null) Carts.RemoveAt(i);
         }
 
-        GameObject cartInstance = null;
+        GameObject cartInstance = Instantiate(cart);
+
+        if(PrefabUtility.IsPartOfPrefabAsset(cart)){
+            cartInstance.GetComponent<CartController>().SetCart(gameObject, cart, true);
+        } else {
+            cartInstance.GetComponent<CartController>().SetCart(gameObject, cart);
+        }
+
         if(Carts.Count == 0){
-            cartInstance = Instantiate(cart);
             cartInstance.transform.SetParent(gameObject.transform);
             cartInstance.transform.localPosition =  offset;
         } else {            
-            cartInstance = Instantiate(cart);
             cartInstance.transform.SetParent(gameObject.transform);
 
             //int xDistance = Mathf.FloorToInt(Carts[Carts.Count-1].transform.localPosition.x) - Mathf.FloorToInt(Carts[Carts.Count-1].GetComponent<CartController>().cartSize.x/2 + cart.GetComponent<CartController>().cartSize.x/2 + (float)cartDistance -1);
             float xDistance = Mathf.Ceil(Carts[Carts.Count-1].transform.localPosition.x) - Mathf.Ceil(Carts[Carts.Count-1].GetComponent<CartController>().cartSize.x/2) - Mathf.Ceil(cart.GetComponent<CartController>().cartSize.x/2) - cartDistance + 1;
-            //Debug.Log($"POS : {Mathf.FloorToInt(Carts[Carts.Count-1].transform.localPosition.x)} | Distance : {xDistance}");
-            cartInstance.transform.localPosition = new Vector3(
-                    xDistance, 
-                    offset.y,
-                    offset.z
-            );    
+            cartInstance.transform.localPosition = new Vector3(xDistance, offset.y,offset.z);    
         }
-        cartInstance.GetComponent<CartController>().SetCart(gameObject);
         Carts.Add(cartInstance);
-
+        return cartInstance;
     }
 
     private void Awake(){
-        
         for(int i = 0; i < transform.childCount; i++){
-            transform.GetChild(i).GetComponent<CartController>().SetCart(gameObject);
-            Carts.Add(transform.GetChild(i).gameObject);
+            GameObject exCart = transform.GetChild(i).gameObject; 
+            exCart.GetComponent<CartController>().SetCart(gameObject, exCart, true);
         }
 
-        AddCart(coalCart);
-        AddCart(genericTrainCart);
+        //AddCart(coalCart);
+        //AddCart(genericTrainCart);
         
         for(int i = 0; i < Carts.Count; i++){
-            if(Carts[i] == null) Carts.RemoveAt(i);
+            if(Carts[i] == null) {
+                Carts.RemoveAt(i);
+            } else {
+                //Debug.Log($"Instance Information | name : {Carts[i].cart.name} | reference : {Carts[i].cart.GetComponent<CartController>().prefabReference}");
+            }
         }
+    }
+
+
+    public void Save(ref GameData data){
+        foreach(GameObject cart in Carts){
+            data.SaveCart(cart);
+        }
+    }
+    public void Load(ref GameData data){
+        foreach(GameData.CartData cart in data.carts.list){
+            AddCart(AssetDatabase.LoadAssetAtPath<GameObject>(cart.Address));
+        }
+    }
+    public void Init(ref GameData gameData){
+        AddCart(coalCart);
+        AddCart(genericTrainCart);
     }
 }
 
@@ -79,6 +98,7 @@ public class TrainCartControllerGUI : Editor{
     public override void OnInspectorGUI()
     {
         //base.OnInspectorGUI();
+        
 
         TrainCartController cartController = (TrainCartController)target;
 
