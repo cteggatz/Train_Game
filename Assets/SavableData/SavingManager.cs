@@ -29,9 +29,9 @@ namespace DataSaving{
             if(gameData == null){
                 return false;
             }
-            Debug.Log($"Loading Data : {gameData.ToString()}");
+            //Debug.Log($"Loading Data : {gameData.ToString()}");
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
-
+            
             foreach(ISavable script in savableObjects){
                 script.Load(ref gameData);
             }
@@ -47,10 +47,10 @@ namespace DataSaving{
             }
         }  
         public static void InitializeGameObjects(){
-            Debug.Log("Initializing GameObject Data");
+            //Debug.Log("Initializing GameObject Data");
             GameData gameData = FileManager.Load();
             IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
-            Debug.Log($"Items : {savableObjects.Length}");
+            //Debug.Log($"Items : {savableObjects.Length}");
             foreach(ISavable script in savableObjects){
                 script.Save(ref gameData);
             }

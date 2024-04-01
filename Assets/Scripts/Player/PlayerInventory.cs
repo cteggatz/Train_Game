@@ -11,7 +11,7 @@ using Unity.VisualScripting.Dependencies.NCalc;
 /// <summary>
 /// This class is responsible for organizing the inventory of the player and rendering it out
 /// </summary>
-public class PlayerInventory : MonoBehaviour, ISavable, IGameInit
+public class PlayerInventory : MonoBehaviour, ISavable
 {
     //---- Item Settings ----
     [Header("Items")]
@@ -221,6 +221,14 @@ public class PlayerInventory : MonoBehaviour, ISavable, IGameInit
         }
     }
     public void Load(ref GameData data){
+        if(data.playerInitialized == false){
+            Debug.Log("No Player Data - Initializing Player Data");
+            inventory[0] = new ItemInstance(_primary);
+            inventory[1] = new ItemInstance(_secondary);
+            inventory[2] = new ItemInstance(_consumable);
+            inventory[3] = null;
+            data.playerInitialized = true;
+        }
         void setItem(int index, ref GameData data){
             if(data == null || data.playerGuns.list[index].reference == null){
                 inventory[index] = new ItemInstance(_primary);
@@ -233,16 +241,6 @@ public class PlayerInventory : MonoBehaviour, ISavable, IGameInit
         setItem(0, ref data);
         setItem(1, ref data);
         setItem(2, ref data);
-    }
-
-    public void Init(ref GameData data){
-        Debug.Log("initializing player information");
-        if(data.playerInitialized == false){
-            inventory[0] = new ItemInstance(_primary);
-            inventory[1] = new ItemInstance(_secondary);
-            inventory[2] = new ItemInstance(_consumable);
-            inventory[3] = null;
-        }
     }
 
 }

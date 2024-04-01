@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DataSaving;
 using System;
+using Unity.VisualScripting;
 
 public class GameControllerInstance : MonoBehaviour, ISavable
 {
+    public bool initialized = false;
     private static GameControllerInstance instance;
     private enum GameState{
         Title,
@@ -24,7 +26,19 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     [SerializeField] Train_Controller traincontroller;
 
     
+    /**
+    New Archicture proposal. 
 
+    [] No persistant instance game manager!
+
+    Save Game State -> Load new Scene -> load state in new instance of game manager
+
+
+    */
+
+    void OnEnable(){SceneManager.activeSceneChanged += OnSceneLoaded;}
+    
+    void OnDisable(){SceneManager.activeSceneChanged -=OnSceneLoaded;}
 
     void Awake(){
         if(instance == null){
@@ -32,18 +46,39 @@ public class GameControllerInstance : MonoBehaviour, ISavable
             DontDestroyOnLoad(gameObject);
             this.gameState = GameState.Title;
             Debug.Log($"---- [1] Instantiating Game : {{State : {this.gameState}}} ----");
+            initialized = true;
         } else {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
-        //if(SavingManager.Load() == false){NewGame();}
     }
+    
+    private void OnSceneLoaded(Scene oldScene, Scene newScene){
+        Debug.Log($"---- [2] Loading into {newScene.name} ----");
+        SavingManager.Load();
+        switch(newScene.buildIndex){
+            case 1:
+                this.gameState = GameState.Train;
+                traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
+                break;
+            case 2:
+                this.gameState = GameState.Title;
+                break;
+            
+        }
+    }
+
 
     public void StartGame(int saveNumber){
         SavingManager.Init(saveNumber);
-        Debug.Log("---- [2] Loading into Train Scene ----");
-        SceneManager.LoadScene(1);
+        SwitchScene(1);
         this.gameState = GameState.Train;
         SavingManager.InitializeGameObjects();
+    }
+
+    public void SwitchScene(int sceneNumber){
+        SavingManager.Save();
+        SceneManager.LoadScene(sceneNumber);
+        //Destroy(this.gameObject);
     }
 
 
