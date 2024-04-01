@@ -5,8 +5,19 @@ using UnityEngine.SceneManagement;
 using DataSaving;
 using System;
 
-public class GameController : MonoBehaviour, ISavable
+public class GameControllerInstance : MonoBehaviour, ISavable
 {
+    private static GameControllerInstance instance;
+    private enum GameState{
+        Title,
+        Train,
+        Station,
+        CutScene
+    }
+
+    private GameState gameState;
+
+
     [SerializeField, Min(0)] float distance = 0;
     [SerializeField, Min(0)] float endDistance = 0;
 
@@ -16,15 +27,37 @@ public class GameController : MonoBehaviour, ISavable
 
 
     void Awake(){
-        if(SavingManager.Load() == false){
-            NewGame();
+        if(instance == null){
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            this.gameState = GameState.Title;
+            Debug.Log($"---- [1] Instantiating Game : {{State : {this.gameState}}} ----");
+        } else {
+            Destroy(gameObject);
+        }
+        //if(SavingManager.Load() == false){NewGame();}
+    }
+
+    public void StartGame(int saveNumber){
+        SavingManager.Init(saveNumber);
+        Debug.Log("---- [2] Loading into Train Scene ----");
+        SceneManager.LoadScene(1);
+        this.gameState = GameState.Train;
+        SavingManager.InitializeGameObjects();
+    }
+
+
+
+
+    void FixedUpdate(){
+        switch(gameState){
+            case GameState.Train:
+                TrainLogic();
+                break;
         }
     }
 
-    void NewGame(){
-        SavingManager.Init();
-    }
-    void FixedUpdate(){
+    private void TrainLogic(){
         distance += Time.deltaTime * traincontroller.GetSpeed() / 60f;
 
         if(distance >= endDistance){
@@ -34,8 +67,7 @@ public class GameController : MonoBehaviour, ISavable
         }
     }
 
-    
-
+    // ---- getters and setters
     public (float, float) getDistance() => (distance, endDistance);
 
     public void Save(ref GameData data){

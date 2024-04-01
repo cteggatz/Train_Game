@@ -236,10 +236,13 @@ public class PlayerInventory : MonoBehaviour, ISavable, IGameInit
     }
 
     public void Init(ref GameData data){
-        inventory[0] = new ItemInstance(_primary);
-        inventory[1] = new ItemInstance(_secondary);
-        inventory[2] = new ItemInstance(_consumable);
-        inventory[3] = null;
+        Debug.Log("initializing player information");
+        if(data.playerInitialized == false){
+            inventory[0] = new ItemInstance(_primary);
+            inventory[1] = new ItemInstance(_secondary);
+            inventory[2] = new ItemInstance(_consumable);
+            inventory[3] = null;
+        }
     }
 
 }

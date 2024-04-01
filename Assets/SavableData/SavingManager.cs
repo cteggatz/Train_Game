@@ -9,6 +9,7 @@ using GameItems;
 using System.IO;
 using UnityEngine.Windows;
 using UnityEditor.PackageManager;
+using Unity.VisualScripting;
 
 namespace DataSaving{
     public class SavingManager : MonoBehaviour
@@ -37,7 +38,25 @@ namespace DataSaving{
             return true;
         }
 
-        public static void Init(){
+        public static void Init(int saveNumber){
+            FileManager.Init(saveNumber);
+            if(saveNumber >= FileManager.GetSaves().Length){
+                CreateNewGame();
+            } else {
+                Load();
+            }
+        }  
+        public static void InitializeGameObjects(){
+            Debug.Log("Initializing GameObject Data");
+            GameData gameData = FileManager.Load();
+            IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
+            Debug.Log($"Items : {savableObjects.Length}");
+            foreach(ISavable script in savableObjects){
+                script.Save(ref gameData);
+            }
+            FileManager.Save(gameData);
+        }
+        public static void CreateNewGame(){
             Debug.Log("No File! Creating Save File");
             GameData gameData = new GameData();
             IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
@@ -50,7 +69,9 @@ namespace DataSaving{
             }
             FileManager.Save(gameData);
         }
-    
+
+
+
     }
 
     /// --------
@@ -58,20 +79,32 @@ namespace DataSaving{
     /// Class Responsible for converting given Game Data into a json and saving it to the disk
     /// </summary>
     public class FileManager{
+        private static int saveNumber;
         static string jsonData;
+
+        public static void Init(int saveNumber){
+            FileManager.saveNumber = saveNumber;
+            Debug.Log($"Initialized File Manager | [Pointing to save : {saveNumber}]");
+        }
         public static void Save(GameData data){
             jsonData = JsonUtility.ToJson(data, true);
             //Debug.Log(AssetDatabase.GetAssetPath(SavingManager.Manager) + " | " + Application.persistentDataPath);
-            System.IO.File.WriteAllText(Application.persistentDataPath + "/SaveData.json", jsonData);
+            System.IO.File.WriteAllText(Application.persistentDataPath + $"/SaveData{saveNumber}.json", jsonData);
         }
         public static GameData Load(){
             try{
-                jsonData = System.IO.File.ReadAllText(Application.persistentDataPath + "/SaveData.json");
+                jsonData = System.IO.File.ReadAllText(Application.persistentDataPath + $"/SaveData{saveNumber}.json");
                 return JsonUtility.FromJson<GameData>(jsonData);
             } catch(Exception e){
-                System.IO.File.WriteAllText(Application.persistentDataPath + "/SaveData.json", "");
+                Debug.Log($"[Error] Save file not found | {e.ToShortString()}");
+                System.IO.File.WriteAllText(Application.persistentDataPath + "/SaveData{saveNumber}.json", "");
                 return null;
             }
+        }
+
+        public static string[] GetSaves(){
+            //Debug.Log($"Retrieving Save Data | {System.IO.Directory.GetFiles(Application.persistentDataPath).Length}");
+            return System.IO.Directory.GetFiles(Application.persistentDataPath);
         }
     }
 
@@ -82,6 +115,10 @@ namespace DataSaving{
     /// </summary>
     [Serializable]
     public class GameData{
+
+        public bool playerInitialized = false;
+        public bool trainInitialized = false;
+
         public GameData(){
             carts = new SerializableList<CartData>();
             playerGuns = new SerializableList<GunData>();

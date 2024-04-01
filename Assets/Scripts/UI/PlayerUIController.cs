@@ -43,7 +43,7 @@ public class PlayerUIController : MonoBehaviour
         trainFuel.text = $"Fuel : {(int)trainControllerInstance.GetFuel()} | Speed : {(float)Mathf.Round(trainControllerInstance.GetSpeed()*10) * .1f}";
         trainHealth.text = $"Engine Health : [{trainControllerInstance.Health}/{trainControllerInstance.MaxHealth}]";
         playerHealthText.text = $"Health : {health.health}";
-        (float, float) trainDistance = gameController.GetComponent<GameController>().getDistance();
+        (float, float) trainDistance = gameController.GetComponent<GameControllerInstance>().getDistance();
         distance.text = $"Distance : [{(int)(trainDistance.Item1/trainDistance.Item2 * 1000)/10f}%]";
     }
 }
