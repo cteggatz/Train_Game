@@ -6,7 +6,7 @@ public class p_movement : MonoBehaviour
     private Rigidbody2D body;
     private Vector2 velocity, _moveInput;
     [SerializeField] private Animator animator;
-    [SerializeField] private float lerpAmount, accelAmount, deccelAmount, accelInAir, deccelInAir, maxSpeed, jumphight, coyoteTimeInterval, jumpBufferInterval;
+    [SerializeField] private float lerpAmount, accelAmount, deccelAmount, accelInAir, deccelInAir, maxSpeed, jumphight, coyoteTimeInterval, jumpBufferInterval, sprintSpeed, normalSpeed;
     [Header("Gravity")]
     [SerializeField] private float gravityScale;
     [SerializeField] private float maxFallSpeed, fallGravityMult, f_FallGravityMult, maxFastFallSpeed, jumpHangTimeThreshold, jumpHangGravityMult, jumpHangAccelerationMult, jumpHangMaxSpeedMult, jumpCutGravityMult;
@@ -52,6 +52,21 @@ public class p_movement : MonoBehaviour
         }
         else if(Input.GetKeyUp(KeyCode.W)) {
             _isJumpCut = true;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            animator.SetBool("Sprinting", true);
+            accelAmount = sprintSpeed;
+            gameObject.GetComponent<PlayerInventory>().itemRenderer.gameObject.SetActive(false);
+            gameObject.GetComponent<PlayerInventory>().enabled = false;
+
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            animator.SetBool("Sprinting", false);
+            accelAmount = normalSpeed;
+            gameObject.GetComponent<PlayerInventory>().enabled = true;
+            gameObject.GetComponent<PlayerInventory>().itemRenderer.gameObject.SetActive(true);
         }
         if (grounded && timeLastPressedJump > 0){
             timeLastPressedJump = 0;

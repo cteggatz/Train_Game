@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d517a45937637b5f48e9512584f2fb1c, type: 3}
   m_Name: New_Test_Gun
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1058679507, guid: 6cd74882a692d064ab432fcb01a72b6c, type: 3}
+  sprite: {fileID: -268117984, guid: 4a40d3bcae035ac4ab40f267c470545d, type: 3}
   sprite_Size: {x: 1, y: 1, z: 0}
   collidable: 0
   name: Gunny
@@ -23,8 +23,8 @@ MonoBehaviour:
   automatic: 0
   gunType: 0
   shootType: 0
-  reloadSpeed: 1
   shell: {fileID: 5655894131590389429, guid: c90500f2bdf9eb046abc51abd0034391, type: 3}
+  reloadSpeed: 1
   burstAmmount: 3
   burstDelay: 0.125
   shotSpread: 0
