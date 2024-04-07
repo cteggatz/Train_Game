@@ -4,14 +4,16 @@ using System.Net.NetworkInformation;
 using UnityEngine;
 using GameItems;
 using System.Runtime.CompilerServices;
+using System;
 
 namespace GameItems
 {
+    [Serializable]
     public class ItemInstance{
         public Usable_Item reference;
-        public int ammo {get; private set;}
-        public bool onUseCooldown {get; private set;}
-        public bool reloading {get; private set;}
+        public int ammo;
+        public bool onUseCooldown;
+        public bool reloading;
         
         
         public ItemInstance(Usable_Item reference){
