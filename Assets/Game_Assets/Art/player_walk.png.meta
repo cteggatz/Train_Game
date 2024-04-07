@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6cd74882a692d064ab432fcb01a72b6c
+guid: f440706cfac9c2d4087cf78e4a0bc68f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,190 +110,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: test guns_0
-      rect:
-        serializedVersion: 2
-        x: 13
-        y: 27
-        width: 19
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6639f681ac70cc441b3f42022bb3fef2
-      internalID: 1058679507
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_1
+      name: player_walk_0
       rect:
         serializedVersion: 2
         x: 2
-        y: 28
-        width: 10
-        height: 4
+        y: 16
+        width: 12
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 0, z: 2, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83089c12a0f7e184797abb35e41e4872
-      internalID: 1752913623
+      spriteID: 0a6ed9db3842ab94798736d24b9dd616
+      internalID: -2115548252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test guns_2
+      name: player_walk_1
       rect:
         serializedVersion: 2
-        x: 10
-        y: 21
-        width: 22
-        height: 5
+        x: 2
+        y: 0
+        width: 12
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 0, z: 2, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4dbeed892fd31b4418f062bfeff157b0
-      internalID: 605875277
+      spriteID: 00aec0cde606b9e4ebef457561c93610
+      internalID: 2091396126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test guns_3
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 15
-        width: 13
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40cf1f4842068674198ba9ff976a84bb
-      internalID: 1908183220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_4
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 15
-        width: 16
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34102b94c8c3f3a468361c46977e54e1
-      internalID: 145268652
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_5
+      name: player_walk_2
       rect:
         serializedVersion: 2
         x: 18
-        y: 10
-        width: 14
-        height: 4
+        y: 16
+        width: 12
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 2, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46a6b9b44f4c3474e88abf13bcc34f65
-      internalID: -1922529827
+      spriteID: 3486aac40184eb74391309aec79e6d40
+      internalID: -364997692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test guns_6
+      name: player_walk_3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 17
-        height: 9
+        x: 18
+        y: 0
+        width: 12
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 2, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d9f690313c331049bc5c70410a9e01c
-      internalID: 980617477
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_7
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 2
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e0710da2108b03748b8f5665e195a36a
-      internalID: -525543351
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_8
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 1
-        width: 7
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 670b074d987121546ac478116e9107fb
-      internalID: 1742009135
+      spriteID: 160282dda3ea1cd48b8c1bd23cf8d5b4
+      internalID: 168980852
       vertices: []
       indices: 
       edges: []
@@ -309,15 +204,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      test guns_0: 1058679507
-      test guns_1: 1752913623
-      test guns_2: 605875277
-      test guns_3: 1908183220
-      test guns_4: 145268652
-      test guns_5: -1922529827
-      test guns_6: 980617477
-      test guns_7: -525543351
-      test guns_8: 1742009135
+      player_walk_0: -2115548252
+      player_walk_1: 2091396126
+      player_walk_2: -364997692
+      player_walk_3: 168980852
+      player_walk_4: 2022004033
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

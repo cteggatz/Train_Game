@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6cd74882a692d064ab432fcb01a72b6c
+guid: 7c2ba5ca658cfab479ad3824dc03d3eb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,97 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: test guns_0
+      name: player_run_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 27
-        width: 19
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6639f681ac70cc441b3f42022bb3fef2
-      internalID: 1058679507
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_1
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 28
-        width: 10
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83089c12a0f7e184797abb35e41e4872
-      internalID: 1752913623
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_2
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 21
-        width: 22
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4dbeed892fd31b4418f062bfeff157b0
-      internalID: 605875277
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_3
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 15
-        width: 13
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40cf1f4842068674198ba9ff976a84bb
-      internalID: 1908183220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: test guns_4
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 15
-        width: 16
-        height: 6
+        x: 0
+        y: 36
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +124,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34102b94c8c3f3a468361c46977e54e1
-      internalID: 145268652
+      spriteID: b2e516bb223176d469f45f9e8fa6e8a6
+      internalID: -844712629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test guns_5
+      name: player_run_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 18
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b4a8ac8e6b5a3a4ab0eff080e9d033e
+      internalID: -2138386635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_run_2
       rect:
         serializedVersion: 2
         x: 18
-        y: 10
-        width: 14
-        height: 4
+        y: 36
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46a6b9b44f4c3474e88abf13bcc34f65
-      internalID: -1922529827
+      spriteID: 24d4d4a7ab0984e4493f022f58286594
+      internalID: 785068513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test guns_6
+      name: player_run_3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 17
-        height: 9
+        x: 36
+        y: 36
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d9f690313c331049bc5c70410a9e01c
-      internalID: 980617477
+      spriteID: c00a369b7630a2f4ea6e4185abd7c8e2
+      internalID: -493778585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test guns_7
+      name: player_run_4
       rect:
         serializedVersion: 2
-        x: 19
-        y: 2
-        width: 3
-        height: 3
+        x: 18
+        y: 18
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0710da2108b03748b8f5665e195a36a
-      internalID: -525543351
+      spriteID: 7db32408f2bb63f46bbf54f79948c7a5
+      internalID: -762451133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: test guns_8
+      name: player_run_5
       rect:
         serializedVersion: 2
-        x: 24
-        y: 1
-        width: 7
-        height: 5
+        x: 36
+        y: 18
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,8 +229,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 670b074d987121546ac478116e9107fb
-      internalID: 1742009135
+      spriteID: 02c3304b1aebe384f96b7973a8128652
+      internalID: 1467940960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_run_6
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaa18588c8abaa34896f2b5c63cc11c6
+      internalID: 1069964096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_run_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f448482d3368824ba3e161184d8304b
+      internalID: -828542316
       vertices: []
       indices: 
       edges: []
@@ -309,15 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      test guns_0: 1058679507
-      test guns_1: 1752913623
-      test guns_2: 605875277
-      test guns_3: 1908183220
-      test guns_4: 145268652
-      test guns_5: -1922529827
-      test guns_6: 980617477
-      test guns_7: -525543351
-      test guns_8: 1742009135
+      player_run_0: -844712629
+      player_run_1: -2138386635
+      player_run_2: 785068513
+      player_run_3: -493778585
+      player_run_4: -762451133
+      player_run_5: 1467940960
+      player_run_6: 1069964096
+      player_run_7: -828542316
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

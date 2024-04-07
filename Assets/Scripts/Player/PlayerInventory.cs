@@ -34,7 +34,7 @@ public class PlayerInventory : MonoBehaviour
 
     //---- item rendering ----
     [Header("Item Renderer")]
-    [SerializeField] private GameObject itemRenderer;
+    [SerializeField] public GameObject itemRenderer;
     [SerializeField] private float itemDistance = 0.5f;
     [SerializeField] private Vector3 offset;
 
