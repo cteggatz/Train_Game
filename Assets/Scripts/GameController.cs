@@ -44,17 +44,30 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         if(instance == null){
             instance = this;
             DontDestroyOnLoad(gameObject);
-            this.gameState = GameState.Title;
-            Debug.Log($"---- [1] Instantiating Game : {{State : {this.gameState}}} ----");
-            initialized = true;
+
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            if(scene == 0){
+                this.gameState = GameState.Title;
+                Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Default Game : {{State : {this.gameState}}} ");
+            } else {
+                if(scene == 1){
+                    this.gameState = GameState.Train;
+                } else if(scene == 2){
+                    this.gameState = GameState.Station;
+                }
+                Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameState}}} \n" + "loading into test envoirnment");
+                SavingManager.Init(0);
+                SavingManager.Save();
+            }
+            this.initialized = true;
         } else {
             Destroy(this.gameObject);
         }
     }
     
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
-        Debug.Log($"---- [2] Loading into {newScene.name} & {newScene.buildIndex}----");
-        if(newScene.buildIndex != 2){
+        Debug.Log($"<color=green>[GameManager]</color> [2] Loading into {newScene.name} & {newScene.buildIndex}");
+        if(newScene.buildIndex != 0){
             SavingManager.Load();
         }
         switch(newScene.buildIndex){
@@ -64,12 +77,8 @@ public class GameControllerInstance : MonoBehaviour, ISavable
                 FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
                 break;
             case 2:
-                this.gameState = GameState.Title;
-                break;
-            case 3:
                 this.gameState = GameState.Station;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
-                FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
                 break;
             
         }
@@ -84,7 +93,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     public void SwitchScene(int sceneNumber){
         SavingManager.Save();
-        Debug.Log("Saving Scene");
         SceneManager.LoadScene(sceneNumber);
     }
 

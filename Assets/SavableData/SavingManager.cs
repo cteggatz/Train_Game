@@ -53,7 +53,7 @@ namespace DataSaving{
 
         }  
         public static void CreateNewGame(){
-            Debug.LogWarning("No File! Creating Save File");
+            Debug.LogWarning("<color=yellow>[FileManager]</color> No File! Creating Save File");
             GameData gameData = new GameData();
             IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
 
@@ -81,7 +81,7 @@ namespace DataSaving{
 
         public static void Init(int saveNumber){
             FileManager.saveNumber = saveNumber;
-            Debug.Log($"Initialized File Manager | [Pointing to save : SaveFile{saveNumber}.json]");
+            Debug.Log($"<color=yellow>[FileManager]</color> Initialized File Manager | [Pointing to save : SaveFile{saveNumber}.json]");
         }
         public static void Save(GameData data){
             jsonData = JsonUtility.ToJson(data, true);
@@ -93,7 +93,7 @@ namespace DataSaving{
                 jsonData = System.IO.File.ReadAllText(Application.persistentDataPath + $"/SaveData{saveNumber}.json");
                 return JsonUtility.FromJson<GameData>(jsonData);
             } catch(Exception e){
-                Debug.LogError($"[Error] SaveFile{saveNumber} not found | {e.ToShortString()}");
+                Debug.LogError($"<color=yellow>[FileManager]</color><color=red><Error></color> SaveFile{saveNumber} not found | {e.ToShortString()}");
                 System.IO.File.WriteAllText(Application.persistentDataPath + $"/SaveData{saveNumber}.json", "");
                 return null;
             }

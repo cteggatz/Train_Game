@@ -87,7 +87,7 @@ public class TrainCartController : MonoBehaviour, ISavable, IGameInit
     }
     public void Load(ref GameData data){
         if(data.trainInitialized == false){
-            Debug.Log("No Cart Data - Initializing Train Data");
+            Debug.Log("[TrainController] No Cart Data - Initializing Train Data");
             AddCart(trainHead);
             AddCart(coalCart);
             AddCart(genericTrainCart);
