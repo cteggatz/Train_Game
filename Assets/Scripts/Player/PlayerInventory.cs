@@ -214,11 +214,13 @@ public class PlayerInventory : MonoBehaviour, ISavable
     }
 
     public void Save(ref GameData data){
+        List<GameData.GunData> gunDatas = new List<GameData.GunData>();
         foreach(ItemInstance item in inventory){
             if(item != null && item.reference != null){
-                data.SaveGun(item);
+                gunDatas.Add(new GameData.GunData(item.ammo, item.reference));
             }
         }
+        data.playerGuns.list = gunDatas;
     }
     public void Load(ref GameData data){
         if(data.playerInitialized == false){
@@ -228,6 +230,7 @@ public class PlayerInventory : MonoBehaviour, ISavable
             inventory[2] = new ItemInstance(_consumable);
             inventory[3] = null;
             data.playerInitialized = true;
+            return;
         }
         void setItem(int index, ref GameData data){
             if(data == null || data.playerGuns.list[index].reference == null){

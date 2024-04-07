@@ -54,11 +54,14 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
         Debug.Log($"---- [2] Loading into {newScene.name} ----");
-        SavingManager.Load();
+        if(newScene.buildIndex != 2){
+            SavingManager.Load();
+        }
         switch(newScene.buildIndex){
-            case 1:
+            case 1: //This is the Train Scene
                 this.gameState = GameState.Train;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
+                FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
                 break;
             case 2:
                 this.gameState = GameState.Title;
@@ -77,8 +80,8 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     public void SwitchScene(int sceneNumber){
         SavingManager.Save();
+        Debug.Log("Saving Scene");
         SceneManager.LoadScene(sceneNumber);
-        //Destroy(this.gameObject);
     }
 
 
@@ -89,6 +92,12 @@ public class GameControllerInstance : MonoBehaviour, ISavable
             case GameState.Train:
                 TrainLogic();
                 break;
+            case GameState.Station:
+                break;
+            case GameState.CutScene:
+                break;
+            default:
+                break;
         }
     }
 
@@ -96,9 +105,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         distance += Time.deltaTime * traincontroller.GetSpeed() / 60f;
 
         if(distance >= endDistance){
-            SavingManager.Save();
-            SavingManager.Load();
-            SceneManager.LoadScene(0);
+            SwitchScene(2);
         }
     }
 

@@ -77,11 +77,23 @@ public class TrainCartController : MonoBehaviour, ISavable, IGameInit
 
 
     public void Save(ref GameData data){
+        List<GameData.CartData> cartDataList = new List<GameData.CartData>();
+        
         foreach(GameObject cart in Carts){
-            data.SaveCart(cart);
+            //data.SaveCart(cart);
+            cartDataList.Add(new GameData.CartData(cart.GetComponent<CartController>().prefabReference));
         }
+        data.carts.list = cartDataList;
     }
     public void Load(ref GameData data){
+        if(data.trainInitialized == false){
+            Debug.Log("No Cart Data - Initializing Train Data");
+            AddCart(trainHead);
+            AddCart(coalCart);
+            AddCart(genericTrainCart);
+            data.trainInitialized = true;
+            return;
+        }
         foreach(GameData.CartData cart in data.carts.list){
             AddCart(AssetDatabase.LoadAssetAtPath<GameObject>(cart.Address));
         }

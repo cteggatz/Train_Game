@@ -1,4 +1,7 @@
 
+using System;
+using System.Collections.Generic;
+using System.IO;
 using DataSaving;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,10 +14,18 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject loadSavePanel;
     [SerializeField] private GameControllerInstance gameManager; 
 
+    [SerializeField] private List<SaveController> saves;
+
+
 
     void Start(){
         startPanel.SetActive(true);
         loadSavePanel.SetActive(false);
+
+        string[] saveFiles = FileManager.GetSaves(); 
+        foreach(SaveController saveButton in saves){
+            saveButton.SetButton(saveFiles);
+        }
 
     }
 
@@ -23,11 +34,17 @@ public class MainMenuController : MonoBehaviour
         startPanel.SetActive(false);
         loadSavePanel.SetActive(true);
     }
+    public void GetTitleScreen(){
+        startPanel.SetActive(true);
+        loadSavePanel.SetActive(false);
+    }
 
     public void NewGame(){
+        Debug.ClearDeveloperConsole();
         gameManager.StartGame(FileManager.GetSaves().Length);
     }
     public void LoadGame(int save){
+        Debug.ClearDeveloperConsole();
         gameManager.StartGame(save);
     }
     

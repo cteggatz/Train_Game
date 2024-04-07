@@ -46,4 +46,8 @@ public class PlayerUIController : MonoBehaviour
         (float, float) trainDistance = gameController.GetComponent<GameControllerInstance>().getDistance();
         distance.text = $"Distance : [{(int)(trainDistance.Item1/trainDistance.Item2 * 1000)/10f}%]";
     }
+
+    public void setGameController(GameControllerInstance gameController){
+        this.gameController = gameController.gameObject;
+    }
 }

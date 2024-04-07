@@ -14,8 +14,10 @@ using Unity.VisualScripting;
 namespace DataSaving{
     public class SavingManager : MonoBehaviour
     {
+        static GameData currentData;
         public static void Save(){
-            GameData gameData = new GameData();
+            Debug.Log("Saving!");
+            GameData gameData = currentData;
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
 
             foreach(ISavable script in savableObjects){
@@ -24,18 +26,17 @@ namespace DataSaving{
             FileManager.Save(gameData);
         }
 
-        public static bool Load(){
+        public static void Load(){
+            Debug.Log("Loading!");
             GameData gameData = FileManager.Load();
             if(gameData == null){
-                return false;
+                gameData = new GameData();
             }
-            //Debug.Log($"Loading Data : {gameData.ToString()}");
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
-            
             foreach(ISavable script in savableObjects){
                 script.Load(ref gameData);
             }
-            return true;
+            currentData = gameData;
         }
 
         public static void Init(int saveNumber){
@@ -57,7 +58,7 @@ namespace DataSaving{
             FileManager.Save(gameData);
         }
         public static void CreateNewGame(){
-            Debug.Log("No File! Creating Save File");
+            Debug.LogWarning("No File! Creating Save File");
             GameData gameData = new GameData();
             IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
 
@@ -68,6 +69,7 @@ namespace DataSaving{
                 script.Save(ref gameData);
             }
             FileManager.Save(gameData);
+            currentData = gameData;
         }
 
 
@@ -84,7 +86,7 @@ namespace DataSaving{
 
         public static void Init(int saveNumber){
             FileManager.saveNumber = saveNumber;
-            Debug.Log($"Initialized File Manager | [Pointing to save : {saveNumber}]");
+            Debug.Log($"Initialized File Manager | [Pointing to save : SaveFile{saveNumber}.json]");
         }
         public static void Save(GameData data){
             jsonData = JsonUtility.ToJson(data, true);
@@ -96,8 +98,8 @@ namespace DataSaving{
                 jsonData = System.IO.File.ReadAllText(Application.persistentDataPath + $"/SaveData{saveNumber}.json");
                 return JsonUtility.FromJson<GameData>(jsonData);
             } catch(Exception e){
-                Debug.Log($"[Error] Save file not found | {e.ToShortString()}");
-                System.IO.File.WriteAllText(Application.persistentDataPath + "/SaveData{saveNumber}.json", "");
+                Debug.LogError($"[Error] SaveFile{saveNumber} not found | {e.ToShortString()}");
+                System.IO.File.WriteAllText(Application.persistentDataPath + $"/SaveData{saveNumber}.json", "");
                 return null;
             }
         }
@@ -116,9 +118,25 @@ namespace DataSaving{
     [Serializable]
     public class GameData{
 
+        // ----- Data -----
+        // initialization
         public bool playerInitialized = false;
         public bool trainInitialized = false;
 
+        // train
+        public float fuel;
+        public SerializableList<CartData> carts;
+
+        //game
+        public float distance;
+        public float endDistance;
+
+        //player
+        public int playerHealth;
+        public SerializableList<GunData> playerGuns;
+
+
+        // ----- functions -----
         public GameData(){
             carts = new SerializableList<CartData>();
             playerGuns = new SerializableList<GunData>();
@@ -128,10 +146,22 @@ namespace DataSaving{
             string returnString = $"Game Data [Distance : {this.distance}] | [endDistance : {this.endDistance}] \n Train Data [Carts : {this.carts.list.ToString()}] \nPlayer Data {this.playerGuns.ToString()}";
             return returnString + base.ToString();
         }
-
-        // ----- Train ----
-        public float fuel;
+        public void SaveCart(GameObject cart, int index){
+            if(index >= this.carts.list.Count){
+                this.carts.list.Add(new GameData.CartData(cart.GetComponent<CartController>().prefabReference));
+            } else {
+                carts.list[index] = new GameData.CartData(cart.GetComponent<CartController>().prefabReference);
+            }
+        }
+        public void SaveGun(ItemInstance item, int index){
+            if(index >= this.playerGuns.list.Count){
+                playerGuns.list.Add(new GunData(item.ammo, item.reference));
+            } else {
+                playerGuns.list[index] = new GunData(item.ammo, item.reference);
+            }
+        }
     
+        // classes
         [Serializable]
         public class SerializableList<T> {
             public List<T> list;
@@ -147,17 +177,6 @@ namespace DataSaving{
                 Address = address;
             }
         }
-
-        public void SaveCart(GameObject cart) => this.carts.list.Add(new GameData.CartData(cart.GetComponent<CartController>().prefabReference));
-        public SerializableList<CartData> carts;
-
-        //Game Data
-        public float distance;
-        public float endDistance;
-
-
-        // ----- Player ------
-        public int playerHealth;
         [Serializable]
         public struct GunData{
             public int ammo;
@@ -167,12 +186,6 @@ namespace DataSaving{
                 this.reference = AssetDatabase.GetAssetPath(item);
             }
         }
-        public void SaveGun(ItemInstance item){
-            playerGuns.list.Add(new GunData(item.ammo, item.reference));
-        }
-        public SerializableList<GunData> playerGuns;
-
-
     }
     public interface ISavable{
         public void Save(ref GameData gamedata);
