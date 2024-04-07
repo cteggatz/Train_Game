@@ -53,7 +53,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     }
     
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
-        Debug.Log($"---- [2] Loading into {newScene.name} ----");
+        Debug.Log($"---- [2] Loading into {newScene.name} & {newScene.buildIndex}----");
         if(newScene.buildIndex != 2){
             SavingManager.Load();
         }
@@ -75,7 +75,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         SavingManager.Init(saveNumber);
         SwitchScene(1);
         this.gameState = GameState.Train;
-        SavingManager.InitializeGameObjects();
     }
 
     public void SwitchScene(int sceneNumber){

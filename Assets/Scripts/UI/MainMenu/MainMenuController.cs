@@ -39,9 +39,9 @@ public class MainMenuController : MonoBehaviour
         loadSavePanel.SetActive(false);
     }
 
-    public void NewGame(){
-        Debug.ClearDeveloperConsole();
-        gameManager.StartGame(FileManager.GetSaves().Length);
+    public void NewGame(int saveNumber){
+        //Debug.ClearDeveloperConsole();
+        gameManager.StartGame(saveNumber);
     }
     public void LoadGame(int save){
         Debug.ClearDeveloperConsole();

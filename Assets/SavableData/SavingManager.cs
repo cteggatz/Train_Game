@@ -16,7 +16,7 @@ namespace DataSaving{
     {
         static GameData currentData;
         public static void Save(){
-            Debug.Log("Saving!");
+            //Debug.Log("Saving!");
             GameData gameData = currentData;
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
 
@@ -27,7 +27,7 @@ namespace DataSaving{
         }
 
         public static void Load(){
-            Debug.Log("Loading!");
+            //Debug.Log("Loading!");
             GameData gameData = FileManager.Load();
             if(gameData == null){
                 gameData = new GameData();
@@ -41,22 +41,17 @@ namespace DataSaving{
 
         public static void Init(int saveNumber){
             FileManager.Init(saveNumber);
-            if(saveNumber >= FileManager.GetSaves().Length){
-                CreateNewGame();
-            } else {
-                Load();
+
+            string[] saveFiles = FileManager.GetSaves();
+            foreach(string save in saveFiles){
+                if(Path.GetFileName(save).Equals($"SaveData{saveNumber}.json")){
+                    Load();
+                    return;
+                }
             }
+            CreateNewGame();
+
         }  
-        public static void InitializeGameObjects(){
-            //Debug.Log("Initializing GameObject Data");
-            GameData gameData = FileManager.Load();
-            IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
-            //Debug.Log($"Items : {savableObjects.Length}");
-            foreach(ISavable script in savableObjects){
-                script.Save(ref gameData);
-            }
-            FileManager.Save(gameData);
-        }
         public static void CreateNewGame(){
             Debug.LogWarning("No File! Creating Save File");
             GameData gameData = new GameData();

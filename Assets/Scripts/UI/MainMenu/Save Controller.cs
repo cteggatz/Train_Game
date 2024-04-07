@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DataSaving;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,18 +12,19 @@ using UnityEngine.UI;
 public class SaveController : MonoBehaviour 
 {
     private Button button;
-    private Button deleteSaveButton;
+    [SerializeField] private Button deleteSaveButton;
     private TMP_Text text;
     
     [SerializeField] int saveNumber;
 
     void Awake(){
         button = gameObject.GetComponent<Button>();
-        deleteSaveButton = gameObject.GetComponentInChildren<Button>();
+        //deleteSaveButton = gameObject.GetComponentInChildren<Button>();
         text = gameObject.GetComponentInChildren<TMP_Text>();
 
-        button.onClick.AddListener(delegate{FindObjectOfType<GameControllerInstance>().StartGame(saveNumber);});
+        //button.onClick.AddListener(delegate{FindObjectOfType<GameControllerInstance>().StartGame(saveNumber);});
         deleteSaveButton.gameObject.SetActive(false);
+        deleteSaveButton.onClick.AddListener(delegate{DeleteButton();});
     }
 
     public void SetButton(string[] saves){
@@ -33,5 +35,11 @@ public class SaveController : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void DeleteButton(){
+        File.Delete(Application.persistentDataPath + $"/SaveData{saveNumber}.json");
+        text.text = $"New Save";
+        deleteSaveButton.gameObject.SetActive(false);
     }
 }
