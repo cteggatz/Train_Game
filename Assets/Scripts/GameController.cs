@@ -66,6 +66,11 @@ public class GameControllerInstance : MonoBehaviour, ISavable
             case 2:
                 this.gameState = GameState.Title;
                 break;
+            case 3:
+                this.gameState = GameState.Station;
+                traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
+                FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
+                break;
             
         }
     }
