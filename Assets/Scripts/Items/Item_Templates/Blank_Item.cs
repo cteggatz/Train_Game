@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public abstract class Blank_Item : ScriptableObject
 {
 
@@ -17,6 +19,8 @@ public abstract class Blank_Item : ScriptableObject
     public string description;
 
 }
+
+[Serializable]
 public abstract class Usable_Item : Blank_Item{
     // ---- USAGE ----
     [Header("Item Usability")]    

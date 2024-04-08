@@ -16,7 +16,9 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private TMP_Text trainFuel;
     [SerializeField] private TMP_Text trainHealth;
     [SerializeField] private TMP_Text distance;
+
     [SerializeField] private GameObject trainController;
+    [SerializeField] private GameObject gameController;
      
 
 
@@ -41,5 +43,11 @@ public class PlayerUIController : MonoBehaviour
         trainFuel.text = $"Fuel : {(int)trainControllerInstance.GetFuel()} | Speed : {(float)Mathf.Round(trainControllerInstance.GetSpeed()*10) * .1f}";
         trainHealth.text = $"Engine Health : [{trainControllerInstance.Health}/{trainControllerInstance.MaxHealth}]";
         playerHealthText.text = $"Health : {health.health}";
+        (float, float) trainDistance = gameController.GetComponent<GameControllerInstance>().getDistance();
+        distance.text = $"Distance : [{(int)(trainDistance.Item1/trainDistance.Item2 * 1000)/10f}%]";
+    }
+
+    public void setGameController(GameControllerInstance gameController){
+        this.gameController = gameController.gameObject;
     }
 }

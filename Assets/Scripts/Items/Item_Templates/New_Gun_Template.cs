@@ -13,7 +13,7 @@ using UnityEngine;
 /// ----Chris Notes----
 
 
-[CreateAssetMenu(fileName = "New_Gun_Template", menuName = "ScriptableObjects/Gun/New_Gun_Template")]
+[CreateAssetMenu(fileName = "New_Gun_Template", menuName = "ScriptableObjects/Gun/New_Gun_Template"), Serializable]
 public class New_Gun_Template : Usable_Item
 {
     public enum GunType {Primary, Secondary}
@@ -57,6 +57,7 @@ public class New_Gun_Template : Usable_Item
                 .GetComponent<PlayerInventory>()
                 .StartCoroutine(ShootWithDelay(i, angle, position, layer, player.gameObject));
         }
+        Instantiate(shell).transform.position = player.transform.position;
     }
 
     

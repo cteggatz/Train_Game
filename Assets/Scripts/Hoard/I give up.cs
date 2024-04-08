@@ -1,5 +1,7 @@
 using Pathfinding;
 using System.Collections;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Igiveup : MonoBehaviour
@@ -7,7 +9,6 @@ public class Igiveup : MonoBehaviour
     [Header("Pathfinding")]
     public Transform target;
     public float awareness, health;
-    public Vector3 size;
     [SerializeField] private float pathUpdateSeconds;
 
     [Header("Physics")]
@@ -15,7 +16,7 @@ public class Igiveup : MonoBehaviour
     [SerializeField] private float jumpForce, nextWaypointDistance, jumpNodeHeightRequirement, jumpModifier, jumpCheckOffset;
 
     [Header("Custom Behavior")]
-    [SerializeField] private float attckRange, attackForce, damage, g_rayDistance;
+    [SerializeField] private float damage, attckRange, attackForce, g_rayDistance;
     [SerializeField] private ParticleSystem death;
     [SerializeField] private AudioClip dsound, bite, jump;
     //[SerializeField] private int layermask;
@@ -24,34 +25,44 @@ public class Igiveup : MonoBehaviour
 
     private Path path;
     private int currentWaypoint = 0;
-    [SerializeField] private bool isGrounded;
+    [SerializeField] public bool isGrounded;
     Seeker seeker;
     Rigidbody2D rb;
     private bool isOnCoolDown;
+    [SerializeField] private Transform oldtarget;
 
     public void Start()
     {
-        gameObject.transform.localScale = size;
         gameObject.GetComponent<CircleCollider2D>().radius = awareness;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         isOnCoolDown = false;
         speed = 40 / health;
-
+        oldtarget = target;
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
 
     private void FixedUpdate()
     {
         PathFollow();
-        if(Vector2.Distance(transform.position, target.transform.position) < attckRange){
-            //Attack();
-        }
         if(health <= 0)
         {
             AudioSource.PlayClipAtPoint(dsound, transform.position);
             Destroy(gameObject);
             Instantiate(death).transform.position = gameObject.transform.position;
+        }
+        if(gameObject.layer != target.gameObject.layer)
+        {
+            oldtarget = target; //broken?!
+            GameObject[] doors = GameObject.FindGameObjectsWithTag("Interactable");
+            float mindist = Mathf.Infinity;
+            for(int i = 0; i < doors.Length; i++){
+                float dist = Vector3.Distance(doors[i].gameObject.transform.position, gameObject.transform.position);
+                if(dist < mindist){
+                    target = doors[i].transform;
+                    mindist = dist;
+                }
+            }
         }
     }
 
@@ -140,7 +151,7 @@ public class Igiveup : MonoBehaviour
                     target.GetComponent<PlayerHealth>().health -= damage;
                     AudioSource.PlayClipAtPoint(bite, transform.position);
                 }
-            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -148,6 +159,18 @@ public class Igiveup : MonoBehaviour
         if(collision.gameObject.GetComponent<p_movement>() != null)
         {
             target = collision.gameObject.transform;
+        }
+        if (collision.IsTouching(gameObject.GetComponent<BoxCollider2D>()) && collision.gameObject.GetComponent<Furnace>() != null)
+        {
+            collision.gameObject.GetComponent<Furnace>().DamageTrain((int)damage);
+        }
+        if (collision.IsTouching(gameObject.GetComponent<BoxCollider2D>()) && collision.gameObject.GetComponent<DoorController>() != null)
+        {
+            if(gameObject.layer != oldtarget.gameObject.layer){
+                gameObject.layer = oldtarget.gameObject.layer;
+                target = oldtarget;// I think this is the bad boy
+                //NEED TO FIX OLD TARGET BEING SET TO DOOR STILL SOMETIMES
+            }
         }
     }
 }
