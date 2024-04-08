@@ -20,10 +20,11 @@ public class ProjectileScript : MonoBehaviour
 
     private Rigidbody2D _rb;
     [SerializeField] private AudioClip ghurt, bang, s_wall;
-    [SerializeField] private ParticleSystem p_wall;
+    [SerializeField] private ParticleSystem p_wall, p_fire;
 
     private void Awake(){
         AudioSource.PlayClipAtPoint(bang, transform.position);
+        Instantiate(p_fire).transform.position = gameObject.transform.position;
         _rb = gameObject.GetComponent<Rigidbody2D>();
     }
     private void Update(){
