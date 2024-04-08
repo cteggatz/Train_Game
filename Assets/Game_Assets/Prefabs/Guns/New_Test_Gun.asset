@@ -15,19 +15,19 @@ MonoBehaviour:
   sprite: {fileID: -268117984, guid: 4a40d3bcae035ac4ab40f267c470545d, type: 3}
   sprite_Size: {x: 1, y: 1, z: 0}
   collidable: 0
-  name: Gunny
-  description: 
-  maxUseQuantity: 12
+  name: Shotgun
+  description: bang
+  maxUseQuantity: 6
   useIncrement: 1
-  useCooldown: 1
+  useCooldown: 0.28
   automatic: 0
   gunType: 0
-  shootType: 0
+  shootType: 1
   shell: {fileID: 5655894131590389429, guid: c90500f2bdf9eb046abc51abd0034391, type: 3}
   reloadSpeed: 1
   burstAmmount: 3
-  burstDelay: 0.125
-  shotSpread: 0
-  projectile: {fileID: 3166372697761311189, guid: c7e9233bf4202ce4ba8020e28dccc378, type: 3}
+  burstDelay: 0
+  shotSpread: 3
+  projectile: {fileID: 3166372697761311189, guid: ed31233d98792194e92763f5c70a9881, type: 3}
   bulletDamage: 1
-  thrust: 10
+  thrust: 50

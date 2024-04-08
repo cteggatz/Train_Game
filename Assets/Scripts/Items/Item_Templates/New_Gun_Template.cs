@@ -56,6 +56,7 @@ public class New_Gun_Template : Usable_Item
             player
                 .GetComponent<PlayerInventory>()
                 .StartCoroutine(ShootWithDelay(i, angle, position, layer, player.gameObject));
+            Instantiate(shell);
         }
     }
 
