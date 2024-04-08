@@ -936,7 +936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 923986533}
   lerpAmount: 0.1
-  accelAmount: 1
+  accelAmount: 2
   deccelAmount: 1
   accelInAir: 1.5
   deccelInAir: 1.5
