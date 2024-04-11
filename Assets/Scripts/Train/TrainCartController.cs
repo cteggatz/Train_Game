@@ -102,6 +102,10 @@ public class TrainCartController : MonoBehaviour, ISavable, IGameInit
         AddCart(coalCart);
         AddCart(genericTrainCart);
     }
+
+    public ref List<GameObject> GetCarts(){
+        return ref this.Carts;
+    }
 }
 
 [CustomEditor(typeof(TrainCartController))]
