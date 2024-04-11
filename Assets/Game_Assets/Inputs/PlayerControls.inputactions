@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "PlayerMovement",
     "maps": [
         {
             "name": "PlayerMovement(Keyboard)",
@@ -74,11 +74,5 @@
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
-            "devices": []
-        }
-    ]
+    "controlSchemes": []
 }
