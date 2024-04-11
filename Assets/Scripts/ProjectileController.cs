@@ -20,7 +20,7 @@ public class ProjectileScript : MonoBehaviour
 
     private Rigidbody2D _rb;
     [SerializeField] private AudioClip ghurt, bang, s_wall;
-    [SerializeField] private ParticleSystem p_wall, p_fire;
+    [SerializeField] private ParticleSystem p_wall, p_fire, boxbrake; //fuck it idk how to get resources.load to work- Its just thius for now
 
     private void Awake(){
         AudioSource.PlayClipAtPoint(bang, transform.position);
@@ -41,8 +41,14 @@ public class ProjectileScript : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        if (other.gameObject.tag == "Fuel")
+        {
+            Instantiate(boxbrake).transform.position = gameObject.transform.position;
+            Destroy(other.gameObject);
+            return;
+        }
 
-        if(other.gameObject.tag == "Interactable")return;
+        if (other.gameObject.tag == "Interactable")return;
         if(other.gameObject == spawnedParent)return;
         if (other.GetType() == typeof(CircleCollider2D)) return;
         if(other.gameObject.GetComponent<Igiveup>() != null){
