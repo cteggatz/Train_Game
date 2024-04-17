@@ -41,6 +41,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     void OnDisable(){SceneManager.activeSceneChanged -=OnSceneLoaded;}
 
     void Awake(){
+        SavingManager.Load();
         if(instance == null){
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -67,9 +68,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
         Debug.Log($"<color=green>[GameManager]</color> [2] Loading into {newScene.name} & {newScene.buildIndex}");
-        if(newScene.buildIndex != 0){
-            SavingManager.Load();
-        }
+        
         switch(newScene.buildIndex){
             case 1: //This is the Train Scene
                 this.gameState = GameState.Train;
