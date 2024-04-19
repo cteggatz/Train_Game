@@ -41,7 +41,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     void OnDisable(){SceneManager.activeSceneChanged -=OnSceneLoaded;}
 
     void Awake(){
-        SavingManager.Load();
         if(instance == null){
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -58,12 +57,15 @@ public class GameControllerInstance : MonoBehaviour, ISavable
                 }
                 Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameState}}} \n" + "loading into test envoirnment");
                 SavingManager.Init(0);
+                SavingManager.Load();
                 SavingManager.Save();
             }
             this.initialized = true;
+            
         } else {
             Destroy(this.gameObject);
         }
+        
     }
     
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
@@ -74,8 +76,9 @@ public class GameControllerInstance : MonoBehaviour, ISavable
                 this.gameState = GameState.Train;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
+        
                 break;
-            case 2:
+            case 2: // Station
                 this.gameState = GameState.Station;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 break;

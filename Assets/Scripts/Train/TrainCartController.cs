@@ -58,6 +58,12 @@ public class TrainCartController : MonoBehaviour, ISavable
         Carts.Add(cartInstance);
         return cartInstance;
     }
+    public void setCarts(){
+        for(int i = 0; i < transform.childCount; i++){
+            GameObject.Destroy(transform.GetChild(i).gameObject);            
+        }
+    }
+
 
     private void Awake(){
         for(int i = 0; i < transform.childCount; i++){
@@ -65,7 +71,7 @@ public class TrainCartController : MonoBehaviour, ISavable
             //exCart.GetComponent<CartController>().SetCart(gameObject, exCart, true);
             //Destroy(transform.GetChild(i).gameObject);
         }
-
+        
         //AddCart(coalCart);
         //AddCart(genericTrainCart);
         
@@ -105,6 +111,8 @@ public class TrainCartController : MonoBehaviour, ISavable
         foreach(GameData.CartData cart in data.carts.list){
             AddCart(AssetDatabase.LoadAssetAtPath<GameObject>(cart.Address));
         }
+        FindAnyObjectByType<hoardLogic>().GetComponent<hoardLogic>().SetTargets(this.Carts);
+
     }
 
     public ref List<GameObject> GetCarts(){

@@ -36,6 +36,9 @@ public class CartController : MonoBehaviour
         tilemaps.Add(universal);
         return tilemaps;
     }
+    public List<GameObject> GetSettableObjects(){
+        return cartObjectSetter;
+    }
 
     void Awake()
     {
