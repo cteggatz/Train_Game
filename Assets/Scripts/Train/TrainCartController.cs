@@ -111,7 +111,11 @@ public class TrainCartController : MonoBehaviour, ISavable
         foreach(GameData.CartData cart in data.carts.list){
             AddCart(AssetDatabase.LoadAssetAtPath<GameObject>(cart.Address));
         }
-        FindAnyObjectByType<hoardLogic>().GetComponent<hoardLogic>().SetTargets(this.Carts);
+        
+        hoardLogic HoardController = FindAnyObjectByType<hoardLogic>();
+        if(HoardController != null){
+            HoardController.SetTargets(this.Carts);
+        }
 
     }
 

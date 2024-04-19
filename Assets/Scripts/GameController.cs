@@ -10,7 +10,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 {
     public bool initialized = false;
     private static GameControllerInstance instance;
-    private enum GameState{
+    public enum GameState{
         Title,
         Train,
         Station,
@@ -63,6 +63,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
             this.initialized = true;
             
         } else {
+            SavingManager.Load();
             Destroy(this.gameObject);
         }
         
@@ -98,9 +99,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         SceneManager.LoadScene(sceneNumber);
     }
 
-
-
-
     void FixedUpdate(){
         switch(gameState){
             case GameState.Train:
@@ -125,6 +123,8 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     // ---- getters and setters
     public (float, float) getDistance() => (distance, endDistance);
+
+    public GameState GetGameState() => this.gameState;
 
     public void Save(ref GameData data){
         data.distance = distance;
