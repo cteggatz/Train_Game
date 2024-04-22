@@ -11,7 +11,7 @@ using UnityEngine;
 /// <summary>
 /// Controls the train in the main scene
 /// </summary>
-public class TrainCartController : MonoBehaviour, ISavable, IGameInit
+public class TrainCartController : MonoBehaviour, ISavable
 {
     public GameObject genericTrainCart;
     public GameObject trainHead;
@@ -31,6 +31,7 @@ public class TrainCartController : MonoBehaviour, ISavable, IGameInit
     /// </summary>
     /// <param name="cart">the cart prefab that will be added to the trian</param>
     public GameObject AddCart(GameObject cart){
+        Debug.Log("[TrainController] Adding Cart");
         for(int i = 0; i < Carts.Count; i++){
             if(Carts[i] == null) Carts.RemoveAt(i);
         }
@@ -46,6 +47,7 @@ public class TrainCartController : MonoBehaviour, ISavable, IGameInit
         if(Carts.Count == 0){
             cartInstance.transform.SetParent(gameObject.transform);
             cartInstance.transform.localPosition =  offset;
+            Debug.Log(offset);
         } else {            
             cartInstance.transform.SetParent(gameObject.transform);
 
@@ -56,13 +58,20 @@ public class TrainCartController : MonoBehaviour, ISavable, IGameInit
         Carts.Add(cartInstance);
         return cartInstance;
     }
+    public void setCarts(){
+        for(int i = 0; i < transform.childCount; i++){
+            GameObject.Destroy(transform.GetChild(i).gameObject);            
+        }
+    }
+
 
     private void Awake(){
         for(int i = 0; i < transform.childCount; i++){
-            GameObject exCart = transform.GetChild(i).gameObject; 
-            exCart.GetComponent<CartController>().SetCart(gameObject, exCart, true);
+            //GameObject exCart = transform.GetChild(i).gameObject; 
+            //exCart.GetComponent<CartController>().SetCart(gameObject, exCart, true);
+            //Destroy(transform.GetChild(i).gameObject);
         }
-
+        
         //AddCart(coalCart);
         //AddCart(genericTrainCart);
         
@@ -86,6 +95,11 @@ public class TrainCartController : MonoBehaviour, ISavable, IGameInit
         data.carts.list = cartDataList;
     }
     public void Load(ref GameData data){
+        for(int i = 0; i < transform.childCount; i++){
+            Destroy(transform.GetChild(i).gameObject);
+        }
+        this.Carts = new List<GameObject>();
+
         if(data.trainInitialized == false){
             Debug.Log("[TrainController] No Cart Data - Initializing Train Data");
             AddCart(trainHead);
@@ -97,10 +111,16 @@ public class TrainCartController : MonoBehaviour, ISavable, IGameInit
         foreach(GameData.CartData cart in data.carts.list){
             AddCart(AssetDatabase.LoadAssetAtPath<GameObject>(cart.Address));
         }
+        
+        hoardLogic HoardController = FindAnyObjectByType<hoardLogic>();
+        if(HoardController != null){
+            HoardController.SetTargets(this.Carts);
+        }
+
     }
-    public void Init(ref GameData gameData){
-        AddCart(coalCart);
-        AddCart(genericTrainCart);
+
+    public ref List<GameObject> GetCarts(){
+        return ref this.Carts;
     }
 }
 

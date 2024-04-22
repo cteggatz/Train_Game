@@ -10,7 +10,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 {
     public bool initialized = false;
     private static GameControllerInstance instance;
-    private enum GameState{
+    public enum GameState{
         Title,
         Train,
         Station,
@@ -57,26 +57,29 @@ public class GameControllerInstance : MonoBehaviour, ISavable
                 }
                 Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameState}}} \n" + "loading into test envoirnment");
                 SavingManager.Init(0);
+                SavingManager.Load();
                 SavingManager.Save();
             }
             this.initialized = true;
+            
         } else {
+            SavingManager.Load();
             Destroy(this.gameObject);
         }
+        
     }
     
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
         Debug.Log($"<color=green>[GameManager]</color> [2] Loading into {newScene.name} & {newScene.buildIndex}");
-        if(newScene.buildIndex != 0){
-            SavingManager.Load();
-        }
+        
         switch(newScene.buildIndex){
             case 1: //This is the Train Scene
                 this.gameState = GameState.Train;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
+        
                 break;
-            case 2:
+            case 2: // Station
                 this.gameState = GameState.Station;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 break;
@@ -95,9 +98,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         SavingManager.Save();
         SceneManager.LoadScene(sceneNumber);
     }
-
-
-
 
     void FixedUpdate(){
         switch(gameState){
@@ -123,6 +123,8 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     // ---- getters and setters
     public (float, float) getDistance() => (distance, endDistance);
+
+    public GameState GetGameState() => this.gameState;
 
     public void Save(ref GameData data){
         data.distance = distance;

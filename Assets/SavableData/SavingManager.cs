@@ -28,9 +28,18 @@ namespace DataSaving{
 
         public static void Load(){
             //Debug.Log("Loading!");
+            /*
             GameData gameData = FileManager.Load();
             if(gameData == null){
                 gameData = new GameData();
+            }
+            */
+            GameData gameData;
+            if(currentData != null){
+                gameData = currentData;
+            } else {
+                gameData = FileManager.Load();
+                if(gameData == null){gameData = new GameData();}
             }
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
             foreach(ISavable script in savableObjects){
@@ -45,7 +54,7 @@ namespace DataSaving{
             string[] saveFiles = FileManager.GetSaves();
             foreach(string save in saveFiles){
                 if(Path.GetFileName(save).Equals($"SaveData{saveNumber}.json")){
-                    Load();
+                    //Load();
                     return;
                 }
             }

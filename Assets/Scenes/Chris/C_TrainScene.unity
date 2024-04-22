@@ -893,8 +893,8 @@ MonoBehaviour:
   canCreatCoal: 0
   CoalSpawner: {fileID: 0}
   itemRenderer: {fileID: 1749078273}
-  itemDistance: 0.5
-  offset: {x: 0, y: 0.5, z: 0}
+  itemDistance: -0.2
+  offset: {x: 0, y: 0.4, z: 0}
   groundedItemPrefab: {fileID: 1122454330874751658, guid: 1991ff87c237c6d43a16336eeef3b6c0, type: 3}
 --- !u!114 &361018883
 MonoBehaviour:
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 923986533}
   lerpAmount: 0.1
-  accelAmount: 1
+  accelAmount: 2
   deccelAmount: 1
   accelInAir: 1.5
   deccelInAir: 1.5
@@ -944,6 +944,8 @@ MonoBehaviour:
   jumphight: 6
   coyoteTimeInterval: 0.1
   jumpBufferInterval: 0.05
+  sprintSpeed: 4
+  normalSpeed: 2
   gravityScale: 1
   maxFallSpeed: -3
   fallGravityMult: 1.5
@@ -1272,6 +1274,7 @@ MonoBehaviour:
   runtime: 0
   difficulty: 0
   grunt: {fileID: 2373761937586878413, guid: b89a13232932d214486268598d00bcd4, type: 3}
+  side_grunt: {fileID: 6907690980672370196, guid: a84e8c0f527f83a49bbb3eef9d0e7292, type: 3}
   H_location: {x: -95, y: 0}
   targets:
   - {fileID: 1624649510}
@@ -3861,7 +3864,7 @@ Transform:
   m_GameObject: {fileID: 546797649}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.64, y: 0.29, z: -0.26444793}
+  m_LocalPosition: {x: 0.981, y: 0.255, z: -0.26444793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4001,6 +4004,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605028779}
   m_CullTransparentMesh: 1
+--- !u!1 &616157804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 616157807}
+  - component: {fileID: 616157806}
+  - component: {fileID: 616157805}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &616157805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616157804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1ae041922b9f29389626516fd2144a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &616157806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616157804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f175508ddbfb1a95aad93b5bd278aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialized: 0
+  distance: 0
+  endDistance: 30
+  traincontroller: {fileID: 2035663128}
+--- !u!4 &616157807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616157804}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -5648,12 +5712,12 @@ SpriteRenderer:
   m_SortingLayerID: 913276795
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1292850878, guid: d1e8da15a62d87a4c90e388332dafb40, type: 3}
+  m_Sprite: {fileID: -2115548252, guid: f440706cfac9c2d4087cf78e4a0bc68f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.6875, y: 0.9375}
+  m_Size: {x: 0.75, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -6430,7 +6494,7 @@ Transform:
   m_GameObject: {fileID: 1257497687}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.6337867, y: 3.13, z: 0}
+  m_LocalPosition: {x: -2.6337867, y: 2.8561273, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7699,67 +7763,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1483470509
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1483470512}
-  - component: {fileID: 1483470511}
-  - component: {fileID: 1483470510}
-  m_Layer: 0
-  m_Name: GameController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1483470510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483470509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1ae041922b9f29389626516fd2144a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1483470511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483470509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f175508ddbfb1a95aad93b5bd278aaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialized: 0
-  distance: 0
-  endDistance: 30
-  traincontroller: {fileID: 0}
---- !u!4 &1483470512
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483470509}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1526272817
 GameObject:
   m_ObjectHideFlags: 0
@@ -7902,7 +7905,7 @@ Transform:
   m_GameObject: {fileID: 1553370006}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.363, y: -0.066, z: -0.26444793}
+  m_LocalPosition: {x: 0.352, y: -0.117, z: -0.26444793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13434,7 +13437,7 @@ MonoBehaviour:
   trainHealth: {fileID: 1174013960}
   distance: {fileID: 605028781}
   trainController: {fileID: 2035663125}
-  gameController: {fileID: 0}
+  gameController: {fileID: 616157804}
 --- !u!114 &1835945464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14304,4 +14307,4 @@ SceneRoots:
   - {fileID: 361018876}
   - {fileID: 1835945467}
   - {fileID: 398016606}
-  - {fileID: 1483470512}
+  - {fileID: 616157807}

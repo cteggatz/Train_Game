@@ -10,7 +10,24 @@ public class hoardLogic : MonoBehaviour
     [SerializeField, Range(0, 100)] private float difficulty;
     [SerializeField] private GameObject grunt, side_grunt;
     [SerializeField] private Vector2 H_location;
-    [SerializeField] private List<Transform> targets = new List<Transform>();
+    [SerializeField] public List<Transform> targets = new List<Transform>();
+
+    public void SetTargets(List<GameObject> carts){
+        Debug.Log("Loading Hoard Logic");
+        for(int i = 0; i<carts.Count; i++){
+            CartController child = carts[i].GetComponent<CartController>();
+            if(child != null){
+                foreach(GameObject obj in child.GetSettableObjects()){
+                    Debug.Log(obj.name);
+                    if(obj.name == "Furnace" && obj != null){
+                        this.targets.Add(obj.transform);
+                    }
+                }
+            }
+        }
+    }
+
+
 
     // Update is called once per frame
     void Update()
@@ -30,7 +47,7 @@ public class hoardLogic : MonoBehaviour
             float random = Random.Range(0.5f, 1.5f);
             if (random >= 1.3)
             {
-                Instantiate(side_grunt).GetComponent<spawnOnTrain>().spawn = new Vector3(-12f, -3f, 0.0f);
+             //   Instantiate(side_grunt).GetComponent<spawnOnTrain>().spawn = new Vector3(-12f, -3f, 0.0f);
             }
             else
             {

@@ -2,27 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using DataSaving;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class StationController : MonoBehaviour, ISavable
 {
-    
-    private List<GameObject> parkedTrain = new List<GameObject>();
 
+    [SerializeField] private TrainCartController train;
+    [SerializeField] private Material cartMaterial;
     public void Start(){
+        string outDebug = "<color=red>[StationController]</color> setting carts";
+        
+        void SetChildren(Transform parent){
+            outDebug += $"\n {parent.childCount}";
+            for(int i = 0; i < parent.childCount; i++){
+                Transform child = parent.GetChild(i);
 
-        foreach(GameObject cart in parkedTrain){
-            foreach(Transform child in cart.transform){
-                SpriteRenderer sprite = child.GetComponent<SpriteRenderer>();
-                Collider2D collider = child.GetComponent<Collider2D>();
+                if(child.childCount > 0){
+                    for(int j = 0; j < child.childCount; j++){
+                        SetChildren(child.GetChild(j));
+                    }
+                }
 
-                if(sprite != null){
-                    sprite.sortingOrder = 2;
+                TilemapRenderer mapRender = child.GetComponent<TilemapRenderer>();
+                if(mapRender != null){
+                    mapRender.material = cartMaterial;
                 }
-                if(collider != null){
-                    collider.enabled = false;
+                SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer>();
+                if(spriteRenderer != null){
+                    spriteRenderer.material = cartMaterial;
                 }
+
+
+                LayerHelper layerHelper = child.GetComponent<LayerHelper>();
+                CompositeCollider2D collider = child.GetComponent<CompositeCollider2D>();
+                TilemapCollider2D tileCollider = child.GetComponent<TilemapCollider2D>();
+                if(tileCollider == false)continue;
+                if(collider == null)continue;
+                if(layerHelper == null || layerHelper.GetLayer() == LayerHelper.TrainLayer.Inside_Train)continue;
+
+                outDebug += $"Disable Collision Cart {child.name}";
+                tileCollider.enabled = false;
+                collider.enabled = false;
             }
         }
+
+        foreach(GameObject cart in train.GetCarts()){
+            SetChildren(cart.transform);
+        }
+        Debug.Log(outDebug);
 
 
 
@@ -33,12 +60,5 @@ public class StationController : MonoBehaviour, ISavable
 
     }
     public void Load(ref GameData data){
-        
-        foreach(GameData.CartData cart in data.carts.list){
-            for(int i = 0; i < parkedTrain.Count; i++){
-                if(parkedTrain[i] == null) parkedTrain.RemoveAt(i);
-            }
-            parkedTrain.Add(UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(cart.Address));
-        }
     }
 }
