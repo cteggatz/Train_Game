@@ -31,7 +31,7 @@ public class TrainCartController : MonoBehaviour, ISavable
     /// </summary>
     /// <param name="cart">the cart prefab that will be added to the trian</param>
     public GameObject AddCart(GameObject cart){
-        Debug.Log("[TrainController] Adding Cart");
+        //Debug.Log("[TrainController] Adding Cart");
         for(int i = 0; i < Carts.Count; i++){
             if(Carts[i] == null) Carts.RemoveAt(i);
         }
@@ -116,6 +116,7 @@ public class TrainCartController : MonoBehaviour, ISavable
         if(HoardController != null){
             HoardController.SetTargets(this.Carts);
         }
+        Debug.Log("Loaded Train Carts");
 
     }
 
