@@ -32,8 +32,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     [] No persistant instance game manager!
 
     Save Game State -> Load new Scene -> load state in new instance of game manager
-
-
     */
 
     void OnEnable(){SceneManager.activeSceneChanged += OnSceneLoaded;}
@@ -77,6 +75,10 @@ public class GameControllerInstance : MonoBehaviour, ISavable
                 this.gameState = GameState.Train;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
+
+                this.distance = 0;
+                this.endDistance = UnityEngine.Random.Range(10f, 50f);
+
         
                 break;
             case 2: // Station
@@ -90,7 +92,9 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     public void StartGame(int saveNumber){
         SavingManager.Init(saveNumber);
+        SavingManager.Load();
         SwitchScene(1);
+        
         this.gameState = GameState.Train;
     }
 
