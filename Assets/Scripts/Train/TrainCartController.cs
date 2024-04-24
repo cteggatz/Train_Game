@@ -66,11 +66,12 @@ public class TrainCartController : MonoBehaviour, ISavable
 
 
     private void Awake(){
+        /*
         for(int i = 0; i < transform.childCount; i++){
             //GameObject exCart = transform.GetChild(i).gameObject; 
             //exCart.GetComponent<CartController>().SetCart(gameObject, exCart, true);
             //Destroy(transform.GetChild(i).gameObject);
-        }
+        }*/
         
         //AddCart(coalCart);
         //AddCart(genericTrainCart);
@@ -116,7 +117,7 @@ public class TrainCartController : MonoBehaviour, ISavable
         if(HoardController != null){
             HoardController.SetTargets(this.Carts);
         }
-        Debug.Log("Loaded Train Carts");
+        //Debug.Log("Loaded Train Carts");
 
     }
 

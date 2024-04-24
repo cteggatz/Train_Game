@@ -19,6 +19,8 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     private GameState gameState;
 
+    private List<(int, float)> tripLog = new List<(int, float)>(); 
+
 
     [SerializeField, Min(0)] float distance = 0;
     [SerializeField, Min(0)] float endDistance = 0;
@@ -121,6 +123,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         distance += Time.deltaTime * traincontroller.GetSpeed() / 60f;
 
         if(distance >= endDistance){
+            tripLog.Add((tripLog.Count+1, endDistance));  
             SwitchScene(2);
         }
     }
@@ -130,9 +133,15 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     public GameState GetGameState() => this.gameState;
 
+    
     public void Save(ref GameData data){
         data.distance = distance;
         data.endDistance = endDistance;
+        
+        foreach((int, float) trip in tripLog){
+            Debug.Log(trip);
+            data.tripLog.list.Add(trip);
+        }
     }
     public void Load(ref GameData data){}
 }

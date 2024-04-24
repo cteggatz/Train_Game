@@ -134,6 +134,7 @@ namespace DataSaving{
         //game
         public float distance;
         public float endDistance;
+        public SerializableList<(int, float)> tripLog;
 
         //player
         public int playerHealth;
@@ -144,6 +145,7 @@ namespace DataSaving{
         public GameData(){
             carts = new SerializableList<CartData>();
             playerGuns = new SerializableList<GunData>();
+            tripLog = new SerializableList<(int, float)>();
         }
         public override string ToString()
         {

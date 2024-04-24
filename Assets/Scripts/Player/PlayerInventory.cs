@@ -244,7 +244,7 @@ public class PlayerInventory : MonoBehaviour, ISavable
         setItem(0, ref data);
         setItem(1, ref data);
         setItem(2, ref data);
-        Debug.Log("Loaded Player Data");
+        //Debug.Log("Loaded Player Data");
     }
 
 }
