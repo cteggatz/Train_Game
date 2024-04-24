@@ -8,6 +8,8 @@ TagManager:
   - Fuel
   - Interactable
   - Train (primary)
+  - Background1
+  - Ground
   layers:
   - Default
   - TransparentFX
