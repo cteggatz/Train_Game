@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0a3874c44ed655f4da26d9704e8ff0fc
+guid: b94bb2d9d5294424f8883395a650f214
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tree1_0
+      name: grunt_good_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 8
-        width: 119
-        height: 125
+        x: 11
+        y: 11
+        width: 11
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7da90496442c204468ce1ca24e12581c
-      internalID: -1651178427
+      spriteID: 2ceaee1622f4cef4bb95d7ee760649c2
+      internalID: -2018163168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_good_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27cee728eefeaad4898f0654c016bf93
+      internalID: 1002455760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_good_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fc2d7a275fd5324aa7795accf3ab72e
+      internalID: 558459041
       vertices: []
       indices: 
       edges: []
@@ -141,7 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tree1_0: -1651178427
+      grunt_good_0: -2018163168
+      grunt_good_1: 1002455760
+      grunt_good_2: 558459041
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
