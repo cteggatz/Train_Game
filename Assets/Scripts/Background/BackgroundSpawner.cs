@@ -35,7 +35,6 @@ public class BackgroundSpawner : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D bc)
     {
-        Debug.Log(bc.tag);
         if(bc.tag == ObjectTag)
         {
             spawnChunk();
