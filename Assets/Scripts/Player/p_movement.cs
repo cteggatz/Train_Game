@@ -1,37 +1,20 @@
 using System.Drawing;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class p_movement : MonoBehaviour
 {
-    private PlayerControls _PlayerControls;
-    private InputAction _moveAction;
+    private Vector3 mousePos;
     private Rigidbody2D body;
-    private Vector2 velocity, _moveInput;
+    private Vector2 _moveInput;
     [SerializeField] private Animator animator;
     [SerializeField] private float lerpAmount, accelAmount, deccelAmount, accelInAir, deccelInAir, maxSpeed, jumphight, coyoteTimeInterval, jumpBufferInterval, sprintSpeed, normalSpeed;
     [Header("Gravity")]
     [SerializeField] private float gravityScale;
     [SerializeField] private float maxFallSpeed, fallGravityMult, f_FallGravityMult, maxFastFallSpeed, jumpHangTimeThreshold, jumpHangGravityMult, jumpHangAccelerationMult, jumpHangMaxSpeedMult, jumpCutGravityMult;
     private float timeLastOnGround, timeLastPressedJump;
-    private bool grounded, IsJumping, _isJumpCut, _isJumpFalling;
+    private bool grounded, IsJumping, _isJumpCut, _isJumpFalling, jumpKeyDown, sprintKeyDown;
     [SerializeField] private Animator squashAnimator;
     [SerializeField] private ParticleSystem jumpParticle;
-
-    private void Awake(){
-        _PlayerControls = new PlayerControls();
-        _moveAction = _PlayerControls.PlayerMovementKeyboard.Movement;
-    }
-
-    private void OnEnable(){
-        _PlayerControls.Enable();
-        _moveAction.Enable();
-    }
-
-    private void OnDisable(){
-        _PlayerControls.Disable();
-        _moveAction.Disable();
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +29,21 @@ public class p_movement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        //_moveInput.x = Input.GetAxisRaw("Horizontal");
-        //_moveInput.y = Input.GetAxisRaw("Vertical");
-        _moveInput = _moveAction.ReadValue<Vector2>();
+    {   //INPUT SETTINGS WHOOOOOOOOO
+        _moveInput.x = Input.GetAxisRaw("Horizontal");
+        _moveInput.y = Input.GetAxisRaw("Vertical");
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            jumpKeyDown = true;
+        }
+        else { jumpKeyDown= false; }
+        if (Input.GetKeyDown(KeyCode.LeftShift)) //Broken?!?!??!!
+        {
+            sprintKeyDown = true;
+        }
+        else { sprintKeyDown = false; }
+
         timeLastOnGround += Time.deltaTime;
         timeLastPressedJump -= Time.deltaTime;
         Vector2 scale = gameObject.transform.localScale;
@@ -58,21 +52,21 @@ public class p_movement : MonoBehaviour
             grounded = true;
         }
         animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));//animation stuff
-        if (gameObject.transform.position.x > Camera.main.ScreenToWorldPoint(Input.mousePosition).x) //looks in the direction of the mouse (needs to be converted to new input)
+        if (gameObject.transform.position.x > mousePos.x) //looks in the direction of the mouse
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
         else{
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-        if(Input.GetKeyDown(KeyCode.W)) //needs new input
+        if(jumpKeyDown == true)
         {
             timeLastPressedJump = jumpBufferInterval;
         }
-        else if(Input.GetKeyUp(KeyCode.W)) { //needs new input
+        else if(jumpKeyDown == false) {
             _isJumpCut = true;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (sprintKeyDown == true)
         {
             animator.SetBool("Sprinting", true);
             accelAmount = sprintSpeed;
@@ -80,7 +74,7 @@ public class p_movement : MonoBehaviour
             gameObject.GetComponent<PlayerInventory>().enabled = false;
 
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (sprintKeyDown == false)
         {
             animator.SetBool("Sprinting", false);
             accelAmount = normalSpeed;

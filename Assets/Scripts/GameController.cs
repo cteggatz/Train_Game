@@ -10,7 +10,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 {
     public bool initialized = false;
     private static GameControllerInstance instance;
-    private enum GameState{
+    public enum GameState{
         Title,
         Train,
         Station,
@@ -32,8 +32,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     [] No persistant instance game manager!
 
     Save Game State -> Load new Scene -> load state in new instance of game manager
-
-
     */
 
     void OnEnable(){SceneManager.activeSceneChanged += OnSceneLoaded;}
@@ -57,26 +55,33 @@ public class GameControllerInstance : MonoBehaviour, ISavable
                 }
                 Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameState}}} \n" + "loading into test envoirnment");
                 SavingManager.Init(0);
+                SavingManager.Load();
                 SavingManager.Save();
             }
             this.initialized = true;
+            
         } else {
+            SavingManager.Load();
             Destroy(this.gameObject);
         }
+        
     }
     
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
         Debug.Log($"<color=green>[GameManager]</color> [2] Loading into {newScene.name} & {newScene.buildIndex}");
-        if(newScene.buildIndex != 0){
-            SavingManager.Load();
-        }
+        
         switch(newScene.buildIndex){
             case 1: //This is the Train Scene
                 this.gameState = GameState.Train;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
+
+                this.distance = 0;
+                this.endDistance = UnityEngine.Random.Range(10f, 50f);
+
+        
                 break;
-            case 2:
+            case 2: // Station
                 this.gameState = GameState.Station;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 break;
@@ -87,7 +92,9 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     public void StartGame(int saveNumber){
         SavingManager.Init(saveNumber);
+        SavingManager.Load();
         SwitchScene(1);
+        
         this.gameState = GameState.Train;
     }
 
@@ -95,9 +102,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         SavingManager.Save();
         SceneManager.LoadScene(sceneNumber);
     }
-
-
-
 
     void FixedUpdate(){
         switch(gameState){
@@ -123,6 +127,8 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     // ---- getters and setters
     public (float, float) getDistance() => (distance, endDistance);
+
+    public GameState GetGameState() => this.gameState;
 
     public void Save(ref GameData data){
         data.distance = distance;
