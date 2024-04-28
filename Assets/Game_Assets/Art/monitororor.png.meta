@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Game_Assets/Art/BadGuys/hoard.png.meta
-guid: baa4ec31e17c1c14b9c0abe736f13999
-========
-guid: 8a304d12072f859469b0b8b2b1d72abc
->>>>>>>> main:Assets/Game_Assets/Art/crate_maker.png.meta
+guid: 9918e75f1b68c894e915cfe2d0c8e81a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -112,18 +108,15 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<<< HEAD:Assets/Game_Assets/Art/BadGuys/hoard.png.meta
-    sprites: []
-========
     sprites:
     - serializedVersion: 2
-      name: crate_maker_0
+      name: monitororor_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 64
-        width: 35
-        height: 32
+        x: 0
+        y: 27
+        width: 33
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afbd13d01cbc8a4479c5bcd5eca7fb54
-      internalID: 843461134
+      spriteID: 85aa18bcc6706f14d823b3918c765be6
+      internalID: -345472579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crate_maker_1
+      name: monitororor_1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 64
-        width: 35
-        height: 32
+        x: 35
+        y: 27
+        width: 33
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,62 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f51e5204ad91eb945ae2eae5fc473480
-      internalID: -1865025185
+      spriteID: f3f23de721baf884ca7e8df750a0fec4
+      internalID: 1975241352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crate_maker_2
+      name: monitororor_2
       rect:
         serializedVersion: 2
-        x: 2
-        y: 32
-        width: 35
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3859ab6994c7db348a957a84c6059710
-      internalID: 1894385482
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: crate_maker_3
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 32
-        width: 35
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f22927298c047e240a7d854a927460f7
-      internalID: 1150644586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: crate_maker_4
-      rect:
-        serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 35
-        height: 32
+        width: 33
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,13 +166,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53721e3020479244499914fbc9301a40
-      internalID: 2087851963
+      spriteID: 5231b860e7d78d94084588629d4e3b16
+      internalID: -760633298
       vertices: []
       indices: 
       edges: []
       weights: []
->>>>>>>> main:Assets/Game_Assets/Art/crate_maker.png.meta
     outline: []
     physicsShape: []
     bones: []
@@ -232,16 +182,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-<<<<<<<< HEAD:Assets/Game_Assets/Art/BadGuys/hoard.png.meta
-    nameFileIdTable: {}
-========
     nameFileIdTable:
-      crate_maker_0: -596067966
-      crate_maker_1: 288073836
-      crate_maker_2: -1811818081
-      crate_maker_3: -617458839
-      crate_maker_4: 843461134
->>>>>>>> main:Assets/Game_Assets/Art/crate_maker.png.meta
+      monitororor_0: -345472579
+      monitororor_1: 1975241352
+      monitororor_2: -760633298
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

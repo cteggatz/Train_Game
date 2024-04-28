@@ -151,6 +151,10 @@ public class Igiveup : MonoBehaviour
                     target.GetComponent<PlayerHealth>().health -= damage;
                     AudioSource.PlayClipAtPoint(bite, transform.position);
                 }
+            }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
         }
     }
 
