@@ -134,10 +134,11 @@ namespace DataSaving{
         //game
         public float distance;
         public float endDistance;
-        public SerializableList<(int, float)> tripLog;
+        public SerializableList<SerializableKeyValuePair<int,float>> tripLog;
 
         //player
         public int playerHealth;
+        
         public SerializableList<GunData> playerGuns;
 
 
@@ -145,7 +146,7 @@ namespace DataSaving{
         public GameData(){
             carts = new SerializableList<CartData>();
             playerGuns = new SerializableList<GunData>();
-            tripLog = new SerializableList<(int, float)>();
+            tripLog = new SerializableList<SerializableKeyValuePair<int, float>>();
         }
         public override string ToString()
         {
@@ -166,8 +167,20 @@ namespace DataSaving{
                 playerGuns.list[index] = new GunData(item.ammo, item.reference);
             }
         }
+
+        
     
         // classes
+
+        [Serializable]
+        public class SerializableKeyValuePair<TKey, TValue>{
+            public TKey key;
+            public TValue value;
+            public SerializableKeyValuePair(TKey key, TValue value){
+                this.key = key;
+                this.value = value;
+            }
+        }
         [Serializable]
         public class SerializableList<T> {
             public List<T> list;

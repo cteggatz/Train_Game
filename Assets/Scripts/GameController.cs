@@ -19,7 +19,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     private GameState gameState;
 
-    private List<(int, float)> tripLog = new List<(int, float)>(); 
+    private Dictionary<int, float> tripLog = new Dictionary<int, float>(); 
 
 
     [SerializeField, Min(0)] float distance = 0;
@@ -123,7 +123,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         distance += Time.deltaTime * traincontroller.GetSpeed() / 60f;
 
         if(distance >= endDistance){
-            tripLog.Add((tripLog.Count+1, endDistance));  
+            tripLog.Add(tripLog.Count, distance);
             SwitchScene(2);
         }
     }
@@ -137,12 +137,15 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     public void Save(ref GameData data){
         data.distance = distance;
         data.endDistance = endDistance;
-        
-        foreach((int, float) trip in tripLog){
-            Debug.Log(trip);
-            data.tripLog.list.Add(trip);
+        data.tripLog.list.Clear();
+        foreach(var kvp in tripLog){
+            Debug.Log(kvp);
+            data.tripLog.list.Add(new GameData.SerializableKeyValuePair<int, float>(kvp.Key, kvp.Value));
         }
+        //re-work trip log to be a dictionary that converts into a array of key value pairs that converts to JSON.
     }
-    public void Load(ref GameData data){}
+    public void Load(ref GameData data){
+        
+    }
 }
 
