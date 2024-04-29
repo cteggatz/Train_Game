@@ -12,6 +12,9 @@ using UnityEditor.PackageManager;
 using Unity.VisualScripting;
 
 namespace DataSaving{
+    /// <summary>
+    /// Class responsible collecting data and passing that data to savingManager.
+    /// </summary>
     public class SavingManager : MonoBehaviour
     {
         static GameData currentData;
@@ -82,7 +85,7 @@ namespace DataSaving{
 
     /// --------
     /// <summary>
-    /// Class Responsible for converting given Game Data into a json and saving it to the disk
+    /// Class Responsible for converting given Game Data into a json and saving it to the roaming data
     /// </summary>
     public class FileManager{
         private static int saveNumber;

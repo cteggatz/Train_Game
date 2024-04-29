@@ -6,6 +6,19 @@ using DataSaving;
 using System;
 using Unity.VisualScripting;
 
+
+/**
+This is the main controller of the game
+
+This utilizes a singleton class structure seeing as this is a persistant game object.
+For some reason a new gameManager game object is always created so the structure goes a little like this.
+
+1) Awake() -> instantiates new instance of game manager on new scene. Deleates if no instance. Loads and initates loading manager
+
+2) OnSceneLoad() -> effectivly the awake function for instances of GameController Instance. All scene spesific things are done here on awake
+
+3) Normal Stuff.
+*/
 public class GameControllerInstance : MonoBehaviour, ISavable
 {
     public bool initialized = false;
@@ -27,25 +40,20 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     [SerializeField] Train_Controller traincontroller;
 
-    
-    /**
-    New Archicture proposal. 
-
-    [] No persistant instance game manager!
-
-    Save Game State -> Load new Scene -> load state in new instance of game manager
-    */
 
     void OnEnable(){SceneManager.activeSceneChanged += OnSceneLoaded;}
     
     void OnDisable(){SceneManager.activeSceneChanged -=OnSceneLoaded;}
 
+
     void Awake(){
+        //new instance
         if(instance == null){
             instance = this;
             DontDestroyOnLoad(gameObject);
 
             int scene = SceneManager.GetActiveScene().buildIndex;
+
             if(scene == 0){
                 this.gameState = GameState.Title;
                 Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Default Game : {{State : {this.gameState}}} ");
@@ -61,14 +69,14 @@ public class GameControllerInstance : MonoBehaviour, ISavable
                 SavingManager.Save();
             }
             this.initialized = true;
-            
-        } else {
+        } else { // run if instance already exists
             SavingManager.Load();
             Destroy(this.gameObject);
         }
         
     }
     
+    //essentially Awake function 
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
         Debug.Log($"<color=green>[GameManager]</color> [2] Loading into {newScene.name} & {newScene.buildIndex}");
         
@@ -80,8 +88,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
                 this.distance = 0;
                 this.endDistance = UnityEngine.Random.Range(10f, 50f);
-
-        
                 break;
             case 2: // Station
                 this.gameState = GameState.Station;
