@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 79651d3741cf4a94d9a080fd79659e9f
+guid: 8a304d12072f859469b0b8b2b1d72abc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,106 +110,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ugly crates_0
+      name: crate_maker_0
       rect:
         serializedVersion: 2
         x: 2
-        y: 1
-        width: 42
-        height: 40
+        y: 64
+        width: 35
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07bc4bec543959f45bfe0d077e570554
-      internalID: -269200493
+      spriteID: afbd13d01cbc8a4479c5bcd5eca7fb54
+      internalID: 843461134
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ugly crates_1
+      name: crate_maker_1
       rect:
         serializedVersion: 2
-        x: 47
-        y: 1
-        width: 42
-        height: 40
+        x: 40
+        y: 64
+        width: 35
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa3b277b3c996334889ccb35e6eb8954
-      internalID: -2005465777
+      spriteID: f51e5204ad91eb945ae2eae5fc473480
+      internalID: -1865025185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ugly crates_2
+      name: crate_maker_2
       rect:
         serializedVersion: 2
-        x: 92
-        y: 1
-        width: 42
-        height: 40
+        x: 2
+        y: 32
+        width: 35
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e35118c4fb1ee142bce39c42355ebc8
-      internalID: -1851251308
+      spriteID: 3859ab6994c7db348a957a84c6059710
+      internalID: 1894385482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ugly crates_3
+      name: crate_maker_3
       rect:
         serializedVersion: 2
-        x: 137
-        y: 1
-        width: 42
-        height: 40
+        x: 40
+        y: 32
+        width: 35
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6b36ce7cb5a4474f93367dfd31153f0
-      internalID: -689239186
+      spriteID: f22927298c047e240a7d854a927460f7
+      internalID: 1150644586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ugly crates_4
+      name: crate_maker_4
       rect:
         serializedVersion: 2
-        x: 182
-        y: 1
-        width: 42
-        height: 40
+        x: 2
+        y: 0
+        width: 35
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4170c8c2a718fba488a91d200e79c422
-      internalID: 322649846
+      spriteID: 53721e3020479244499914fbc9301a40
+      internalID: 2087851963
       vertices: []
       indices: 
       edges: []
@@ -225,11 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ugly crates_0: -269200493
-      ugly crates_1: -2005465777
-      ugly crates_2: -1851251308
-      ugly crates_3: -689239186
-      ugly crates_4: 322649846
+      crate_maker_0: -596067966
+      crate_maker_1: 288073836
+      crate_maker_2: -1811818081
+      crate_maker_3: -617458839
+      crate_maker_4: 843461134
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
