@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4a40d3bcae035ac4ab40f267c470545d
+guid: c248631586e3d0549b4e931417f5ec31
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,148 +110,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: weaponArms_0
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 15
-        width: 9
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36ae9530ef6dce243bb2cba2dff597b3
-      internalID: 1748196067
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 24
-        width: 16
-        height: 8
-      alignment: 9
-      pivot: {x: 0.9, y: 0.7}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db11ab0ff50bd1b4e9edaafd0f8fd823
-      internalID: -268117984
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_2
+      name: lights_0
       rect:
         serializedVersion: 2
         x: 1
-        y: 14
-        width: 16
-        height: 8
-      alignment: 9
-      pivot: {x: 0.9, y: 0.7}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89d2bd9612f4dd7488c8038c5be2b905
-      internalID: 303330140
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1
-        width: 19
-        height: 11
-      alignment: 9
-      pivot: {x: 0.9, y: 0.7}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e34ac44143d5004190b0df9429d0fad
-      internalID: 1214417635
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_4
-      rect:
-        serializedVersion: 2
-        x: 29
         y: 22
-        width: 15
-        height: 8
-      alignment: 9
-      pivot: {x: 0.8381762, y: 0.68472576}
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab6433cb8dd019b4997d2a02e8acbbf5
-      internalID: -1093080335
+      spriteID: 66a63a4c5a6f13a44be2e8c9e4af7a3b
+      internalID: 1183047729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weaponArms_5
+      name: lights_1
       rect:
         serializedVersion: 2
-        x: 21
-        y: 2
-        width: 22
-        height: 8
-      alignment: 9
-      pivot: {x: 0.84738386, y: 0.5909816}
+        x: 1
+        y: 11
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb1a27f9957f5744d99900070aea2f6a
-      internalID: -1108130052
+      spriteID: 090bb9201ce64074eab57d79cc9d5aa6
+      internalID: -2132522597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weaponArms_6
+      name: lights_2
       rect:
         serializedVersion: 2
-        x: 37
-        y: 14
-        width: 7
-        height: 7
-      alignment: 9
-      pivot: {x: 0.6559677, y: 0.64557046}
+        x: 19
+        y: 19
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb98f0b9540810c4a8420d5e549066f0
-      internalID: -1738023971
+      spriteID: cce5bdc3b7528c24ebbc53129c76db16
+      internalID: -1579345336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lights_3
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 5
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ab29f6befe1a7349ab923a4bc022795
+      internalID: 2012805358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lights_4
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 5
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c901058af1b359418ef6452ebe1d8b3
+      internalID: 1183208437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lights_5
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 5
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 963cba6aa0394114f8caf07a8335897a
+      internalID: -1083000172
       vertices: []
       indices: 
       edges: []
@@ -267,13 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      weaponArms_0: 1748196067
-      weaponArms_1: -268117984
-      weaponArms_2: 303330140
-      weaponArms_3: 1214417635
-      weaponArms_4: -1093080335
-      weaponArms_5: -1108130052
-      weaponArms_6: -1738023971
+      lights_0: 1183047729
+      lights_1: -2132522597
+      lights_2: -1579345336
+      lights_3: 2012805358
+      lights_4: 1183208437
+      lights_5: -1083000172
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

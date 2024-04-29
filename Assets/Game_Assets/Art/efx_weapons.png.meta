@@ -349,7 +349,7 @@ TextureImporter:
         width: 2
         height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -357,6 +357,48 @@ TextureImporter:
       bones: []
       spriteID: 8e3104215650dda45ac91abc0ae0b517
       internalID: -1087130020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: efx_weapons_12
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 3
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e32be6ab3535a54794d87cbe76217d4
+      internalID: 78266657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: efx_weapons_13
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 5
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25b6083702999b84798f9597c32ff8b7
+      internalID: 589457581
       vertices: []
       indices: 
       edges: []
@@ -376,6 +418,8 @@ TextureImporter:
       efx_weapons_1: 1965598717
       efx_weapons_10: 1794205579
       efx_weapons_11: -1087130020
+      efx_weapons_12: 78266657
+      efx_weapons_13: 589457581
       efx_weapons_2: -1049075454
       efx_weapons_3: -886314627
       efx_weapons_4: 5321911
