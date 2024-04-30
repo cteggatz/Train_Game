@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1f723dbb9836f7844a74cd2bbc261294
+guid: 2dbe8577814ab0a48b1b4cb3ccd42d79
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,286 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: efx_weapons_0
+      name: grunt_particleSHEET_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 28
-        width: 4
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65c790f4cd0a6644b9938bb62a9d49d1
-      internalID: 1998613807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_1
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 24
-        width: 4
-        height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0dfceb43688d83145a65a0e020dac915
-      internalID: 1965598717
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_2
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 24
-        width: 2
-        height: 1
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7c44ecda3f134d4c91ea0f1d5ea366d
-      internalID: -1049075454
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_3
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 28
-        width: 6
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f126f97e6f55ab4f9ebbd7bf4ab42f2
-      internalID: -886314627
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_4
-      rect:
-        serializedVersion: 2
-        x: 13
-        y: 28
-        width: 6
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9bed679c43b1fb48a0fa7e480d6e84e
-      internalID: 5321911
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_5
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 29
+        x: 0
+        y: 13
         width: 1
         height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6f95961e737a1794f810ab8ecdb02397
-      internalID: -1447666514
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_6
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 29
-        width: 1
-        height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d8e8dcf67426b2341b03087de15674e2
-      internalID: 1431729381
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_7
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 16
-        width: 5
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c7af3f40de6a436408bc8a61693536a8
-      internalID: 1036521567
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_8
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 24
-        width: 9
-        height: 1
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d095f99bb872f143891a0ce284db520
-      internalID: 775057976
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_9
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 22
-        width: 10
-        height: 1
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 07ca632a9dc353d4e802834de0fec9fe
-      internalID: 2085989137
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_10
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 20
-        width: 8
-        height: 1
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c5d7c5d291e14b43943829d669e93f2
-      internalID: 1794205579
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_11
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 22
-        width: 2
-        height: 1
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e3104215650dda45ac91abc0ae0b517
-      internalID: -1087130020
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_12
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 3
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e32be6ab3535a54794d87cbe76217d4
-      internalID: 78266657
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: efx_weapons_13
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 5
-        width: 13
-        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,8 +124,344 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25b6083702999b84798f9597c32ff8b7
-      internalID: 589457581
+      spriteID: 74cc3ed0ac142f741a7c3bdec1994454
+      internalID: -2071282032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 13
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d20ec4cbd25eaaa44aad1369b9853efa
+      internalID: -1151839765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_2
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 13
+        width: 8
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c428f353d2666045a984f7143c58312
+      internalID: -1013461672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_3
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 11
+        width: 1
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c834d297d047234c93df74bb7f30c35
+      internalID: -795958312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_4
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 11
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e80f989b19ae30141a7805969c4ffcf3
+      internalID: 351806043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_5
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 9
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f9e2bf03b47a9a4fa5d111b865717d4
+      internalID: -601887847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 6
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 662d2705b37ae374dad22d272f9fb878
+      internalID: -280458498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10
+        width: 5
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a592b0dcd319fd44ab692b2067c375d
+      internalID: 532733245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7
+        width: 2
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b4cee22b7cd7324f90bbc6c4ca97dcc
+      internalID: 666800404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 3
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b9148f63e6551147bcab5f47753914d
+      internalID: -2069630497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 5
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ff19854f2d415f4ebe3683a36e5c237
+      internalID: 1864521234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_11
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 2
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07469ff3ba4561a478e8f98fbfd3a416
+      internalID: 1189319043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_12
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 7
+        width: 2
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d72be302f238120489f787725a9bb118
+      internalID: 1334791947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_13
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 6
+        width: 3
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4addf87c8ed05304da01e5757171435d
+      internalID: -1370201286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_14
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 3
+        width: 3
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 743ec3a953bec1f49a4bdf3f70c753ce
+      internalID: 1607388276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_15
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 0
+        width: 4
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c0ed9f032b91424baa1a7713c47782c
+      internalID: -245937574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grunt_particleSHEET_16
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 0
+        width: 3
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34ac92f13e568f2419d637c3cbb837c3
+      internalID: 1107216733
       vertices: []
       indices: 
       edges: []
@@ -414,20 +477,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      efx_weapons_0: 1998613807
-      efx_weapons_1: 1965598717
-      efx_weapons_10: 1794205579
-      efx_weapons_11: -1087130020
-      efx_weapons_12: 78266657
-      efx_weapons_13: 589457581
-      efx_weapons_2: -1049075454
-      efx_weapons_3: -886314627
-      efx_weapons_4: 5321911
-      efx_weapons_5: -1447666514
-      efx_weapons_6: 1431729381
-      efx_weapons_7: 1036521567
-      efx_weapons_8: 775057976
-      efx_weapons_9: 2085989137
+      grunt_particleSHEET_0: -2071282032
+      grunt_particleSHEET_1: -1151839765
+      grunt_particleSHEET_10: 1864521234
+      grunt_particleSHEET_11: 1189319043
+      grunt_particleSHEET_12: 1334791947
+      grunt_particleSHEET_13: -1370201286
+      grunt_particleSHEET_14: 1607388276
+      grunt_particleSHEET_15: -245937574
+      grunt_particleSHEET_16: 1107216733
+      grunt_particleSHEET_2: -1013461672
+      grunt_particleSHEET_3: -795958312
+      grunt_particleSHEET_4: 351806043
+      grunt_particleSHEET_5: -601887847
+      grunt_particleSHEET_6: -280458498
+      grunt_particleSHEET_7: 532733245
+      grunt_particleSHEET_8: 666800404
+      grunt_particleSHEET_9: -2069630497
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

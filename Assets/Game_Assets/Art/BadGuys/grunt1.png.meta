@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4a40d3bcae035ac4ab40f267c470545d
+guid: f1d00309c71b3344e9a555b7e4ebfb0f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,148 +110,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: weaponArms_0
+      name: monitororor_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 15
-        width: 9
-        height: 16
+        x: 0
+        y: 27
+        width: 33
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36ae9530ef6dce243bb2cba2dff597b3
-      internalID: 1748196067
+      spriteID: 85aa18bcc6706f14d823b3918c765be6
+      internalID: -345472579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weaponArms_1
+      name: monitororor_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 27
+        width: 33
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3f23de721baf884ca7e8df750a0fec4
+      internalID: 1975241352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monitororor_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 24
-        width: 16
-        height: 8
-      alignment: 9
-      pivot: {x: 0.9, y: 0.7}
+        y: 0
+        width: 33
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db11ab0ff50bd1b4e9edaafd0f8fd823
-      internalID: -268117984
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_2
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 14
-        width: 16
-        height: 8
-      alignment: 9
-      pivot: {x: 0.9, y: 0.7}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89d2bd9612f4dd7488c8038c5be2b905
-      internalID: 303330140
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1
-        width: 19
-        height: 11
-      alignment: 9
-      pivot: {x: 0.9, y: 0.7}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e34ac44143d5004190b0df9429d0fad
-      internalID: 1214417635
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_4
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 22
-        width: 15
-        height: 8
-      alignment: 9
-      pivot: {x: 0.8381762, y: 0.68472576}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ab6433cb8dd019b4997d2a02e8acbbf5
-      internalID: -1093080335
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_5
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 2
-        width: 22
-        height: 8
-      alignment: 9
-      pivot: {x: 0.84738386, y: 0.5909816}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb1a27f9957f5744d99900070aea2f6a
-      internalID: -1108130052
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weaponArms_6
-      rect:
-        serializedVersion: 2
-        x: 37
-        y: 14
-        width: 7
-        height: 7
-      alignment: 9
-      pivot: {x: 0.6559677, y: 0.64557046}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb98f0b9540810c4a8420d5e549066f0
-      internalID: -1738023971
+      spriteID: 5231b860e7d78d94084588629d4e3b16
+      internalID: -760633298
       vertices: []
       indices: 
       edges: []
@@ -267,13 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      weaponArms_0: 1748196067
-      weaponArms_1: -268117984
-      weaponArms_2: 303330140
-      weaponArms_3: 1214417635
-      weaponArms_4: -1093080335
-      weaponArms_5: -1108130052
-      weaponArms_6: -1738023971
+      monitororor_0: -345472579
+      monitororor_1: 1975241352
+      monitororor_2: -760633298
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
