@@ -2129,6 +2129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8754078f9e2f84b890ff6033c11615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   animator: {fileID: 923986533}
   lerpAmount: 0.1
   accelAmount: 2

@@ -1,8 +1,11 @@
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class p_movement : MonoBehaviour
 {
+    //private InputAction moveAction;
+    public PlayerInput playerInput;
     private Vector3 mousePos;
     private Rigidbody2D body;
     private Vector2 _moveInput;
@@ -20,6 +23,15 @@ public class p_movement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         SetGravityScale(gravityScale);
+        playerInput = GetComponent<PlayerInput>();
+        //moveAction = new InputAction("Horizontal");
+    }
+
+    private void OnEnable(){
+        //moveAction.Enable();
+    }
+    private void OnDisable(){
+        //moveAction.Disable();
     }
 
     private void FixedUpdate()
@@ -30,8 +42,8 @@ public class p_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   //INPUT SETTINGS WHOOOOOOOOO
-        _moveInput.x = Input.GetAxisRaw("Horizontal");
-        _moveInput.y = Input.GetAxisRaw("Vertical");
+        //_moveInput.x = Input.GetAxisRaw("Horizontal");
+        //_moveInput.y = Input.GetAxisRaw("Vertical");
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -134,7 +146,10 @@ public class p_movement : MonoBehaviour
     }
     private void Run(float lerpAmount)
     {
+        //_moveInput = moveAction.ReadValue<Vector2>();
+        //Debug.Log(moveAction.ReadValue<Vector2>());
         //Calculate the direction
+        //_moveInput = playerInput.m.ReadValue<Vector2>();
         float targetSpeed = _moveInput.x * maxSpeed;
         //Reduce player controll
         targetSpeed = Mathf.Lerp(body.velocity.x, targetSpeed, lerpAmount);
