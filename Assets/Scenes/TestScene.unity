@@ -1948,6 +1948,7 @@ GameObject:
   - component: {fileID: 361018883}
   - component: {fileID: 361018885}
   - component: {fileID: 361018884}
+  - component: {fileID: 361018886}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -2129,7 +2130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8754078f9e2f84b890ff6033c11615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
   animator: {fileID: 923986533}
   lerpAmount: 0.1
   accelAmount: 2
@@ -2154,6 +2154,52 @@ MonoBehaviour:
   jumpCutGravityMult: 1
   squashAnimator: {fileID: 1775411021}
   jumpParticle: {fileID: 6337983017110141198, guid: 758308f251c30984584da4b47ec06012, type: 3}
+--- !u!114 &361018886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361018872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: aac899de6d454464fa2f733bdb7219f2, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cf22165c-b3fb-4721-9164-a37f44c84b81
+    m_ActionName: PlayerMovement(Keyboard)/Movement[/Keyboard/a,/Keyboard/d,/Keyboard/s,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bad47427-3869-4e9c-9e39-eedc06a463e4
+    m_ActionName: PlayerMovement(Keyboard)/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd155189-b63e-442f-b1e2-8a906641f0bf
+    m_ActionName: PlayerMovement(Keyboard)/Sprint[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0b0b84bc-a318-4494-9826-d2ccbbcc3a0e
+    m_ActionName: PlayerMovement(Keyboard)/Shoot[/Mouse/leftButton]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: KeyBoard&Mouse
+  m_DefaultActionMap: PlayerMovement(Keyboard)
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!4 &378058741 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1868429772171996410, guid: 10d4e0642b222b94d8e5b222bc1d45d0, type: 3}
