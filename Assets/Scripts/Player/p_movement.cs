@@ -4,12 +4,9 @@ using UnityEngine.InputSystem;
 
 public class p_movement : MonoBehaviour
 {
-    //private InputAction moveAction;
-    //public PlayerInput playerInput;
-    //PlayerControls controls;
     private Vector3 mousePos;
     private Rigidbody2D body;
-    private Vector2 _moveInput;
+    private Vector2 _moveInput; 
     [SerializeField] private Animator animator;
     [SerializeField] private float lerpAmount, accelAmount, deccelAmount, accelInAir, deccelInAir, maxSpeed, jumphight, coyoteTimeInterval, jumpBufferInterval, sprintSpeed, normalSpeed;
     [Header("Gravity")]
@@ -24,29 +21,15 @@ public class p_movement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         SetGravityScale(gravityScale);
-        //playerInput = GetComponent<PlayerInput>();
-        //moveAction = new InputAction("Horizontal");
     }
-
-    private void OnEnable(){
-        //moveAction.Enable();
-        //controls = new PlayerControls();
-        //controls.PlayerMovementKeyboard.SetCallbacks();
-        //controls.PlayerMovementKeyboard.Horizontal.Enable();
-    }
-    private void OnDisable(){
-        //moveAction.Disable();
-        //controls.PlayerMovementKeyboard.Disable();
-    }
-
     /*private void FixedUpdate()
     {
         Run(1);
     }*/
-    public void Move(InputAction.CallbackContext context){
-        _moveInput = context.ReadValue<Vector2>().x;
+    /*public void Move(InputAction.CallbackContext context){
+        _moveInput = context.ReadValue<Vector2>();
         Run(1);
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -153,13 +136,29 @@ public class p_movement : MonoBehaviour
             SetGravityScale(gravityScale);
         }
     }
-    private void Run(float lerpAmount)
+    /*private void Run(float lerpAmount)
     {
-        //_moveInput = moveAction.ReadValue<Vector2>();
-        //Debug.Log(moveAction.ReadValue<Vector2>());
-        //Calculate the direction
-        //_moveInput = playerInput.ReadValue<Vector2>();
-        //_moveInput = controls.PlayerMovementKeyboard.Horizontal.ReadValue<Vector2>();
+        float targetSpeed = _moveInput.x * maxSpeed;
+        //Reduce player controll
+        targetSpeed = Mathf.Lerp(body.velocity.x, targetSpeed, lerpAmount);
+        float accelRate;
+
+        //Gets an acceleration value
+        if (timeLastOnGround > 0)
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accelAmount : deccelAmount;
+        else
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accelAmount * accelInAir : deccelAmount * deccelInAir;
+
+        //Make the jump a bit more bouncy? idk people like this for some reason
+        if ((IsJumping || _isJumpFalling) && Mathf.Abs(body.velocity.y) < jumpHangTimeThreshold)
+        {
+            accelRate *= jumpHangAccelerationMult;
+            targetSpeed *= jumpHangMaxSpeedMult;
+        }*/
+
+    public void Run(InputAction.CallbackContext context)
+    {
+        _moveInput = context.ReadValue<Vector2>();
         float targetSpeed = _moveInput.x * maxSpeed;
         //Reduce player controll
         targetSpeed = Mathf.Lerp(body.velocity.x, targetSpeed, lerpAmount);

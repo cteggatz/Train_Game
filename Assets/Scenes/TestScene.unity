@@ -2183,7 +2183,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 361018885}
         m_TargetAssemblyTypeName: p_movement, Assembly-CSharp
-        m_MethodName: Move
+        m_MethodName: Run
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
