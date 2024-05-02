@@ -6,7 +6,7 @@ public class p_movement : MonoBehaviour
 {
     //private InputAction moveAction;
     //public PlayerInput playerInput;
-    PlayerControls controls;
+    //PlayerControls controls;
     private Vector3 mousePos;
     private Rigidbody2D body;
     private Vector2 _moveInput;
@@ -30,17 +30,21 @@ public class p_movement : MonoBehaviour
 
     private void OnEnable(){
         //moveAction.Enable();
-        controls = new PlayerControls();
+        //controls = new PlayerControls();
         //controls.PlayerMovementKeyboard.SetCallbacks();
-        controls.PlayerMovementKeyboard.Horizontal.Enable();
+        //controls.PlayerMovementKeyboard.Horizontal.Enable();
     }
     private void OnDisable(){
         //moveAction.Disable();
-        controls.PlayerMovementKeyboard.Disable();
+        //controls.PlayerMovementKeyboard.Disable();
     }
 
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
+        Run(1);
+    }*/
+    public void Move(InputAction.CallbackContext context){
+        _moveInput = context.ReadValue<Vector2>().x;
         Run(1);
     }
 
@@ -155,7 +159,7 @@ public class p_movement : MonoBehaviour
         //Debug.Log(moveAction.ReadValue<Vector2>());
         //Calculate the direction
         //_moveInput = playerInput.ReadValue<Vector2>();
-        _moveInput = controls.PlayerMovementKeyboard.Horizontal.ReadValue<Vector2>();
+        //_moveInput = controls.PlayerMovementKeyboard.Horizontal.ReadValue<Vector2>();
         float targetSpeed = _moveInput.x * maxSpeed;
         //Reduce player controll
         targetSpeed = Mathf.Lerp(body.velocity.x, targetSpeed, lerpAmount);

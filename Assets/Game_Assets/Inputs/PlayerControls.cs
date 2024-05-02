@@ -29,12 +29,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""cf22165c-b3fb-4721-9164-a37f44c84b81"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Jump"",
@@ -62,31 +62,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Horizontal"",
-                    ""type"": ""Button"",
-                    ""id"": ""115fcdf1-9086-4d3c-9062-cf3f9d8a8609"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Vertical"",
-                    ""type"": ""Button"",
-                    ""id"": ""13a4c611-0a5e-4a2f-99ab-ae418ebc2571"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""Horizontal"",
-                    ""id"": ""37ee1d32-74ca-4704-a433-6f88ed8d7b26"",
-                    ""path"": ""1DAxis"",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""13119fea-3314-466d-9641-462caeb62870"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -95,9 +77,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""72bbe745-8393-4140-8172-2273858ffb72"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""name"": ""up"",
+                    ""id"": ""2dc0267f-f775-46dc-9d95-8f90482f628b"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyBoard&Mouse"",
@@ -106,30 +88,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""dcd3e891-239d-4398-bc14-5208b2514f66"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyBoard&Mouse"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Vertical"",
-                    ""id"": ""6fec5d45-ee3c-4526-9d4e-e43b0bc11ec8"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""93270c0f-2edb-498d-9585-fc4cb162d20f"",
+                    ""name"": ""down"",
+                    ""id"": ""48543210-0461-470b-92cf-05dd0f0beaa8"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -139,9 +99,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""c53c8312-6156-4c2f-93b4-4cb46a4681dc"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""name"": ""left"",
+                    ""id"": ""d3378b2f-33bc-4056-817d-36e21c089b16"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard&Mouse"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""55aadeef-b1fd-4a1a-bb94-e2c2d68ee5d2"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyBoard&Mouse"",
@@ -181,72 +152,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""x Axis"",
-                    ""id"": ""bb7c87eb-9fa6-4c2f-868d-ce61a7765071"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Horizontal"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""5f9d4407-80ac-48d2-b96f-13b96c3a53b7"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyBoard&Mouse"",
-                    ""action"": ""Horizontal"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""52cdbefa-0fd4-4967-a791-0c37b1a30836"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyBoard&Mouse"",
-                    ""action"": ""Horizontal"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""y Axis"",
-                    ""id"": ""51d81b55-57ff-4f3a-906c-758d222d8b35"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Vertical"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""c82e77c8-2ede-4984-a5c9-992cd0e439f2"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyBoard&Mouse"",
-                    ""action"": ""Vertical"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""8db81238-61ba-4c6b-a95c-7a1392622c38"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyBoard&Mouse"",
-                    ""action"": ""Vertical"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -287,8 +192,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovementKeyboard_Jump = m_PlayerMovementKeyboard.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovementKeyboard_Sprint = m_PlayerMovementKeyboard.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerMovementKeyboard_Shoot = m_PlayerMovementKeyboard.FindAction("Shoot", throwIfNotFound: true);
-        m_PlayerMovementKeyboard_Horizontal = m_PlayerMovementKeyboard.FindAction("Horizontal", throwIfNotFound: true);
-        m_PlayerMovementKeyboard_Vertical = m_PlayerMovementKeyboard.FindAction("Vertical", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -354,8 +257,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovementKeyboard_Jump;
     private readonly InputAction m_PlayerMovementKeyboard_Sprint;
     private readonly InputAction m_PlayerMovementKeyboard_Shoot;
-    private readonly InputAction m_PlayerMovementKeyboard_Horizontal;
-    private readonly InputAction m_PlayerMovementKeyboard_Vertical;
     public struct PlayerMovementKeyboardActions
     {
         private @PlayerControls m_Wrapper;
@@ -364,8 +265,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerMovementKeyboard_Jump;
         public InputAction @Sprint => m_Wrapper.m_PlayerMovementKeyboard_Sprint;
         public InputAction @Shoot => m_Wrapper.m_PlayerMovementKeyboard_Shoot;
-        public InputAction @Horizontal => m_Wrapper.m_PlayerMovementKeyboard_Horizontal;
-        public InputAction @Vertical => m_Wrapper.m_PlayerMovementKeyboard_Vertical;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovementKeyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -387,12 +286,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
-            @Horizontal.started += instance.OnHorizontal;
-            @Horizontal.performed += instance.OnHorizontal;
-            @Horizontal.canceled += instance.OnHorizontal;
-            @Vertical.started += instance.OnVertical;
-            @Vertical.performed += instance.OnVertical;
-            @Vertical.canceled += instance.OnVertical;
         }
 
         private void UnregisterCallbacks(IPlayerMovementKeyboardActions instance)
@@ -409,12 +302,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
-            @Horizontal.started -= instance.OnHorizontal;
-            @Horizontal.performed -= instance.OnHorizontal;
-            @Horizontal.canceled -= instance.OnHorizontal;
-            @Vertical.started -= instance.OnVertical;
-            @Vertical.performed -= instance.OnVertical;
-            @Vertical.canceled -= instance.OnVertical;
         }
 
         public void RemoveCallbacks(IPlayerMovementKeyboardActions instance)
@@ -456,7 +343,5 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnHorizontal(InputAction.CallbackContext context);
-        void OnVertical(InputAction.CallbackContext context);
     }
 }
