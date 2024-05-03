@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class p_movement : MonoBehaviour
 {
+
+    //temp moved vars
+    private float targetSpeed;
+    private float accelRate;
     private Vector3 mousePos;
     private Rigidbody2D body;
     private Vector2 _moveInput; 
@@ -30,6 +34,9 @@ public class p_movement : MonoBehaviour
         _moveInput = context.ReadValue<Vector2>();
         Run(1);
     }*/
+    void FixedUpdate(){
+        body.AddForce((targetSpeed - body.velocity.x) * accelRate * Vector2.right, ForceMode2D.Force);
+    }
 
     // Update is called once per frame
     void Update()
@@ -159,10 +166,10 @@ public class p_movement : MonoBehaviour
     public void Run(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
-        float targetSpeed = _moveInput.x * maxSpeed;
+        /*float*/targetSpeed = _moveInput.x * maxSpeed;
         //Reduce player controll
-        targetSpeed = Mathf.Lerp(body.velocity.x, targetSpeed, lerpAmount);
-        float accelRate;
+        targetSpeed = Mathf.Lerp(body.velocity.x, targetSpeed, 1/*lerpAmount*/);
+        //float accelRate;
 
         //Gets an acceleration value
         if (timeLastOnGround > 0)
@@ -183,7 +190,7 @@ public class p_movement : MonoBehaviour
             accelRate = 0;
         }
         //acctually add the final force
-        body.AddForce((targetSpeed - body.velocity.x) * accelRate * Vector2.right, ForceMode2D.Force);
+        //body.AddForce((targetSpeed - body.velocity.x) * accelRate * Vector2.right, ForceMode2D.Force);
     }
     private void OnCollisionEnter2D(Collision2D collision)
         {
