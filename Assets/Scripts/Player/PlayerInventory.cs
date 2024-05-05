@@ -224,7 +224,7 @@ public class PlayerInventory : MonoBehaviour, ISavable
     }
     public void Load(ref GameData data){
         if(data.playerInitialized == false){
-            Debug.Log("No Player Data - Initializing Player Data");
+            //Debug.Log("No Player Data - Initializing Player Data");
             inventory[0] = new ItemInstance(_primary);
             inventory[1] = new ItemInstance(_secondary);
             inventory[2] = new ItemInstance(_consumable);
