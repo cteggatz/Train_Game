@@ -13,12 +13,12 @@ public class hoardLogic : MonoBehaviour
     [SerializeField] public List<Transform> targets = new List<Transform>();
 
     public void SetTargets(List<GameObject> carts){
-        Debug.Log("Loading Hoard Logic");
+        //Debug.Log("Loading Hoard Logic");
         for(int i = 0; i<carts.Count; i++){
             CartController child = carts[i].GetComponent<CartController>();
             if(child != null){
                 foreach(GameObject obj in child.GetSettableObjects()){
-                    Debug.Log(obj.name);
+                    //Debug.Log(obj.name);
                     if(obj.name == "Furnace" && obj != null){
                         this.targets.Add(obj.transform);
                     }

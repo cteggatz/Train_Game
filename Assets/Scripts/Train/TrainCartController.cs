@@ -47,7 +47,7 @@ public class TrainCartController : MonoBehaviour, ISavable
         if(Carts.Count == 0){
             cartInstance.transform.SetParent(gameObject.transform);
             cartInstance.transform.localPosition =  offset;
-            Debug.Log(offset);
+            //Debug.Log(offset);
         } else {            
             cartInstance.transform.SetParent(gameObject.transform);
 
@@ -102,7 +102,7 @@ public class TrainCartController : MonoBehaviour, ISavable
         this.Carts = new List<GameObject>();
 
         if(data.trainInitialized == false){
-            Debug.Log("[TrainController] No Cart Data - Initializing Train Data");
+            //Debug.Log("[TrainController] No Cart Data - Initializing Train Data");
             AddCart(trainHead);
             AddCart(coalCart);
             AddCart(genericTrainCart);
