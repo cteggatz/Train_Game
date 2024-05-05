@@ -12,6 +12,9 @@ using UnityEditor.PackageManager;
 using Unity.VisualScripting;
 
 namespace DataSaving{
+    /// <summary>
+    /// Class responsible collecting data and passing that data to savingManager.
+    /// </summary>
     public class SavingManager : MonoBehaviour
     {
         public static void Save(GameData gameData){
@@ -71,7 +74,7 @@ namespace DataSaving{
 
     /// --------
     /// <summary>
-    /// Class Responsible for converting given Game Data into a json and saving it to the disk
+    /// Class Responsible for converting given Game Data into a json and saving it to the roaming data
     /// </summary>
     public class FileManager{
         private static int saveNumber;
@@ -126,10 +129,12 @@ namespace DataSaving{
         [Header("Game Data")]
         public float distance;
         public float endDistance;
+        public SerializableList<SerializableKeyValuePair<int,float>> tripLog;
 
         //player
         [Header("Player")]
         public int playerHealth;
+        
         public SerializableList<GunData> playerGuns;
 
 
@@ -137,6 +142,7 @@ namespace DataSaving{
         public GameData(){
             carts = new SerializableList<CartData>();
             playerGuns = new SerializableList<GunData>();
+            tripLog = new SerializableList<SerializableKeyValuePair<int, float>>();
         }
         public override string ToString()
         {
@@ -157,8 +163,20 @@ namespace DataSaving{
                 playerGuns.list[index] = new GunData(item.ammo, item.reference);
             }
         }
+
+        
     
         // classes
+
+        [Serializable]
+        public class SerializableKeyValuePair<TKey, TValue>{
+            public TKey key;
+            public TValue value;
+            public SerializableKeyValuePair(TKey key, TValue value){
+                this.key = key;
+                this.value = value;
+            }
+        }
         [Serializable]
         public class SerializableList<T> {
             public List<T> list;

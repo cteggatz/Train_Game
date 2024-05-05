@@ -20,6 +20,8 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     private GameState gameState;
 
+    private Dictionary<int, float> tripLog = new Dictionary<int, float>(); 
+
 
     [SerializeField, Min(0)] float distance = 0;
     [SerializeField, Min(0)] float endDistance = 0;
@@ -30,12 +32,15 @@ public class GameControllerInstance : MonoBehaviour, ISavable
     
     void OnDisable(){SceneManager.activeSceneChanged -=OnSceneLoaded;}
 
+
     void Awake(){
+        //new instance
         if(instance == null){
             instance = this;
             DontDestroyOnLoad(gameObject);
 
             int scene = SceneManager.GetActiveScene().buildIndex;
+
             if(scene == 0){
                 this.gameState = GameState.Title;
                 Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Default Game : {{State : {this.gameState}}} ");
@@ -51,14 +56,14 @@ public class GameControllerInstance : MonoBehaviour, ISavable
                 SavingManager.Save();
             }
             this.initialized = true;
-            
-        } else {
+        } else { // run if instance already exists
             SavingManager.Load();
             Destroy(this.gameObject);
         }
         
     }
     
+    //essentially Awake function 
     private void OnSceneLoaded(Scene oldScene, Scene newScene){
         Debug.Log($"<color=green>[GameManager]</color> [2] Loading into {newScene.name} & {newScene.buildIndex}");
         
@@ -70,8 +75,6 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
                 this.distance = 0;
                 this.endDistance = UnityEngine.Random.Range(10f, 50f);
-
-        
                 break;
             case 2: // Station
                 this.gameState = GameState.Station;
@@ -113,6 +116,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         distance += Time.deltaTime * traincontroller.GetSpeed() / 60f;
 
         if(distance >= endDistance){
+            tripLog.Add(tripLog.Count, distance);
             SwitchScene(2);
         }
     }
@@ -122,6 +126,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 
     public GameState GetGameState() => this.gameState;
 
+    
     public void Save(ref GameData data){
         data.distance = distance;
         data.endDistance = endDistance;
