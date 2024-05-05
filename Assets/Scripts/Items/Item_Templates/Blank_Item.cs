@@ -13,7 +13,8 @@ public abstract class Blank_Item : ScriptableObject
     public Vector3 sprite_Size;
     public bool collidable;
 
-// ---- General Description ----
+
+    // ---- General Description ----
     [Header("Description")]
     public new string name;
     public string description;
