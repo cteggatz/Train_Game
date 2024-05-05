@@ -11,8 +11,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
   m_Name: GameController
-  m_EditorClassIdentifier: Assembly-CSharp::Game_Controller
+  m_EditorClassIdentifier: Assembly-CSharp::GameDataInstance
   initialized: 0
+  gameState: 0
   gameData:
     playerInitialized: 0
     trainInitialized: 0
@@ -24,4 +25,3 @@ MonoBehaviour:
     playerHealth: 0
     playerGuns:
       list: []
-  gameState: 0

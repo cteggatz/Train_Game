@@ -133,7 +133,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable
 public class GameControllerInstance : MonoBehaviour, ISavable{
 
 
-    [SerializeField] public Game_Controller gameControllerData;
+    [SerializeField] public GameDataInstance gameControllerData;
     [SerializeField, Min(0)] float distance = 0;
     [SerializeField, Min(0)] float endDistance = 0;
     [SerializeField] Train_Controller traincontroller;
@@ -144,23 +144,24 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
     public void Awake(){
         int scene = SceneManager.GetActiveScene().buildIndex;
         if(scene == 0){
-            this.gameControllerData.gameState = Game_Controller.GameState.Title;
+            this.gameControllerData.gameState = GameDataInstance.GameState.Title;
             Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Default Game : {{State : {this.gameControllerData.gameState}}} ");
             return;
         } 
 
         if(scene == 1){
-            this.gameControllerData.gameState = Game_Controller.GameState.Train;
+            this.gameControllerData.gameState = GameDataInstance.GameState.Train;
         } else if(scene == 2){
-            this.gameControllerData.gameState = Game_Controller.GameState.Station;
+            this.gameControllerData.gameState = GameDataInstance.GameState.Station;
         }
         
         if(gameControllerData.initialized == false){
             Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameControllerData.gameState}}} \n" + "loading into test envoirnment");
-            SavingManager.Init(0);
+            gameControllerData.gameData = SavingManager.Init(0);
             gameControllerData.initialized = true;
+            return;
         }
-        SavingManager.Load();
+        gameControllerData.gameData = SavingManager.Load();
         SavingManager.Save(gameControllerData.gameData);
     }
 
@@ -169,7 +170,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
         
         switch(newScene.buildIndex){
             case 1: //This is the Train Scene
-                this.gameControllerData.gameState = Game_Controller.GameState.Train;
+                this.gameControllerData.gameState = GameDataInstance.GameState.Train;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
 
@@ -179,19 +180,18 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
                 }
                 break;
             case 2: // Station
-                this.gameControllerData.gameState = Game_Controller.GameState.Station;
+                this.gameControllerData.gameState = GameDataInstance.GameState.Station;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 break;
             
         }
     }
     public void StartGame(int saveNumber){
-        SavingManager.Init(saveNumber);
-        SavingManager.Load();
+        gameControllerData.gameData = SavingManager.Init(saveNumber);
         gameControllerData.initialized = true;
         SwitchScene(1);
         
-        this.gameControllerData.gameState = Game_Controller.GameState.Train;
+        this.gameControllerData.gameState = GameDataInstance.GameState.Train;
     }
 
     public void SwitchScene(int sceneNumber){
@@ -201,12 +201,12 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
 
     void FixedUpdate(){
         switch(gameControllerData.gameState){
-            case Game_Controller.GameState.Train:
+            case GameDataInstance.GameState.Train:
                 TrainLogic();
                 break;
-            case Game_Controller.GameState.Station:
+            case GameDataInstance.GameState.Station:
                 break;
-            case Game_Controller.GameState.CutScene:
+            case GameDataInstance.GameState.CutScene:
                 break;
             default:
                 break;
@@ -231,7 +231,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
     // ---- getters and setters
     public (float, float) getDistance() => (distance, endDistance);
 
-    public Game_Controller.GameState GetGameState() => this.gameControllerData.gameState;
+    public GameDataInstance.GameState GetGameState() => this.gameControllerData.gameState;
 
 
     public void Save(ref GameData data){
@@ -246,7 +246,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
 }
 
 [CreateAssetMenu(fileName = "GameController", menuName = "ScriptableObjects/GameController", order = 1), Serializable]
-public class Game_Controller : ScriptableObject
+public class GameDataInstance : ScriptableObject
 {
 
     public enum GameState{
@@ -256,16 +256,16 @@ public class Game_Controller : ScriptableObject
         CutScene
     }
 
+    [Header("General Game Manager Data")]
     public bool initialized = false;
-    public GameData gameData;
     public GameState gameState;
+
+    [Header("Game State")]
+    public GameData gameData;
 
     public void Reset(){
         this.initialized = false;
         this.gameData = null;
         this.gameState = GameState.Title;
     }
-
-
-
 }

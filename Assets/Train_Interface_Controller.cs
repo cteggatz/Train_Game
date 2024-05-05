@@ -13,7 +13,7 @@ public class Train_Interface_Controller : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D coll){
-        if(coll.gameObject.name == "Player" && gameControllerInstance.GetGameState() == Game_Controller.GameState.Station){
+        if(coll.gameObject.name == "Player" && gameControllerInstance.GetGameState() == GameDataInstance.GameState.Station){
             colliding = true;
         }
     }

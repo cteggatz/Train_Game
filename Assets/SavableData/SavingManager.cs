@@ -14,7 +14,6 @@ using Unity.VisualScripting;
 namespace DataSaving{
     public class SavingManager : MonoBehaviour
     {
-        static GameData currentData;
         public static void Save(GameData gameData){
             //Debug.Log("Saving!");
             //GameData gameData = currentData;
@@ -26,42 +25,32 @@ namespace DataSaving{
             FileManager.Save(gameData);
         }
 
-        public static void Load(){
-            //Debug.Log("Loading!");
-            /*
-            GameData gameData = FileManager.Load();
-            if(gameData == null){
-                gameData = new GameData();
-            }
-            */
+        public static GameData Load(){
+            
             GameData gameData;
-            if(currentData != null){
-                gameData = currentData;
-            } else {
-                gameData = FileManager.Load();
-                if(gameData == null){gameData = new GameData();}
-            }
+            gameData = FileManager.Load();
+            if(gameData == null){gameData = new GameData();}
+
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
             foreach(ISavable script in savableObjects){
                 script.Load(ref gameData);
             }
-            currentData = gameData;
+            return gameData;
         }
 
-        public static void Init(int saveNumber){
+        public static GameData Init(int saveNumber){
             FileManager.Init(saveNumber);
 
             string[] saveFiles = FileManager.GetSaves();
             foreach(string save in saveFiles){
                 if(Path.GetFileName(save).Equals($"SaveData{saveNumber}.json")){
-                    //Load();
-                    return;
+                    return Load();
                 }
             }
-            CreateNewGame();
+            return CreateNewGame();
 
         }  
-        public static void CreateNewGame(){
+        public static GameData CreateNewGame(){
             Debug.LogWarning("<color=yellow>[FileManager]</color> No File! Creating Save File");
             GameData gameData = new GameData();
             IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
@@ -73,7 +62,7 @@ namespace DataSaving{
                 script.Save(ref gameData);
             }
             FileManager.Save(gameData);
-            currentData = gameData;
+            return gameData;
         }
 
 
@@ -124,18 +113,22 @@ namespace DataSaving{
 
         // ----- Data -----
         // initialization
+        [Header("initialization")]
         public bool playerInitialized = false;
         public bool trainInitialized = false;
 
         // train
+        [Header("Train")]
         public float fuel;
         public SerializableList<CartData> carts;
 
         //game
+        [Header("Game Data")]
         public float distance;
         public float endDistance;
 
         //player
+        [Header("Player")]
         public int playerHealth;
         public SerializableList<GunData> playerGuns;
 
