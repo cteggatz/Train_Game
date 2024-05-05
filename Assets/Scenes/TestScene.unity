@@ -3168,7 +3168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f175508ddbfb1a95aad93b5bd278aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  gameControllerData: {fileID: 11400000, guid: 5d995c15428707c4a922e8b19e6a69f1, type: 2}
   distance: 0
   endDistance: 30
   traincontroller: {fileID: 2035663128}

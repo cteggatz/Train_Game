@@ -15,9 +15,9 @@ namespace DataSaving{
     public class SavingManager : MonoBehaviour
     {
         static GameData currentData;
-        public static void Save(){
+        public static void Save(GameData gameData){
             //Debug.Log("Saving!");
-            GameData gameData = currentData;
+            //GameData gameData = currentData;
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
 
             foreach(ISavable script in savableObjects){
