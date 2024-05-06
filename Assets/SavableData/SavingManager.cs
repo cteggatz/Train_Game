@@ -10,6 +10,7 @@ using System.IO;
 using UnityEngine.Windows;
 using UnityEditor.PackageManager;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 namespace DataSaving{
     public class SavingManager : MonoBehaviour
@@ -53,11 +54,7 @@ namespace DataSaving{
         public static GameData CreateNewGame(){
             Debug.LogWarning("<color=yellow>[FileManager]</color> No File! Creating Save File");
             GameData gameData = new GameData();
-            IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
-
-            foreach(IGameInit script in savableObjects){
-                script.Init(ref gameData);
-            }
+            ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
             foreach(ISavable script in savableObjects){
                 script.Save(ref gameData);
             }
@@ -187,8 +184,5 @@ namespace DataSaving{
     public interface ISavable{
         public void Save(ref GameData gamedata);
         public void Load(ref GameData gamedata);
-    }
-    public interface IGameInit{
-        public void Init(ref GameData gameData){}
     }
 }
