@@ -6,119 +6,60 @@ using DataSaving;
 using System;
 using Unity.VisualScripting;
 
-
-/**
-This is the main controller of the game
-
-This utilizes a singleton class structure seeing as this is a persistant game object.
-For some reason a new gameManager game object is always created so the structure goes a little like this.
-
-1) Awake() -> instantiates new instance of game manager on new scene. Deleates if no instance. Loads and initates loading manager
-
-2) OnSceneLoad() -> effectivly the awake function for instances of GameController Instance. All scene spesific things are done here on awake
-
-3) Normal Stuff.
-*/
-public class GameControllerInstance : MonoBehaviour, ISavable
-{
-    public bool initialized = false;
-    private static GameControllerInstance instance;
-    public enum GameState{
-        Title,
-        Train,
-        Station,
-        CutScene
-    }
-
-    private GameState gameState;
-
-    private Dictionary<int, float> tripLog = new Dictionary<int, float>(); 
+public class GameControllerInstance : MonoBehaviour, ISavable{
 
 
+    [SerializeField] public GameDataInstance gameControllerData;
     [SerializeField, Min(0)] float distance = 0;
     [SerializeField, Min(0)] float endDistance = 0;
-
     [SerializeField] Train_Controller traincontroller;
 
 
-    void OnEnable(){SceneManager.activeSceneChanged += OnSceneLoaded;}
-    
-    void OnDisable(){SceneManager.activeSceneChanged -=OnSceneLoaded;}
 
+    // ----- Game Controller Logic ------
 
-    void Awake(){
-        //new instance
-        if(instance == null){
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+    /// <summary>
+    /// Initializes <c>Game Controller Instance</c>, Controls when and how the data is loaded.
+    /// </summary>
+    public void Awake(){
+        int scene = SceneManager.GetActiveScene().buildIndex;
 
-            int scene = SceneManager.GetActiveScene().buildIndex;
-
-            if(scene == 0){
-                this.gameState = GameState.Title;
-                Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Default Game : {{State : {this.gameState}}} ");
-            } else {
-                if(scene == 1){
-                    this.gameState = GameState.Train;
-                } else if(scene == 2){
-                    this.gameState = GameState.Station;
-                }
-                Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameState}}} \n" + "loading into test envoirnment");
-                SavingManager.Init(0);
-                SavingManager.Load();
-                SavingManager.Save();
-            }
-            this.initialized = true;
-        } else { // run if instance already exists
-            SavingManager.Load();
-            Destroy(this.gameObject);
+        ///if on title screen -> wait to load data until 
+        if(scene == 0){
+            this.gameControllerData.gameState = GameDataInstance.GameState.Title;
+            Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Default Game : {{State : {this.gameControllerData.gameState}}} ");
+            return;
+        } 
+        
+        //checks for what the current scene is so logic can function
+        if(scene == 1){
+            this.gameControllerData.gameState = GameDataInstance.GameState.Train;
+        } else if(scene == 2){
+            this.gameControllerData.gameState = GameDataInstance.GameState.Station;
         }
         
-    }
-    
-    //essentially Awake function 
-    private void OnSceneLoaded(Scene oldScene, Scene newScene){
-        Debug.Log($"<color=green>[GameManager]</color> [2] Loading into {newScene.name} & {newScene.buildIndex}");
-        
-        switch(newScene.buildIndex){
-            case 1: //This is the Train Scene
-                this.gameState = GameState.Train;
-                traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
-                FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
-
-                this.distance = 0;
-                this.endDistance = UnityEngine.Random.Range(10f, 50f);
-                break;
-            case 2: // Station
-                this.gameState = GameState.Station;
-                traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
-                break;
-            
+        //if the game data hasn't been initialized -> do initial reading of disk data, else -> load and save per usual
+        if(gameControllerData.initialized == false){
+            Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameControllerData.gameState}}} \n" + "loading into test envoirnment");
+            gameControllerData.gameData = SavingManager.Init(0);
+            gameControllerData.initialized = true;
+            return;
         }
+        gameControllerData.gameData = SavingManager.Load();
+        SavingManager.Save(gameControllerData.gameData);
     }
 
-
-    public void StartGame(int saveNumber){
-        SavingManager.Init(saveNumber);
-        SavingManager.Load();
-        SwitchScene(1);
-        
-        this.gameState = GameState.Train;
-    }
-
-    public void SwitchScene(int sceneNumber){
-        SavingManager.Save();
-        SceneManager.LoadScene(sceneNumber);
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
     void FixedUpdate(){
-        switch(gameState){
-            case GameState.Train:
+        switch(gameControllerData.gameState){
+            case GameDataInstance.GameState.Train:
                 TrainLogic();
                 break;
-            case GameState.Station:
+            case GameDataInstance.GameState.Station:
                 break;
-            case GameState.CutScene:
+            case GameDataInstance.GameState.CutScene:
                 break;
             default:
                 break;
@@ -129,29 +70,109 @@ public class GameControllerInstance : MonoBehaviour, ISavable
         distance += Time.deltaTime * traincontroller.GetSpeed() / 60f;
 
         if(distance >= endDistance){
-            tripLog.Add(tripLog.Count, distance);
             SwitchScene(2);
         }
     }
 
-    // ---- getters and setters
+
+
+    // ----- Logic Helpers ------
+    public void StartGame(int saveNumber){
+        gameControllerData.gameData = SavingManager.Init(saveNumber);
+        gameControllerData.initialized = true;
+        SwitchScene(1);
+        
+        this.gameControllerData.gameState = GameDataInstance.GameState.Train;
+    }
+    public void SwitchScene(int sceneNumber){
+        SavingManager.Save(gameControllerData.gameData);
+        SceneManager.LoadScene(sceneNumber);
+    }
+
+
+
+    // ----- Unity Application Functions ------
+    void OnEnable(){SceneManager.activeSceneChanged += OnSceneLoaded;}
+    void OnDisable(){SceneManager.activeSceneChanged -=OnSceneLoaded;}
+    
+    /// <summary>
+    /// Responsible for initializing all other game objects on the scene and setting the game manager
+    /// </summary>
+    /// <param name="oldScene"></param>
+    /// <param name="newScene"></param>
+    private void OnSceneLoaded(Scene oldScene, Scene newScene){
+        Debug.Log($"<color=green>[GameManager]</color> [2] Loading into {newScene.name} & {newScene.buildIndex}");
+        
+        switch(newScene.buildIndex){
+            case 1: //This is the Train Scene
+                this.gameControllerData.gameState = GameDataInstance.GameState.Train;
+                traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
+                FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
+
+                if(gameControllerData.gameData.distance >= gameControllerData.gameData.endDistance){
+                    this.distance = 0;
+                    this.endDistance = UnityEngine.Random.Range(10f, 50f);
+                }
+                break;
+            case 2: // Station
+                this.gameControllerData.gameState = GameDataInstance.GameState.Station;
+                traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
+                break;
+            
+        }
+    }
+
+    private void OnApplicationQuit(){
+        Debug.Log($"<color=green>[GameManager]</color> [2] EXITING! Saving");
+        SavingManager.Save(gameControllerData.gameData);
+        this.gameControllerData.Reset();
+    }
+
+
+
+    // ----- Getters and Setters ------
     public (float, float) getDistance() => (distance, endDistance);
 
-    public GameState GetGameState() => this.gameState;
+    public GameDataInstance.GameState GetGameState() => this.gameControllerData.gameState;
 
-    
+
+
+    // ----- Saving and Loading Data ------
     public void Save(ref GameData data){
-        data.distance = distance;
-        data.endDistance = endDistance;
-        data.tripLog.list.Clear();
-        foreach(var kvp in tripLog){
-            Debug.Log(kvp);
-            data.tripLog.list.Add(new GameData.SerializableKeyValuePair<int, float>(kvp.Key, kvp.Value));
-        }
-        //re-work trip log to be a dictionary that converts into a array of key value pairs that converts to JSON.
+        data.distance = this.distance;
+        data.endDistance = this.endDistance;
     }
     public void Load(ref GameData data){
-        
+        this.distance = data.distance;
+        this.endDistance = data.endDistance;
+        gameControllerData.gameData = data;
     }
 }
 
+/// <summary>
+/// This is a scriptable object instance of the <c>GameData</c> class. This the data to persist between scenes
+/// </summary>
+[CreateAssetMenu(fileName = "GameController", menuName = "ScriptableObjects/GameController", order = 1), Serializable]
+public class GameDataInstance : ScriptableObject
+{
+
+    public enum GameState{
+        Title,
+        Train,
+        Station,
+        CutScene
+    }
+
+    [Header("General Game Manager Data")]
+    public bool initialized = false;
+    public GameState gameState;
+
+    [Header("Game State")]
+    public GameData gameData;
+
+    public void Reset(){
+        this.initialized = false;
+        this.gameData = null;
+        this.gameState = GameState.Title;
+    }
+}

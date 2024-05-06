@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d517a45937637b5f48e9512584f2fb1c, type: 3}
-  m_Name: New_Test_Gun
+  m_Name: Pump_Shotgun
   m_EditorClassIdentifier: 
   sprite: {fileID: -268117984, guid: 4a40d3bcae035ac4ab40f267c470545d, type: 3}
   sprite_Size: {x: 1, y: 1, z: 0}
   collidable: 0
+  animator_path: 
   name: Shotgun
   description: bang
   maxUseQuantity: 6
