@@ -26,21 +26,21 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
 
         ///if on title screen -> wait to load data until 
         if(scene == 0){
-            this.gameControllerData.gameState = GameDataInstance.GameState.Title;
-            Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Default Game : {{State : {this.gameControllerData.gameState}}} ");
+            this.gameControllerData.gameData.gameState = GameData.GameState.Title;
+            Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Default Game : {{State : {this.gameControllerData.gameData.gameState}}} ");
             return;
         } 
         
         //checks for what the current scene is so logic can function
         if(scene == 1){
-            this.gameControllerData.gameState = GameDataInstance.GameState.Train;
+            this.gameControllerData.gameData.gameState = GameData.GameState.Train;
         } else if(scene == 2){
-            this.gameControllerData.gameState = GameDataInstance.GameState.Station;
+            this.gameControllerData.gameData.gameState = GameData.GameState.Station;
         }
         
         //if the game data hasn't been initialized -> do initial reading of disk data, else -> load and save per usual
         if(gameControllerData.initialized == false){
-            Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameControllerData.gameState}}} \n" + "loading into test envoirnment");
+            Debug.Log($"<color=green>[GameManager]</color> [1] Instantiating Test Game : {{State : {this.gameControllerData.gameData.gameState}}} \n" + "loading into test envoirnment");
             gameControllerData.gameData = SavingManager.Init(0);
             gameControllerData.initialized = true;
             return;
@@ -53,13 +53,13 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
     /// 
     /// </summary>
     void FixedUpdate(){
-        switch(gameControllerData.gameState){
-            case GameDataInstance.GameState.Train:
+        switch(gameControllerData.gameData.gameState){
+            case GameData.GameState.Train:
                 TrainLogic();
                 break;
-            case GameDataInstance.GameState.Station:
+            case GameData.GameState.Station:
                 break;
-            case GameDataInstance.GameState.CutScene:
+            case GameData.GameState.CutScene:
                 break;
             default:
                 break;
@@ -82,7 +82,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
         gameControllerData.initialized = true;
         SwitchScene(1);
         
-        this.gameControllerData.gameState = GameDataInstance.GameState.Train;
+        this.gameControllerData.gameData.gameState = GameData.GameState.Train;
     }
     public void SwitchScene(int sceneNumber){
         SavingManager.Save(gameControllerData.gameData);
@@ -105,7 +105,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
         
         switch(newScene.buildIndex){
             case 1: //This is the Train Scene
-                this.gameControllerData.gameState = GameDataInstance.GameState.Train;
+                this.gameControllerData.gameData.gameState = GameData.GameState.Train;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 FindAnyObjectByType<PlayerUIController>().GetComponent<PlayerUIController>().setGameController(this);
 
@@ -115,7 +115,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
                 }
                 break;
             case 2: // Station
-                this.gameControllerData.gameState = GameDataInstance.GameState.Station;
+                this.gameControllerData.gameData.gameState = GameData.GameState.Station;
                 traincontroller = FindAnyObjectByType<Train_Controller>().GetComponent<Train_Controller>();
                 break;
             
@@ -133,7 +133,7 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
     // ----- Getters and Setters ------
     public (float, float) getDistance() => (distance, endDistance);
 
-    public GameDataInstance.GameState GetGameState() => this.gameControllerData.gameState;
+    public GameData.GameState GetGameState() => this.gameControllerData.gameData.gameState;
 
 
 
@@ -156,16 +156,8 @@ public class GameControllerInstance : MonoBehaviour, ISavable{
 public class GameDataInstance : ScriptableObject
 {
 
-    public enum GameState{
-        Title,
-        Train,
-        Station,
-        CutScene
-    }
-
     [Header("General Game Manager Data")]
     public bool initialized = false;
-    public GameState gameState;
 
     [Header("Game State")]
     public GameData gameData;
@@ -173,6 +165,5 @@ public class GameDataInstance : ScriptableObject
     public void Reset(){
         this.initialized = false;
         this.gameData = null;
-        this.gameState = GameState.Title;
     }
 }

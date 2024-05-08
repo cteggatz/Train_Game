@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DataSaving;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -13,7 +14,7 @@ public class Train_Interface_Controller : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D coll){
-        if(coll.gameObject.name == "Player" && gameControllerInstance.GetGameState() == GameDataInstance.GameState.Station){
+        if(coll.gameObject.name == "Player" && gameControllerInstance.GetGameState() == GameData.GameState.Station){
             colliding = true;
         }
     }

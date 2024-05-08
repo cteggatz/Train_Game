@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour, ISavable
     public float health;
     // Start is called before the first frame update
     public void Save(ref GameData data){
-
+        data.playerHealth = (int)health;
     }
     public void Load(ref GameData data){
         if(data.playerInitData.playerHealth == false){

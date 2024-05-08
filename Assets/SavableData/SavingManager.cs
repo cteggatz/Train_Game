@@ -110,12 +110,10 @@ namespace DataSaving{
 
         // ----- Data -----
         // initialization
-        [Header("initialization")]
-        public PlayerInitData playerInitData;
-        public bool trainInitialized = false;
 
         // train
         [Header("Train")]
+        public bool trainInitialized = false;
         public float fuel;
         public SerializableList<CartData> carts;
 
@@ -123,9 +121,11 @@ namespace DataSaving{
         [Header("Game Data")]
         public float distance;
         public float endDistance;
+        public GameState gameState;
 
         //player
         [Header("Player")]
+        public PlayerInitData playerInitData;
         public int playerHealth;
         public SerializableList<GunData> playerGuns;
 
@@ -190,7 +190,13 @@ namespace DataSaving{
                 this.playerInventory = playerInventory;
                 this.playerHealth = playerHealth;
             }
-
+        }
+        [Serializable]
+        public enum GameState{
+            Title,
+            Train,
+            Station,
+            CutScene
         }
     }
     public interface ISavable{
