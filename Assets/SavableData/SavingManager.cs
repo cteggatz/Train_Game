@@ -111,7 +111,7 @@ namespace DataSaving{
         // ----- Data -----
         // initialization
         [Header("initialization")]
-        public bool playerInitialized = false;
+        public PlayerInitData playerInitData;
         public bool trainInitialized = false;
 
         // train
@@ -134,6 +134,7 @@ namespace DataSaving{
         public GameData(){
             carts = new SerializableList<CartData>();
             playerGuns = new SerializableList<GunData>();
+            playerInitData = new PlayerInitData(false, false);
         }
         public override string ToString()
         {
@@ -179,6 +180,17 @@ namespace DataSaving{
                 this.ammo = ammo;
                 this.reference = AssetDatabase.GetAssetPath(item);
             }
+        }
+        [Serializable]
+        public struct PlayerInitData{
+            public bool playerInventory;
+            public bool playerHealth;
+
+            public PlayerInitData(bool playerInventory, bool playerHealth){
+                this.playerInventory = playerInventory;
+                this.playerHealth = playerHealth;
+            }
+
         }
     }
     public interface ISavable{
