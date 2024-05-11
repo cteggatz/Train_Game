@@ -223,13 +223,13 @@ public class PlayerInventory : MonoBehaviour, ISavable
         data.playerGuns.list = gunDatas;
     }
     public void Load(ref GameData data){
-        if(data.playerInitialized == false){
+        if(data.playerInitData.playerInventory == false){
             //Debug.Log("No Player Data - Initializing Player Data");
             inventory[0] = new ItemInstance(_primary);
             inventory[1] = new ItemInstance(_secondary);
             inventory[2] = new ItemInstance(_consumable);
             inventory[3] = null;
-            data.playerInitialized = true;
+            data.playerInitData.playerInventory = true;
             return;
         }
         void setItem(int index, ref GameData data){

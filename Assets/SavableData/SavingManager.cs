@@ -10,6 +10,7 @@ using System.IO;
 using UnityEngine.Windows;
 using UnityEditor.PackageManager;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 namespace DataSaving{
     public class SavingManager : MonoBehaviour
@@ -53,11 +54,7 @@ namespace DataSaving{
         public static GameData CreateNewGame(){
             Debug.LogWarning("<color=yellow>[FileManager]</color> No File! Creating Save File");
             GameData gameData = new GameData();
-            IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
-
-            foreach(IGameInit script in savableObjects){
-                script.Init(ref gameData);
-            }
+            ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
             foreach(ISavable script in savableObjects){
                 script.Save(ref gameData);
             }
@@ -113,12 +110,10 @@ namespace DataSaving{
 
         // ----- Data -----
         // initialization
-        [Header("initialization")]
-        public bool playerInitialized = false;
-        public bool trainInitialized = false;
 
         // train
         [Header("Train")]
+        public bool trainInitialized = false;
         public float fuel;
         public SerializableList<CartData> carts;
 
@@ -126,9 +121,11 @@ namespace DataSaving{
         [Header("Game Data")]
         public float distance;
         public float endDistance;
+        public GameState gameState;
 
         //player
         [Header("Player")]
+        public PlayerInitData playerInitData;
         public int playerHealth;
         public SerializableList<GunData> playerGuns;
 
@@ -137,6 +134,7 @@ namespace DataSaving{
         public GameData(){
             carts = new SerializableList<CartData>();
             playerGuns = new SerializableList<GunData>();
+            playerInitData = new PlayerInitData(false, false);
         }
         public override string ToString()
         {
@@ -183,12 +181,26 @@ namespace DataSaving{
                 this.reference = AssetDatabase.GetAssetPath(item);
             }
         }
+        [Serializable]
+        public struct PlayerInitData{
+            public bool playerInventory;
+            public bool playerHealth;
+
+            public PlayerInitData(bool playerInventory, bool playerHealth){
+                this.playerInventory = playerInventory;
+                this.playerHealth = playerHealth;
+            }
+        }
+        [Serializable]
+        public enum GameState{
+            Title,
+            Train,
+            Station,
+            CutScene
+        }
     }
     public interface ISavable{
         public void Save(ref GameData gamedata);
         public void Load(ref GameData gamedata);
-    }
-    public interface IGameInit{
-        public void Init(ref GameData gameData){}
     }
 }
