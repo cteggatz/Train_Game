@@ -10,14 +10,14 @@ using System.IO;
 using UnityEngine.Windows;
 using UnityEditor.PackageManager;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 namespace DataSaving{
     public class SavingManager : MonoBehaviour
     {
-        static GameData currentData;
-        public static void Save(){
+        public static void Save(GameData gameData){
             //Debug.Log("Saving!");
-            GameData gameData = currentData;
+            //GameData gameData = currentData;
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
 
             foreach(ISavable script in savableObjects){
@@ -26,54 +26,40 @@ namespace DataSaving{
             FileManager.Save(gameData);
         }
 
-        public static void Load(){
-            //Debug.Log("Loading!");
-            /*
-            GameData gameData = FileManager.Load();
-            if(gameData == null){
-                gameData = new GameData();
-            }
-            */
+        public static GameData Load(){
+            
             GameData gameData;
-            if(currentData != null){
-                gameData = currentData;
-            } else {
-                gameData = FileManager.Load();
-                if(gameData == null){gameData = new GameData();}
-            }
+            gameData = FileManager.Load();
+            if(gameData == null){gameData = new GameData();}
+
             ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
             foreach(ISavable script in savableObjects){
                 script.Load(ref gameData);
             }
-            currentData = gameData;
+            return gameData;
         }
 
-        public static void Init(int saveNumber){
+        public static GameData Init(int saveNumber){
             FileManager.Init(saveNumber);
 
             string[] saveFiles = FileManager.GetSaves();
             foreach(string save in saveFiles){
                 if(Path.GetFileName(save).Equals($"SaveData{saveNumber}.json")){
-                    //Load();
-                    return;
+                    return Load();
                 }
             }
-            CreateNewGame();
+            return CreateNewGame();
 
         }  
-        public static void CreateNewGame(){
+        public static GameData CreateNewGame(){
             Debug.LogWarning("<color=yellow>[FileManager]</color> No File! Creating Save File");
             GameData gameData = new GameData();
-            IGameInit[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameInit>().ToArray();
-
-            foreach(IGameInit script in savableObjects){
-                script.Init(ref gameData);
-            }
+            ISavable[] savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
             foreach(ISavable script in savableObjects){
                 script.Save(ref gameData);
             }
             FileManager.Save(gameData);
-            currentData = gameData;
+            return gameData;
         }
 
 
@@ -124,18 +110,22 @@ namespace DataSaving{
 
         // ----- Data -----
         // initialization
-        public bool playerInitialized = false;
-        public bool trainInitialized = false;
 
         // train
+        [Header("Train")]
+        public bool trainInitialized = false;
         public float fuel;
         public SerializableList<CartData> carts;
 
         //game
+        [Header("Game Data")]
         public float distance;
         public float endDistance;
+        public GameState gameState;
 
         //player
+        [Header("Player")]
+        public PlayerInitData playerInitData;
         public int playerHealth;
         public SerializableList<GunData> playerGuns;
 
@@ -144,6 +134,7 @@ namespace DataSaving{
         public GameData(){
             carts = new SerializableList<CartData>();
             playerGuns = new SerializableList<GunData>();
+            playerInitData = new PlayerInitData(false, false);
         }
         public override string ToString()
         {
@@ -190,12 +181,26 @@ namespace DataSaving{
                 this.reference = AssetDatabase.GetAssetPath(item);
             }
         }
+        [Serializable]
+        public struct PlayerInitData{
+            public bool playerInventory;
+            public bool playerHealth;
+
+            public PlayerInitData(bool playerInventory, bool playerHealth){
+                this.playerInventory = playerInventory;
+                this.playerHealth = playerHealth;
+            }
+        }
+        [Serializable]
+        public enum GameState{
+            Title,
+            Train,
+            Station,
+            CutScene
+        }
     }
     public interface ISavable{
         public void Save(ref GameData gamedata);
         public void Load(ref GameData gamedata);
-    }
-    public interface IGameInit{
-        public void Init(ref GameData gameData){}
     }
 }
